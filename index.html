@@ -16,36 +16,84 @@
     <title>LabLuby.bet</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light mb-0 pb-0">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 px-5 h1 brandNameStyle">TGL</span>
+        <span
+          class="
+            navbar-brand
+            mb-0
+            px-5
+            h1
+            brandNameStyle
+            border-bottom border-success border-4
+          "
+          >TGL</span
+        >
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link disabled"
+                href="#"
+                tabindex="-1"
+                aria-disabled="true"
+                >Disabled</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
     <hr />
 
-    <!-- <div class="container">
-      <div class="row row-cols-3">
-        <div class="col"><hr /></div>
-        <div class="col"></div>
-        <div class="col">Column</div>
-        <div class="col">Column</div>
-      </div>
-    </div> -->
-
     <div class="row">
-      <div class="col">
-        <div
-          class="btn-group m-4"
-          role="group"
-          aria-label="Basic radio toggle button group"
-        >
-          <div class="row align-items-center justify-content-between">
+      <div class="col mx-5">
+          <span id="NewBetText"
+            >New Bet <span data-js="gameSelectedText"> for ...</span></span
+          >
+
+        <div class="row m-0">
+          <span id="ChooseGameText">Choose a game</span>
+        </div>
+
+        <div class="row align-items-center justify-content-between mt-0">
+          <div
+            class="btn-group"
+            role="group"
+            aria-label="Basic radio toggle button group"
+          >
             <div class="col-md-3">
               <input
                 type="radio"
                 class="btn-check lotofacilButtonStyle"
                 name="btnradio"
-                data-js=""
+                data-js="lotofacilButton"
                 id="btnradio1"
                 autocomplete="off"
                 checked
@@ -62,6 +110,7 @@
                 type="radio"
                 class="btn-check mx-2 megaSenaButtonStyle"
                 name="btnradio"
+                data-js="megaSenaButton"
                 id="btnradio2"
                 autocomplete="off"
               />
@@ -76,6 +125,7 @@
               <input
                 type="radio"
                 class="btn-check lotomaniaButtonStyle"
+                data-js="megaSenaButton"
                 name="btnradio"
                 id="btnradio3"
                 autocomplete="off"
@@ -89,8 +139,37 @@
           </div>
         </div>
       </div>
+
       <div class="col px-5">
-        <div class="card w-50">dfkjgnkjsdfnbjkn</div>
+        <div class="card w-50 px-3 float-end">
+          <div class="row">
+            <span class="cartTitleStyle"> CART </span>
+          </div>
+
+          <div class="row">
+            <div class="col-2"></div>
+
+            <div class="col-10">
+              <div
+                class="
+                  container
+                  border-start border-4 border-info
+                  rounded-start
+                "
+              >
+                <span> ljdfnhjnsdfjgnhbjsngfkj </span>
+
+                <span> fdhsdfh </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <span class="cartTitleStyle float-start"
+              >CART <span class="thinTextStyle">TOTAL: </span>
+              <span class="thinTextStyle" data-js="totalCartPrice"></span>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
 

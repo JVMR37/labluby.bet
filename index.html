@@ -26,185 +26,310 @@
     <title>LabLuby.bet</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light mb-0 pb-0">
-      <div class="container-fluid">
-        <span
-          class="
-            navbar-brand
-            mb-0
-            px-5
-            h1
-            brandNameStyle
-            border-bottom border-success border-4
-          "
-          >TGL</span
-        >
+    <nav
+      class="
+        navbar navbar-expand-lg navbar-light
+        bg-light
+        px-5
+        mb-0
+        pb-0
+        border-bottom
+      "
+    >
+      <div class="container-fluid m-0 p-0">
+        <div class="navbar-brand mb-0 px-0 brandNameStyle pb-0">
+          <span> TGL </span>
+          <div class="brandNameLine"></div>
+        </div>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-                >Disabled</a
-              >
-            </li>
-          </ul>
+          <div class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="nav-item">
+              <button class="btn navbarButtonsStyle">Home</button>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button class="btn navbarButtonsStyle">Account</button>
+
+            <button class="btn navbarButtonsStyle">
+              <span class="navbarButtonsStyle">
+                Logout<i class="fa fa-arrow-right iconThin"></i>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>
-    <hr />
 
-    <div class="row">
-      <div class="col mx-5">
-        <span id="NewBetText"
-          >New Bet <span data-js="gameSelectedText"> for ...</span></span
-        >
-
-        <div class="row m-0">
-          <span id="ChooseGameText">Choose a game</span>
-        </div>
-
-        <div class="row align-items-center justify-content-between mt-0">
-          <div
-            class="btn-group"
-            role="group"
-            aria-label="Basic radio toggle button group"
+    <div class="container-fluid px-5">
+      <div class="row">
+        <!--
+       * Primeira Coluna principal
+      -->
+        <div class="col w-75">
+          <span id="NewBetText"
+            >New Bet <span data-js="gameSelectedText"> for ...</span></span
           >
-            <div class="col-md-3">
-              <input
-                type="radio"
-                class="btn-check lotofacilButtonStyle"
-                name="btnradio"
-                data-js="lotofacilButton"
-                id="btnradio1"
-                autocomplete="off"
-                checked
-              />
-              <label
-                class="btn rounded-pill lotofacilButtonStyle"
-                for="btnradio1"
-                >Lotofácil</label
-              >
-            </div>
 
-            <div class="col-md-3">
-              <input
-                type="radio"
-                class="btn-check mx-2 megaSenaButtonStyle"
-                name="btnradio"
-                data-js="megaSenaButton"
-                id="btnradio2"
-                autocomplete="off"
-              />
-              <label
-                class="btn rounded-pill megaSenaButtonStyle"
-                for="btnradio2"
-                >Mega-sena</label
-              >
-            </div>
-
-            <div class="col-md-3">
-              <input
-                type="radio"
-                class="btn-check lotomaniaButtonStyle"
-                data-js="megaSenaButton"
-                name="btnradio"
-                id="btnradio3"
-                autocomplete="off"
-              />
-              <label
-                class="btn rounded-pill lotomaniaButtonStyle"
-                for="btnradio3"
-                >Lotomania</label
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col px-5">
-        <div class="card w-50 float-end">
-          <div class="row px-3">
-            <span class="cartTitleStyle"> CART </span>
+          <div class="row">
+            <span id="ChooseGameText">Choose a game</span>
           </div>
 
-          <div class="row px-3 align-items-center">
-            <div class="col-2">
-              <button class="btn align-middle" data-js="deleteGameButton">
-                <i class="fa fa-trash iconDeleteStyle"></i>
+          <div class="row justify-content-between mt-0 ms-0 ps-0">
+            <div
+              class="btn-group ms-0 ps-0"
+              role="group"
+              aria-label="Basic radio toggle button group"
+            >
+              <div class="col-md-3">
+                <input
+                  type="radio"
+                  class="btn-check lotofacilButtonStyle"
+                  name="btnradio"
+                  data-js="lotofacilButton"
+                  id="btnradio1"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn rounded-pill lotofacilButtonStyle"
+                  for="btnradio1"
+                  >Lotofácil</label
+                >
+              </div>
+
+              <div class="col-md-3">
+                <input
+                  type="radio"
+                  class="btn-check mx-2 megaSenaButtonStyle"
+                  name="btnradio"
+                  data-js="megaSenaButton"
+                  id="btnradio2"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn rounded-pill megaSenaButtonStyle"
+                  for="btnradio2"
+                  >Mega-sena</label
+                >
+              </div>
+
+              <div class="col-md-3">
+                <input
+                  type="radio"
+                  class="btn-check quinaButtonStyle"
+                  data-js="megaSenaButton"
+                  name="btnradio"
+                  id="btnradio3"
+                  autocomplete="off"
+                />
+                <label class="btn rounded-pill quinaButtonStyle" for="btnradio3"
+                  >Quina</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="container mt-4 mb-4">
+            <div class="row">
+              <span class="instructionTitleStyle"> Fill you bet </span>
+            </div>
+            <div class="row">
+              <span data-js="gameDescriptionText" class="">
+                Fill your bet Mark as many numbers as you want up to a maximum
+                of 50. Win by hitting 15, 16, 17, 18, 19, 20 or none of the 20
+                numbers drawn.
+              </span>
+            </div>
+          </div>
+
+          <div class="container">
+            <div
+              data-js="numberOfGameArea"
+              class="row row-cols-10 justify-content-evenly"
+            >
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                <span class="">1</span>
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                2
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                3
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                4
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                5
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                6
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                7
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                8
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                9
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                10
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                11
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                12
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                13
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                14
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                15
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                16
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                17
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                18
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                19
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                20
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                21
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                22
+              </div>
+            </div>
+          </div>
+
+          <div class="row w-100">
+            <div></div>
+            <div class="float-end">
+              <button class="btn addCartButtonStyle">
+                <i class="fa fa-cart-shopping"></i> Add to cart
               </button>
             </div>
+          </div>
+        </div>
 
-            <div class="col-10">
-              <div
-                class="
-                  container
-                  border-start border-4
-                  rounded-start
-                  megaSenaBorderColor
-                "
-              >
-                <div class="row">
-                  <span
-                    data-js="selectedNumbersText"
-                    class="selectedNumbersTextStyle"
-                  >
-                    01, 02, 03, 05 06, 120 15,1221,2,1 0352156</span
-                  >
-                </div>
+        <!--
+       * Segunda Coluna principal
+      -->
+        <div class="col pe-2">
+          <div class="card m-4 w-50">
+            <div class="row px-3">
+              <span class="cartTitleStyle"> CART </span>
+            </div>
 
-                <div class="row">
-                  <div class="col">
-                    <span data-js="typeGameText" class="megaSenaTextStyle">
-                      Mega sena
-                    </span>
-                    <span class="gamePriceTextStyle"> R$ </span>
-                    <span data-js="priceGame" class="gamePriceTextStyle"
-                      >5,50</span
+            <div class="row px-3 align-items-center">
+              <div class="col-2">
+                <button class="btn align-middle" data-js="deleteGameButton">
+                  <i class="fa fa-trash iconDeleteStyle"></i>
+                </button>
+              </div>
+
+              <div class="col-10">
+                <div
+                  class="
+                    container
+                    border-start border-4
+                    rounded-start
+                    megaSenaBorderColor
+                  "
+                >
+                  <div class="row">
+                    <span
+                      data-js="selectedNumbersText"
+                      class="selectedNumbersTextStyle"
                     >
+                      01, 02, 03, 05 06, 120 15,1221,2,1 0352156</span
+                    >
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <span data-js="typeGameText" class="megaSenaTextStyle">
+                        Mega sena
+                      </span>
+                      <span class="gamePriceTextStyle"> R$ </span>
+                      <span data-js="priceGame" class="gamePriceTextStyle"
+                        >5,50</span
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row px-3">
-            <span class="cartTitleStyle float-start"
-              >CART <span class="thinTextStyle">TOTAL: R$ </span>
-              <span class="thinTextStyle" data-js="totalCartPrice">0,00</span>
-            </span>
-          </div>
+            <div class="row px-3">
+              <span class="cartTitleStyle float-start"
+                >CART <span class="thinTextStyle">TOTAL: R$ </span>
+                <span class="thinTextStyle" data-js="totalCartPrice">0,00</span>
+              </span>
+            </div>
 
-          <button class="m-0 p-2 w-100 h-100 saveCartItensContainer">
-            Save <i class="fa fa-arrow-right iconThin"></i>
-          </button>
+            <button class="m-0 p-2 w-100 h-100 saveCartItensContainer">
+              Save <i class="fa fa-arrow-right iconThin"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

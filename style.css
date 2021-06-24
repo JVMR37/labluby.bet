@@ -35,12 +35,21 @@ footer {
   text-transform: uppercase;
 }
 
+.brandNameLine {
+  height: 6px;
+  width: 95px;
+  border-radius: 3px;
+  background-color: #b5c401;
+}
+
 .brandNameStyle {
   text-align: center;
   font: italic normal bold 44px Helvetica;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
+  /* border-bottom: 6px #b5c401;
+  border-radius: 6px; */
 }
 
 .lotofacilButtonStyle {
@@ -78,7 +87,7 @@ footer {
   color: white;
 }
 
-.lotomaniaButtonStyle {
+.quinaButtonStyle {
   background-color: transparent;
   text-align: center;
   font: italic normal bold 14px;
@@ -107,8 +116,8 @@ span[id="NewBetText"] {
   padding: 0;
 }
 
-.lotomaniaButtonStyle:hover,
-.lotomaniaButtonStyle:checked + label {
+.quinaButtonStyle:hover,
+.quinaButtonStyle:checked + label {
   background-color: #f79c31;
   font-weight: 400;
   color: white;
@@ -128,7 +137,7 @@ span[id="NewBetText"] {
   border-color: #7f3992 !important;
 }
 
-.lotomaniaBorderColor {
+.quinaBorderColor {
   border-color: #f79c31 !important;
 }
 
@@ -154,7 +163,7 @@ span[id="NewBetText"] {
   color: #f79c31;
 }
 
-.lotomaniaTextStyle {
+.quinaTextStyle {
   font: italic normal bold 16px Helvetica;
   color: #7f3992;
 }
@@ -167,7 +176,7 @@ span[id="NewBetText"] {
   border: 1px solid #e2e2e2;
   opacity: 1;
   text-align: center;
-  font: italic normal bold 35px/70px Helvetica Neue;
+  font: italic normal bold 35px/70px Helvetica;
   letter-spacing: 0px;
   color: #27c383;
   opacity: 1;
@@ -176,6 +185,15 @@ span[id="NewBetText"] {
 .saveCartItensContainer:hover,
 .saveCartItensContainer:focus {
   color: #20a36d;
+}
+
+.navbarButtonsStyle {
+  background-color: transparent;
+  text-align: center;
+  font: italic normal bold 20px Helvetica;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
 }
 
 .iconThin {
@@ -195,4 +213,22 @@ span[data-js="gameDescriptionText"] {
   letter-spacing: 0px;
   color: #868686;
   opacity: 1;
+}
+
+.numberCircleStyle {
+  background-color: #adc0c4;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 32px;
+  margin-right: 8px;
+  margin-bottom: 16px;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.numberCircleStyle:hover {
+  filter: brightness(0.9);
 }

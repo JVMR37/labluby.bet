@@ -11,6 +11,16 @@
       crossorigin="anonymous"
     />
 
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
     <link rel="stylesheet" href="style.css" />
 
     <title>LabLuby.bet</title>
@@ -74,9 +84,9 @@
 
     <div class="row">
       <div class="col mx-5">
-          <span id="NewBetText"
-            >New Bet <span data-js="gameSelectedText"> for ...</span></span
-          >
+        <span id="NewBetText"
+          >New Bet <span data-js="gameSelectedText"> for ...</span></span
+        >
 
         <div class="row m-0">
           <span id="ChooseGameText">Choose a game</span>
@@ -141,34 +151,60 @@
       </div>
 
       <div class="col px-5">
-        <div class="card w-50 px-3 float-end">
-          <div class="row">
+        <div class="card w-50 float-end">
+          <div class="row px-3">
             <span class="cartTitleStyle"> CART </span>
           </div>
 
-          <div class="row">
-            <div class="col-2"></div>
+          <div class="row px-3 align-items-center">
+            <div class="col-2">
+              <button class="btn align-middle" data-js="deleteGameButton">
+                <i class="fa fa-trash iconDeleteStyle"></i>
+              </button>
+            </div>
 
             <div class="col-10">
               <div
                 class="
                   container
-                  border-start border-4 border-info
+                  border-start border-4
                   rounded-start
+                  megaSenaBorderColor
                 "
               >
-                <span> ljdfnhjnsdfjgnhbjsngfkj </span>
+                <div class="row">
+                  <span
+                    data-js="selectedNumbersText"
+                    class="selectedNumbersTextStyle"
+                  >
+                    01, 02, 03, 05 06, 120 15,1221,2,1 0352156</span
+                  >
+                </div>
 
-                <span> fdhsdfh </span>
+                <div class="row">
+                  <div class="col">
+                    <span data-js="typeGameText" class="megaSenaTextStyle">
+                      Mega sena
+                    </span>
+                    <span class="gamePriceTextStyle"> R$ </span>
+                    <span data-js="priceGame" class="gamePriceTextStyle"
+                      >5,50</span
+                    >
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row px-3">
             <span class="cartTitleStyle float-start"
-              >CART <span class="thinTextStyle">TOTAL: </span>
-              <span class="thinTextStyle" data-js="totalCartPrice"></span>
+              >CART <span class="thinTextStyle">TOTAL: R$ </span>
+              <span class="thinTextStyle" data-js="totalCartPrice">0,00</span>
             </span>
           </div>
+
+          <button class="m-0 p-2 w-100 h-100 saveCartItensContainer">
+            Save <i class="fa fa-arrow-right iconThin"></i>
+          </button>
         </div>
       </div>
     </div>

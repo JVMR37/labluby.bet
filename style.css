@@ -109,3 +109,72 @@ span[id="NewBetText"] {
   font-weight: 400;
   color: white;
 }
+
+.iconDeleteStyle {
+  color: #888888 0% 0% no-repeat padding-box;
+  opacity: 1;
+  font-size: 20px;
+}
+
+.megaSenaBorderColor {
+  border-color: #01ac66 !important;
+}
+
+.lotofacilBorderColor {
+  border-color: #7f3992 !important;
+}
+
+.lotomaniaBorderColor {
+  border-color: #f79c31 !important;
+}
+
+.selectedNumbersTextStyle {
+  text-align: justify;
+  font: italic normal bold 15px "Helvetica Neue";
+  color: #868686;
+}
+
+.gamePriceTextStyle {
+  text-align: justify;
+  font: normal normal normal 16px "Helvetica Neue";
+  color: #868686;
+}
+
+.megaSenaTextStyle {
+  font: italic normal bold 16px "Helvetica Neue";
+  color: #01ac66;
+}
+
+.lotofacilTextStyle {
+  font: italic normal bold 16px "Helvetica Neue";
+  color: #f79c31;
+}
+
+.lotomaniaTextStyle {
+  font: italic normal bold 16px "Helvetica Neue";
+  color: #7f3992;
+}
+
+.saveCartItensContainer {
+  /* width: 317px;
+  height: 96px; */
+  height: 50%;
+  background: #f4f4f4 0% 0% no-repeat padding-box;
+  border: 1px solid #e2e2e2;
+  opacity: 1;
+  text-align: center;
+  font: italic normal bold 35px/70px Helvetica Neue;
+  letter-spacing: 0px;
+  color: #27c383;
+  opacity: 1;
+}
+
+.saveCartItensContainer:hover,
+.saveCartItensContainer:focus {
+  color: #20a36d;
+}
+
+.iconThin {
+  -webkit-text-stroke: 3px #f4f4f4;
+  margin-left: 3px;
+}

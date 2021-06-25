@@ -70,6 +70,12 @@ footer {
   color: white;
 }
 
+.lotofacilButtonSelectedStyle + label {
+  background-color: #7f3992 !important;
+  font-weight: bold !important;
+  color: white !important;
+}
+
 .megaSenaButtonStyle {
   background-color: transparent;
   text-align: center;
@@ -87,6 +93,12 @@ footer {
   color: white;
 }
 
+.megaSenaButtonSelectedStyle + label {
+  background-color: #01ac66 !important;
+  font-weight: bold !important;
+  color: white !important;
+}
+
 .quinaButtonStyle {
   background-color: transparent;
   text-align: center;
@@ -100,8 +112,14 @@ footer {
 .quinaButtonStyle:hover,
 .quinaButtonStyle:checked + label {
   background-color: #f79c31;
-  font-weight: 400;
+  font-weight: bold;
   color: white;
+}
+
+.quinaButtonSelectedStyle + label {
+  background-color: #f79c31 !important;
+  font-weight: bold !important;
+  color: white !important;
 }
 
 span[id="ChooseGameText"] {
@@ -121,6 +139,14 @@ span[id="NewBetText"] {
   text-transform: uppercase;
   margin: 0;
   padding: 0;
+}
+
+.typeGameText {
+  text-align: center;
+  font: italic normal 300 24px Helvetica;
+  letter-spacing: 0px;
+  color: #707070;
+  text-transform: uppercase;
 }
 
 .iconDeleteStyle {

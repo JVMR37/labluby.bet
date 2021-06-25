@@ -66,12 +66,14 @@
         <!--
        * Primeira Coluna principal
       -->
-        <div class="col w-75">
-          <span id="NewBetText"
-            >New Bet <span data-js="gameSelectedText"> for ...</span></span
-          >
+        <div class="col">
+          <div class="row ms-0 pe-0 mt-5 mb-4">
+            <span id="NewBetText"
+              >New Bet <span data-js="gameSelectedText"> for ...</span></span
+            >
+          </div>
 
-          <div class="row">
+          <div class="row mb-4">
             <span id="ChooseGameText">Choose a game</span>
           </div>
 
@@ -130,7 +132,7 @@
             </div>
           </div>
 
-          <div class="container mt-4 mb-4">
+          <div class="container mt-4 mb-4 ms-0 ps-0">
             <div class="row">
               <span class="instructionTitleStyle"> Fill you bet </span>
             </div>
@@ -143,55 +145,55 @@
             </div>
           </div>
 
-          <div class="container">
+          <div class="container ms-0 ps-0 pe-0 me-0">
             <div
               data-js="numberOfGameArea"
-              class="row row-cols-10 justify-content-evenly"
+              class="row row-cols-10 justify-content-start"
             >
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                <span class="">1</span>
+                <span class="">01</span>
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                2
+                02
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                3
+                03
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                4
+                04
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                5
+                05
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                6
+                06
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                7
+                07
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                8
+                08
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
               >
-                9
+                09
               </div>
               <div
                 class="col-1 numberCircleStyle d-flex justify-content-center"
@@ -258,13 +260,36 @@
               >
                 22
               </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                23
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                24
+              </div>
+              <div
+                class="col-1 numberCircleStyle d-flex justify-content-center"
+              >
+                25
+              </div>
             </div>
           </div>
 
-          <div class="row w-100">
-            <div></div>
-            <div class="float-end">
-              <button class="btn addCartButtonStyle">
+          <div class="row mt-4 w-100 justify-content-between">
+            <div class="col">
+              <button class="btn btn-outline gameActionsButtonStyle">
+                Complete game
+              </button>
+
+              <button class="btn btn-outline gameActionsButtonStyle">
+                Clear game
+              </button>
+            </div>
+            <div class="col justify-content-end">
+              <button class="btn addCartButtonStyle d-flex float-end">
                 <i class="fa fa-cart-shopping"></i> Add to cart
               </button>
             </div>
@@ -274,7 +299,7 @@
         <!--
        * Segunda Coluna principal
       -->
-        <div class="col pe-2">
+        <div class="col">
           <div class="card m-4 w-50">
             <div class="row px-3">
               <span class="cartTitleStyle"> CART </span>

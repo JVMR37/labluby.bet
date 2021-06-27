@@ -288,8 +288,10 @@ span[data-js="gameDescriptionText"] {
   height: 55px;
   align-items: center;
   justify-content: center;
+  border: none;
 }
 
 .numberCircleStyle:hover {
   filter: brightness(0.9);
+  color: white;
 }

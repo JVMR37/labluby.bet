@@ -56,7 +56,7 @@
             $('[data-js="clearGameButton"]').on('click', handleClearGameButton);
             $('[data-js="completeGameButton"]').on('click', handleCompleteGameButton);
             $('[data-js="addCartButton"]').on('click', handleAddToCartButton);
-
+            $('[data-js="saveCartButton"]').on('click', handleSaveCartButton);
             // ? Apagar o elementos selecionados ao clicar no botão de completar ou
             // ? Terminar de preencher
         }
@@ -244,12 +244,20 @@
                 price: 0.0
             };
 
-            cartItemObject.selectedNumber = selectedNumbersElementList.reduce(
-                function (acumulado, numberElement, index, array) {
+            var selectedNumbersList = selectedNumbersElementList.map(
+                function (numberElement) {
+                    return numberElement.textContent;
+                }
+            );
+
+            selectedNumbersList.sort();
+
+            cartItemObject.selectedNumber = selectedNumbersList.reduce(
+                function (acumulado, number, index, array) {
                     if (index !== array.length - 1) {
-                        return acumulado + numberElement.textContent + ' ';
+                        return acumulado + number + ', ';
                     }
-                    return acumulado + numberElement.textContent + '.'
+                    return acumulado + number + '.'
                 }, ''
             );
 
@@ -266,6 +274,8 @@
 
         function handleAddToCartButton(e) {
             e.preventDefault();
+
+            // if(selectedNumbersElementList.length < selectedGame.)
 
             if (cartItens.length === 0) removeNoItensTextRow();
 
@@ -409,8 +419,10 @@
         }
 
         function handleSaveCartButton() {
-            clearCartItemList();
-            win.alert("Seu jogos foram salvos com sucesso !");
+            if (cartItens.length > 0) {
+                clearCartItemList();
+                win.alert("Seu jogos foram salvos com sucesso !");
+            }
         }
 
 

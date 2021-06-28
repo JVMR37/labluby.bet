@@ -198,12 +198,12 @@ span[id="NewBetText"] {
 
 .lotofacilTextStyle {
   font: italic normal bold 16px Helvetica;
-  color: #f79c31;
+  color: #7f3992;
 }
 
 .quinaTextStyle {
   font: italic normal bold 16px Helvetica;
-  color: #7f3992;
+  color: #f79c31;
 }
 
 .saveCartItensContainer {
@@ -294,4 +294,19 @@ span[data-js="gameDescriptionText"] {
 .numberCircleStyle:hover {
   filter: brightness(0.9);
   color: white;
+}
+
+[data-js="deleteGameButton"]:hover {
+  filter: brightness(0.9);
+  color: rgb(182, 0, 0);
+}
+
+.noItensTextStyle {
+  flex-direction: column;
+  text-align: center;
+
+  font: normal normal 300 14px Helvetica;
+  letter-spacing: 0px;
+  color: #707070;
+  text-transform: uppercase;
 }

@@ -69,13 +69,10 @@
 
             var gamesJsonDecoded = JSON.parse(ajax.responseText);
             gameTypeList = gamesJsonDecoded.types;
-
-            console.log(gameTypeList);
         }
 
         function handleGameRadioButtonClick(e) {
             e.preventDefault();
-            console.log(e);
             var typeGameButton = e.target.getAttribute('data-js');
             var newTypeGame;
 
@@ -112,10 +109,7 @@
                 }
             );
 
-            console.log(selectedNumbersElementList);
-
             selectedNumbersElementList = [];
-
         }
 
         function getGameObjectByName(gameName) {

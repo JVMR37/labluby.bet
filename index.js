@@ -26,13 +26,21 @@
 
         var selectedNumbersElementList = [];
 
-        var cart = [
-            {
-                "selectedNumber": [0, 2050, 1, 5],
-                "typeGame": "LotoLoto",
-                "price": 151.00
-            }
-        ]
+        var cartItens = [];
+
+        var cartTotalPrice = 0.0;
+
+        const textStyleClassByTypeGame = {
+            'Lotofácil': 'lotofacilTextStyle',
+            'Mega-Sena': 'megaSenaTextStyle',
+            'Quina': 'quinaTextStyle'
+        }
+
+        const borderColorClassByTypeGame = {
+            'Lotofácil': 'lotofacilBorderColor',
+            'Mega-Sena': 'megaSenaBorderColor',
+            'Quina': 'quinaBorderColor',
+        }
 
 
         function initialize() {
@@ -47,6 +55,8 @@
             $('[data-js="quinaButton"]').on('click', handleGameRadioButtonClick);
             $('[data-js="clearGameButton"]').on('click', handleClearGameButton);
             $('[data-js="completeGameButton"]').on('click', handleCompleteGameButton);
+            $('[data-js="addCartButton"]').on('click', handleAddToCartButton);
+
             // ? Apagar o elementos selecionados ao clicar no botão de completar ou
             // ? Terminar de preencher
         }
@@ -108,12 +118,16 @@
 
         }
 
-        function changeTypeGame(newTypeGame) {
-            selectedGame = gameTypeList.filter(
+        function getGameObjectByName(gameName) {
+            return gameTypeList.filter(
                 function (gameObject) {
-                    return gameObject.type === newTypeGame
+                    return gameObject.type === gameName
                 }
             )[0];
+        }
+
+        function changeTypeGame(newTypeGame) {
+            selectedGame = getGameObjectByName(newTypeGame);
 
             $gameDescriptionText.textContent = selectedGame.description;
             $typeGameText.textContent = selectedGame.type;
@@ -222,6 +236,184 @@
             }
 
         }
+
+        function addNumbersToCart() {
+            var cartItemObject = {
+                selectedNumber: [],
+                typeGame: "",
+                price: 0.0
+            };
+
+            cartItemObject.selectedNumber = selectedNumbersElementList.reduce(
+                function (acumulado, numberElement, index, array) {
+                    if (index !== array.length - 1) {
+                        return acumulado + numberElement.textContent + ' ';
+                    }
+                    return acumulado + numberElement.textContent + '.'
+                }, ''
+            );
+
+
+            cartItemObject.typeGame = selectedGame.type;
+            cartItemObject.price = selectedGame.price;
+
+            cartTotalPrice += cartItemObject.price;
+
+            updateTotalPriceText();
+
+            addItemCartElement(cartItemObject);
+        }
+
+        function handleAddToCartButton(e) {
+            e.preventDefault();
+
+            if (cartItens.length === 0) removeNoItensTextRow();
+
+            addNumbersToCart();
+
+            removeAllSelectedElements();
+        }
+
+        function addItemCartElement(cartItemObject) {
+            var $fragment = doc.createDocumentFragment();
+            var $cartItensArea = $('[data-js="cartItensArea"]').get();
+
+            var $row = doc.createElement('div');
+            var $firstCol = doc.createElement('div');
+            var $secondCol = doc.createElement('div');
+
+            var $itemCartContainer = doc.createElement('div');
+            var $rowOfSelectedNumber = doc.createElement('div');
+            var $spanOfSelectedNumbers = doc.createElement('span');
+
+            var $deleteGameButton = doc.createElement('button');
+            var $iconDelete = doc.createElement('i');
+
+
+            $firstCol.classList.add("col-2");
+            $secondCol.classList.add("col-10");
+
+            $itemCartContainer.classList.add(
+                'container',
+                'border-start', 'border-4',
+                'rounded-start',
+                borderColorClassByTypeGame[cartItemObject.typeGame]
+            );
+            $spanOfSelectedNumbers.classList.add('selectedNumbersTextStyle');
+            $rowOfSelectedNumber.classList.add('row');
+            $iconDelete.classList.add('fa', 'fa-trash', 'iconDeleteStyle');
+            $deleteGameButton.classList.add('btn', 'align-middle');
+            $row.classList.add('row', 'px-3', 'align-items-center', 'mb-2', 'mt-2');
+
+            $deleteGameButton.appendChild($iconDelete);
+            $deleteGameButton.setAttribute('data-js', 'deleteGameButton');
+            $deleteGameButton.addEventListener('click', handleRemoveCartButton);
+
+            $spanOfSelectedNumbers.setAttribute('data-js', 'selectedNumbersText');
+            $spanOfSelectedNumbers.textContent = cartItemObject.selectedNumber;
+            $rowOfSelectedNumber.appendChild($spanOfSelectedNumbers);
+
+            var $priceOfGameElement = doc.createElement('div');
+
+            $priceOfGameElement.innerHTML = `
+                <div class="row">
+                    <div class="col">
+                        <span data-js="typeGameText" class="${textStyleClassByTypeGame[cartItemObject.typeGame]}">
+                            ${cartItemObject.typeGame}
+                        </span>
+                        <span class="gamePriceTextStyle"> R$ </span>
+                        <span data-js="priceGame" class="gamePriceTextStyle"
+                            >${cartItemObject.price.toFixed(2)}</span
+                        >
+                    </div>
+                </div>
+            `
+
+            $itemCartContainer.appendChild($rowOfSelectedNumber);
+            $itemCartContainer.appendChild($priceOfGameElement);
+
+
+            $firstCol.appendChild($deleteGameButton);
+            $secondCol.appendChild($itemCartContainer);
+
+
+            $row.appendChild($firstCol);
+            $row.appendChild($secondCol);
+
+            $row.setAttribute('data-js', cartItemObject.typeGame);
+
+            cartItens.push($row);
+
+            $fragment.appendChild($row);
+
+
+            $cartItensArea.appendChild($fragment);
+
+        }
+
+        function removeNoItensTextRow() {
+            var $noItensTextRow = $('[data-js="noItensTextRow"]').get();
+            $noItensTextRow.remove();
+        }
+
+        function insertNoItensTextRow() {
+            var $cartItensArea = $('[data-js="cartItensArea"]').get();
+            var $noItensTextRow = doc.createElement('div');
+            $noItensTextRow.innerHTML = `<div class="row mb-3 mt-3 mx-2" data-js="noItensTextRow">
+                                                <span class="noItensTextStyle">
+                                                Ainda não há jogos adicionados no carrinho : (
+                                                </span>
+                                        </div>`
+
+            $cartItensArea.appendChild($noItensTextRow);
+        }
+
+        function removeCartItemElement(rowOfCartItem) {
+            var indexToRemove = cartItens.indexOf(rowOfCartItem);
+
+            cartItens.splice(indexToRemove, 1);
+
+            rowOfCartItem.remove();
+        }
+
+        function handleRemoveCartButton(e) {
+            e.preventDefault();
+
+            var $rowOfCartItem = e.target.parentElement.parentElement.parentElement;
+            var typeGame = $rowOfCartItem.getAttribute('data-js');
+
+            removeCartItemElement($rowOfCartItem);
+
+            cartTotalPrice -= getGameObjectByName(typeGame).price;
+
+            updateTotalPriceText();
+
+            if (cartItens.length === 0) insertNoItensTextRow();
+        }
+
+        function updateTotalPriceText() {
+            var $totalCartPriceElement = $('[data-js="totalCartPrice"]').get();
+
+            $totalCartPriceElement.textContent = cartTotalPrice.toFixed(2);
+        }
+
+        function clearCartItemList() {
+            cartItens.forEach(
+                function (rowElement) {
+                    rowElement.remove();
+                }
+            );
+
+            cartItens = [];
+            insertNoItensTextRow();
+        }
+
+        function handleSaveCartButton() {
+            clearCartItemList();
+            win.alert("Seu jogos foram salvos com sucesso !");
+        }
+
+
 
         initialize();
     }

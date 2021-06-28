@@ -275,7 +275,10 @@
         function handleAddToCartButton(e) {
             e.preventDefault();
 
-            // if(selectedNumbersElementList.length < selectedGame.)
+            if (selectedNumbersElementList.length < selectedGame["max-number"]) {
+                var remainingNumbers = Number(selectedGame["max-number"]) - selectedNumbersElementList.length;
+                return win.alert("Você ainda pode selecionar " + remainingNumbers + " número(s) !");
+            }
 
             if (cartItens.length === 0) removeNoItensTextRow();
 
@@ -413,6 +416,9 @@
                     rowElement.remove();
                 }
             );
+
+            cartTotalPrice = 0;
+            updateTotalPriceText();
 
             cartItens = [];
             insertNoItensTextRow();

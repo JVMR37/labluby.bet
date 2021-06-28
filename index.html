@@ -291,8 +291,9 @@
             </div>
             <div class="col justify-content-end">
               <button
-              data-js="addCartButton"
-              class="btn addCartButtonStyle d-flex float-end">
+                data-js="addCartButton"
+                class="btn addCartButtonStyle d-flex float-end"
+              >
                 <i class="fa fa-cart-shopping"></i> Add to cart
               </button>
             </div>
@@ -308,43 +309,11 @@
               <span class="cartTitleStyle"> CART </span>
             </div>
 
-            <div class="row px-3 align-items-center">
-              <div class="col-2">
-                <button class="btn align-middle" data-js="deleteGameButton">
-                  <i class="fa fa-trash iconDeleteStyle"></i>
-                </button>
-              </div>
-
-              <div class="col-10">
-                <div
-                  class="
-                    container
-                    border-start border-4
-                    rounded-start
-                    megaSenaBorderColor
-                  "
-                >
-                  <div class="row">
-                    <span
-                      data-js="selectedNumbersText"
-                      class="selectedNumbersTextStyle"
-                    >
-                      01, 02, 03, 05 06, 120 15,1221,2,1 0352156</span
-                    >
-                  </div>
-
-                  <div class="row">
-                    <div class="col">
-                      <span data-js="typeGameText" class="megaSenaTextStyle">
-                        Mega sena
-                      </span>
-                      <span class="gamePriceTextStyle"> R$ </span>
-                      <span data-js="priceGame" class="gamePriceTextStyle"
-                        >5,50</span
-                      >
-                    </div>
-                  </div>
-                </div>
+            <div data-js="cartItensArea">
+              <div class="row mb-3 mt-3 mx-2" data-js="noItensTextRow">
+                <span class="noItensTextStyle">
+                  Ainda não há jogos adicionados no carrinho : (
+                </span>
               </div>
             </div>
             <div class="row px-3">

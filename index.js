@@ -89,7 +89,7 @@
             removeAllSelectedElements();
         }
 
-        function handleCompleteGameButton(e) {
+        function handleCompleteGameButton() {
             randomlySelectNumbers();
         }
 
@@ -146,11 +146,6 @@
             }
         }
 
-        function hasSelectedNumber(numberElement) {
-            //TODO: Implemente isso aqui mano, e usa na funçaõ de selecionar e na ativação do botão
-            //TOPDO: No botão ta pra chmar uma função especifica só de remover
-        }
-
         function buildGridWithNumbers(numbersQuantity) {
             const numberOfGameArea = $('[data-js="numberOfGameArea"]').get();
             const $fragment = doc.createDocumentFragment();
@@ -175,7 +170,8 @@
             e.preventDefault();
             var numberElement = e.target;
 
-            if (selectedNumbersElementList.length === selectedGame["max-number"]) {
+            if (selectedNumbersElementList.indexOf(numberElement) === -1 &&
+                selectedNumbersElementList.length === selectedGame["max-number"]) {
                 win.alert("Você já selecionou o máximo de números permitidos para esse jogo !");
                 return;
             }
@@ -184,53 +180,37 @@
         }
 
         function selectNumber(numberElement, removeRepeated) {
+            var cssSelectStyleClass = '';
             switch (selectedGame.type) {
                 case 'Lotofácil':
+                    cssSelectStyleClass = 'lotofacilBackgroundColor';
 
-                    if (numberElement.classList.contains('lotofacilBackgroundColor')) {
-                        if (!removeRepeated) return
-                        numberElement.classList.remove('lotofacilBackgroundColor');
-                        selectedNumbersElementList.remove(numberElement);
-                        return;
-                    }
-
-                    selectedNumbersElementList.push(numberElement);
-
-                    numberElement.classList.add('lotofacilBackgroundColor');
                     break;
                 case 'Mega-Sena':
 
-                    if (numberElement.classList.contains('megaSenaBackgroundColor')) {
-                        if (!removeRepeated) return
-
-                        numberElement.classList.remove('megaSenaBackgroundColor');
-                        var indexToRemove = selectedNumbersElementList.indexOf(numberElement);
-                        selectedNumbersElementList.splice(indexToRemove, 1);
-
-                        return;
-                    }
-
-                    selectedNumbersElementList.push(numberElement);
-                    numberElement.classList.add('megaSenaBackgroundColor');
-
+                    cssSelectStyleClass = 'megaSenaBackgroundColor';
 
                     break;
                 case 'Quina':
-                    if (numberElement.classList.contains('quinaBackgroundColor')) {
-                        if (!removeRepeated) return
 
-                        numberElement.classList.remove('quinaBackgroundColor');
-                        selectedNumbersElementList.remove(numberElement);
-                        console.log(selectedNumbersElementList.length);
-
-                        return;
-                    }
-
-                    selectedNumbersElementList.push(numberElement);
-                    numberElement.classList.add('quinaBackgroundColor');
+                    cssSelectStyleClass = 'quinaBackgroundColor';
 
                     break;
             }
+
+            var indexForSelectedElement = selectedNumbersElementList.indexOf(numberElement);
+
+            if (indexForSelectedElement !== -1) {
+                if (!removeRepeated) return
+
+                numberElement.classList.remove(cssSelectStyleClass);
+                selectedNumbersElementList.splice(indexForSelectedElement, 1);
+
+                return;
+            }
+
+            selectedNumbersElementList.push(numberElement);
+            numberElement.classList.add(cssSelectStyleClass);
         }
 
         function randomlySelectNumbers() {

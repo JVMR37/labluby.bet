@@ -23,6 +23,7 @@
         };
 
         var gameTypeList = [];
+        var gameTypeButtonList = [];
 
         var selectedNumbersElementList = [];
 
@@ -30,17 +31,7 @@
 
         var cartTotalPrice = 0.0;
 
-        const textStyleClassByTypeGame = {
-            'Lotofácil': 'lotofacilTextStyle',
-            'Mega-Sena': 'megaSenaTextStyle',
-            'Quina': 'quinaTextStyle'
-        }
-
-        const borderColorClassByTypeGame = {
-            'Lotofácil': 'lotofacilBorderColor',
-            'Mega-Sena': 'megaSenaBorderColor',
-            'Quina': 'quinaBorderColor',
-        }
+        const unselectedNumberBackgroundColor = '#adc0c4';
 
 
         function initialize() {
@@ -97,15 +88,17 @@
         }
 
         function handleCompleteGameButton() {
+            if (selectedNumbersElementList.length === selectedGame["max-number"]) {
+                console.log("Era pra remover");
+                removeAllSelectedElements();
+            }
             randomlySelectNumbers();
         }
 
         function removeAllSelectedElements() {
             selectedNumbersElementList.forEach(
                 function (numberElement) {
-                    numberElement.classList.remove('lotofacilBackgroundColor');
-                    numberElement.classList.remove('megaSenaBackgroundColor');
-                    numberElement.classList.remove('quinaBackgroundColor');
+                    numberElement.style.backgroundColor = unselectedNumberBackgroundColor;
                 }
             );
 
@@ -188,37 +181,19 @@
         }
 
         function selectNumber(numberElement, removeRepeated) {
-            var cssSelectStyleClass = '';
-            switch (selectedGame.type) {
-                case 'Lotofácil':
-                    cssSelectStyleClass = 'lotofacilBackgroundColor';
-
-                    break;
-                case 'Mega-Sena':
-
-                    cssSelectStyleClass = 'megaSenaBackgroundColor';
-
-                    break;
-                case 'Quina':
-
-                    cssSelectStyleClass = 'quinaBackgroundColor';
-
-                    break;
-            }
-
             var indexForSelectedElement = selectedNumbersElementList.indexOf(numberElement);
 
             if (indexForSelectedElement !== -1) {
                 if (!removeRepeated) return
 
-                numberElement.classList.remove(cssSelectStyleClass);
+                numberElement.style.backgroundColor = unselectedNumberBackgroundColor;
                 selectedNumbersElementList.splice(indexForSelectedElement, 1);
 
                 return;
             }
 
             selectedNumbersElementList.push(numberElement);
-            numberElement.classList.add(cssSelectStyleClass);
+            numberElement.style.backgroundColor = selectedGame.color;
         }
 
         function randomlySelectNumbers() {
@@ -304,8 +279,10 @@
                 'container',
                 'border-start', 'border-4',
                 'rounded-start',
-                borderColorClassByTypeGame[cartItemObject.typeGame]
             );
+
+            $itemCartContainer.setAttribute('style', `border-color: ${selectedGame.color} !important`);
+
             $spanOfSelectedNumbers.classList.add('selectedNumbersTextStyle');
             $rowOfSelectedNumber.classList.add('row');
             $iconDelete.classList.add('fa', 'fa-trash', 'iconDeleteStyle');
@@ -325,7 +302,7 @@
             $priceOfGameElement.innerHTML = `
                 <div class="row">
                     <div class="col">
-                        <span data-js="typeGameText" class="${textStyleClassByTypeGame[cartItemObject.typeGame]}">
+                        <span data-js="typeGameText" class="gameTextStyle" style="color: ${selectedGame.color}">
                             ${cartItemObject.typeGame}
                         </span>
                         <span class="gamePriceTextStyle"> R$ </span>

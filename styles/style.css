@@ -155,30 +155,6 @@ span[id="NewBetText"] {
   font-size: 20px;
 }
 
-.megaSenaBorderColor {
-  border-color: #01ac66 !important;
-}
-
-.lotofacilBorderColor {
-  border-color: #7f3992 !important;
-}
-
-.quinaBorderColor {
-  border-color: #f79c31 !important;
-}
-
-.megaSenaBackgroundColor {
-  background-color: #01ac66 !important;
-}
-
-.lotofacilBackgroundColor {
-  background-color: #7f3992 !important;
-}
-
-.quinaBackgroundColor {
-  background-color: #f79c31 !important;
-}
-
 .selectedNumbersTextStyle {
   text-align: justify;
   font: italic normal bold 15px Helvetica;
@@ -191,19 +167,8 @@ span[id="NewBetText"] {
   color: #868686;
 }
 
-.megaSenaTextStyle {
+.gameTextStyle {
   font: italic normal bold 16px Helvetica;
-  color: #01ac66;
-}
-
-.lotofacilTextStyle {
-  font: italic normal bold 16px Helvetica;
-  color: #7f3992;
-}
-
-.quinaTextStyle {
-  font: italic normal bold 16px Helvetica;
-  color: #f79c31;
 }
 
 .saveCartItensContainer {

@@ -1,13 +1,7 @@
 body {
-  /* min-width: 100vw;
-  min-height: 100vh; */
   margin: 0;
   background: #f7f7f7 0% 0% no-repeat padding-box;
   font-family: Helvetica;
-  /* display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center; */
 }
 
 nav {
@@ -48,65 +42,6 @@ footer {
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
-  /* border-bottom: 6px #b5c401;
-  border-radius: 6px; */
-}
-
-.lotofacilButtonStyle {
-  /* margin-left: 10px; */
-  background-color: transparent;
-  text-align: center;
-  font: italic normal bold 14px;
-  color: #7f3992;
-  width: 113px;
-  height: 34px;
-  border: 2px solid #7f3992;
-}
-
-.lotofacilButtonStyle:hover,
-.lotofacilButtonStyle:checked + label {
-  background-color: #7f3992;
-  font-weight: 400;
-  color: white;
-}
-
-.lotofacilButtonSelectedStyle + label {
-  background-color: #7f3992 !important;
-  font-weight: bold !important;
-  color: white !important;
-}
-
-.megaSenaButtonStyle {
-  background-color: transparent;
-  text-align: center;
-  font: italic normal bold 14px;
-  color: #01ac66;
-  border: 2px solid #01ac66;
-  width: 113px;
-  height: 34px;
-}
-
-.megaSenaButtonStyle:hover,
-.megaSenaButtonStyle:checked + label {
-  background-color: #01ac66;
-  font-weight: 400;
-  color: white;
-}
-
-.megaSenaButtonSelectedStyle + label {
-  background-color: #01ac66 !important;
-  font-weight: bold !important;
-  color: white !important;
-}
-
-.quinaButtonStyle {
-  background-color: transparent;
-  text-align: center;
-  font: italic normal bold 14px;
-  color: #f79c31;
-  border: 2px solid #f79c31;
-  width: 113px;
-  height: 34px;
 }
 
 .gameButtonStyle {
@@ -116,29 +51,6 @@ footer {
   border: 2px solid;
   width: 113px;
   height: 34px;
-}
-
-/* .gameButtonStyle:hover {
-  background-color: transparent;
-  text-align: center;
-  font: italic normal bold 14px;
-  color: var("--buttonColor");
-  border: 2px solid var("--buttonColor");
-  width: 113px;
-  height: 34px;
-} */
-
-.quinaButtonStyle:hover,
-.quinaButtonStyle:checked + label {
-  background-color: #f79c31;
-  font-weight: bold;
-  color: white;
-}
-
-.quinaButtonSelectedStyle + label {
-  background-color: #f79c31 !important;
-  font-weight: bold !important;
-  color: white !important;
 }
 
 span[id="ChooseGameText"] {
@@ -191,8 +103,6 @@ span[id="NewBetText"] {
 }
 
 .saveCartItensContainer {
-  /* width: 317px;
-  height: 96px; */
   height: 50%;
   background: #f4f4f4 0% 0% no-repeat padding-box;
   border: 1px solid #e2e2e2;

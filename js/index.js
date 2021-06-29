@@ -57,9 +57,7 @@
 
         function createGameTypeButtons() {
             const $gameButtonsGroup = $('[data-js="gameButtonsGroup"]').get();
-            console.log($gameButtonsGroup);
             const $fragment = doc.createDocumentFragment();
-            console.log(gameTypeList);
             gameTypeList.forEach(
                 function (gameTypeObject) {
                     const $div = doc.createElement('div');
@@ -140,7 +138,6 @@
 
         function handleCompleteGameButton() {
             if (selectedNumbersElementList.length === selectedGame["max-number"]) {
-                console.log("Era pra remover");
                 removeAllSelectedElements();
             }
             randomlySelectNumbers();
@@ -172,8 +169,6 @@
 
             selectedNumbersElementList = [];
             buildGridWithNumbers(selectedGame.range);
-
-            console.log(gameTypeButtonList);
 
             gameTypeButtonList.forEach(
                 function (gameButtomElement) {
@@ -370,9 +365,7 @@
 
             $fragment.appendChild($row);
 
-
             $cartItensArea.appendChild($fragment);
-
         }
 
         function removeNoItensTextRow() {
@@ -402,13 +395,20 @@
 
         function handleRemoveCartButton(e) {
             e.preventDefault();
+            var $rowOfCartItem;
 
-            var $rowOfCartItem = e.target.parentElement.parentElement.parentElement;
+            if (e.target.localName === 'button') {
+                $rowOfCartItem = e.target.parentElement.parentElement;
+            } else {
+                $rowOfCartItem = e.target.parentElement.parentElement.parentElement;
+            }
             var typeGame = $rowOfCartItem.getAttribute('data-js');
 
             removeCartItemElement($rowOfCartItem);
 
-            cartTotalPrice -= getGameObjectByName(typeGame).price;
+            var game = getGameObjectByName(typeGame);
+
+            cartTotalPrice -= game.price;
 
             updateTotalPriceText();
 

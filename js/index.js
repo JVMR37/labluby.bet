@@ -36,20 +36,78 @@
 
         function initialize() {
             getGameTypes();
+            createGameTypeButtons();
             changeTypeGame('Lotofácil');
             initEvents();
         }
 
         function initEvents() {
-            $('[data-js="lotofacilButton"]').on('click', handleGameRadioButtonClick);
-            $('[data-js="megaSenaButton"]').on('click', handleGameRadioButtonClick);
-            $('[data-js="quinaButton"]').on('click', handleGameRadioButtonClick);
             $('[data-js="clearGameButton"]').on('click', handleClearGameButton);
             $('[data-js="completeGameButton"]').on('click', handleCompleteGameButton);
             $('[data-js="addCartButton"]').on('click', handleAddToCartButton);
             $('[data-js="saveCartButton"]').on('click', handleSaveCartButton);
-            // ? Apagar o elementos selecionados ao clicar no botão de completar ou
-            // ? Terminar de preencher
+        }
+
+        function createGameTypeButtons() {
+            const $gameButtonsGroup = $('[data-js="gameButtonsGroup"]').get();
+            console.log($gameButtonsGroup);
+            const $fragment = doc.createDocumentFragment();
+            console.log(gameTypeList);
+            gameTypeList.forEach(
+                function (gameTypeObject) {
+                    const $div = doc.createElement('div');
+                    $div.classList.add('col-md-3');
+
+                    $div.appendChild(createGameTypeButtonElement(gameTypeObject));
+                    $fragment.appendChild($div);
+                }
+            );
+
+            $gameButtonsGroup.appendChild($fragment);
+        }
+
+        function createGameTypeButtonElement(gameTypeObject) {
+            var $gameButton = doc.createElement('button');
+            $gameButton.setAttribute('data-js', gameTypeObject.type);
+
+            $gameButton.classList.add('btn', 'rounded-pill', 'gameButtonStyle');
+
+            $gameButton.style.setProperty('color', gameTypeObject.color);
+            $gameButton.style.setProperty('border-color', gameTypeObject.color);
+
+
+            $gameButton.textContent = gameTypeObject.type;
+
+            $gameButton.addEventListener('click', handleGameRadioButtonClick);
+
+            $gameButton.addEventListener('mouseover', function (e) {
+                var gameButtonElement = e.target;
+                setSelecteStyleToButton(gameButtonElement, getGameObjectByName(e.target.getAttribute('data-js')).color);
+
+            });
+
+            $gameButton.addEventListener('mouseout', function (e) {
+                var gameButtonElement = e.target;
+                var gameObject = getGameObjectByName(e.target.getAttribute('data-js'));
+                if (selectedGame.type === gameObject.type) return
+                setUnselecteStyleToButton(gameButtonElement, gameObject.color);
+            });
+
+            gameTypeButtonList.push($gameButton);
+
+            return $gameButton;
+        }
+
+        function setSelecteStyleToButton(buttonElement) {
+            buttonElement.style.backgroundColor = buttonElement.style.borderColor;
+            buttonElement.style.color = 'white';
+            buttonElement.style.fontWeight = 'bold';
+        }
+
+        function setUnselecteStyleToButton(buttonElement) {
+            buttonElement.style.backgroundColor = 'transparent';
+            buttonElement.style.color = buttonElement.style.borderColor;
+            buttonElement.style.fontWeight = 'normal';
         }
 
         function getGameTypes() {
@@ -64,23 +122,9 @@
 
         function handleGameRadioButtonClick(e) {
             e.preventDefault();
-            var typeGameButton = e.target.getAttribute('data-js');
-            var newTypeGame;
-
-            switch (typeGameButton) {
-                case 'lotofacilButton':
-                    newTypeGame = "Lotofácil";
-                    break;
-                case 'megaSenaButton':
-                    newTypeGame = "Mega-Sena";
-                    break;
-                case 'quinaButton':
-                    newTypeGame = "Quina";
-                    break;
-            }
+            var newTypeGame = e.target.getAttribute('data-js');
 
             changeTypeGame(newTypeGame);
-
         }
 
         function handleClearGameButton() {
@@ -122,29 +166,18 @@
             selectedNumbersElementList = [];
             buildGridWithNumbers(selectedGame.range);
 
+            console.log(gameTypeButtonList);
 
-            switch (selectedGame.type) {
-                case 'Lotofácil':
-                    $lotofacilGameButton.classList.add('lotofacilButtonSelectedStyle');
-                    $megaSenaGameButton.classList.remove('megaSenaButtonSelectedStyle');
-                    $quinaGameButton.classList.remove('quinaButtonSelectedStyle');
+            gameTypeButtonList.forEach(
+                function (gameButtomElement) {
+                    if (gameButtomElement.getAttribute('data-js') === selectedGame.type) {
+                        setSelecteStyleToButton(gameButtomElement);
+                    } else {
+                        setUnselecteStyleToButton(gameButtomElement,);
+                    }
+                }
+            );
 
-                    break;
-                case 'Mega-Sena':
-
-                    $lotofacilGameButton.classList.remove('lotofacilButtonSelectedStyle');
-                    $megaSenaGameButton.classList.add('megaSenaButtonSelectedStyle');
-                    $quinaGameButton.classList.remove('quinaButtonSelectedStyle');
-
-                    break;
-                case 'Quina':
-
-                    $lotofacilGameButton.classList.remove('lotofacilButtonSelectedStyle');
-                    $megaSenaGameButton.classList.remove('megaSenaButtonSelectedStyle');
-                    $quinaGameButton.classList.add('quinaButtonSelectedStyle');
-
-                    break;
-            }
         }
 
         function buildGridWithNumbers(numbersQuantity) {

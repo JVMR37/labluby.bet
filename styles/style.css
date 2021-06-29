@@ -109,6 +109,25 @@ footer {
   height: 34px;
 }
 
+.gameButtonStyle {
+  background-color: transparent;
+  text-align: center;
+  font: italic normal bold 14px;
+  border: 2px solid;
+  width: 113px;
+  height: 34px;
+}
+
+/* .gameButtonStyle:hover {
+  background-color: transparent;
+  text-align: center;
+  font: italic normal bold 14px;
+  color: var("--buttonColor");
+  border: 2px solid var("--buttonColor");
+  width: 113px;
+  height: 34px;
+} */
+
 .quinaButtonStyle:hover,
 .quinaButtonStyle:checked + label {
   background-color: #f79c31;

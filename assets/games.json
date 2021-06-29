@@ -29,10 +29,10 @@
     },
     {
       "type": "Teste",
-      "description": "Uma descrição de teste.",
-      "range": 20,
-      "price": 3,
-      "max-number": 2,
+      "description": "No modo de teste você pode selecionar 60 números.",
+      "range": 120,
+      "price": 5,
+      "max-number": 60,
       "color": "#ff0000",
       "min-cart-value": 40
     }

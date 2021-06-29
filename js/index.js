@@ -33,6 +33,13 @@
 
         const unselectedNumberBackgroundColor = '#adc0c4';
 
+        Number.prototype.pad = function (n) {
+            if (n == undefined)
+                n = 2;
+
+            return (new Array(n).join('0') + this).slice(-n);
+        }
+
 
         function initialize() {
             getGameTypes();
@@ -184,12 +191,12 @@
             const numberOfGameArea = $('[data-js="numberOfGameArea"]').get();
             const $fragment = doc.createDocumentFragment();
 
-
             for (let index = 1; index <= numbersQuantity; index++) {
                 var buttonNumber = doc.createElement('button');
 
                 buttonNumber.classList.add('col-1', 'btn', 'numberCircleStyle', 'd-flex', 'justify-content-center');
-                buttonNumber.textContent = ('0' + index).slice(-2);
+
+                buttonNumber.textContent = index < 10 ? index.pad(2) : index;
 
                 buttonNumber.addEventListener('click', handleClickNumberButton);
 

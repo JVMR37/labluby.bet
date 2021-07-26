@@ -143,11 +143,10 @@ export const MenuLink = styled(Link)`
 export const MenuItemBtn = styled.li`
   list-style: none;
   @media screen and (max-width: 1000px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 120px;
+    display: block;
+    text-align: center;
+    transition: all 0.2s ease;
+    width: 100%;
   }
 `;
 
@@ -156,9 +155,58 @@ export const MenuLinkBtn = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 16px;
+  /* padding: 8px 16px; */
   height: 100%;
   width: 100%;
   border: none;
   outline: none;
+
+  & button {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #707070;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    height: 100%;
+    transition: all 0.2s ease;
+
+    & svg {
+      margin-left: 5px;
+    }
+
+    &:hover {
+      color: red;
+      transform: traslateY(-3rem);
+    }
+    &:active {
+      transform: traslateY(3rem);
+      color: red;
+    }
+
+    @media only screen and (max-width: 1000px) {
+      display: block;
+      padding: 3rem;
+      text-align: center;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: red;
+        transform: traslateY(-3rem);
+      }
+      &:active {
+        transform: traslateY(3rem);
+        color: red;
+      }
+
+      & svg {
+        display: none;
+      }
+    }
+  }
 `;

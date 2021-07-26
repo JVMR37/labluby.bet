@@ -9,6 +9,8 @@ import {
   Menu,
   MenuItem,
   MenuLink,
+  MenuLinkBtn,
+  MenuItemBtn,
 } from "../styles/navbar.style";
 const Navbar = () => {
   //click is the initial state and setclick will be the update state
@@ -18,8 +20,9 @@ const Navbar = () => {
   //if the menu icon was the menu bar at the beginning when clicked it will have the close icon
   const handleClick = () => setClick(!click);
 
-  const closeMenu = (event: MouseEventHandler<HTMLAnchorElement>) => {
+  const closeMenu = (event: any) => {
     // event.preventDefault();
+    console.log("aloha");
   };
   return (
     <Nav>
@@ -39,12 +42,16 @@ const Navbar = () => {
           <MenuItem>
             <MenuLink to="/account">Account</MenuLink>
           </MenuItem>
-          <MenuItem>
-            <MenuLink to="/logout">
-              <span>Logout</span>
-              <FaArrowRight />
-            </MenuLink>
-          </MenuItem>
+
+          <MenuItemBtn>
+            <MenuLinkBtn to="/login">
+              <button onClick={closeMenu}>
+                <span>Logout</span>
+                <FaArrowRight />
+              </button>
+            </MenuLinkBtn>
+          </MenuItemBtn>
+
           {/* <MenuItemBtn>
             {true ? (
               <MenuLinkBtn to="/order-now">

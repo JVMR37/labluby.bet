@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { BiRestaurant } from "react-icons/bi";
 import { Container } from "../GlobalStyles";
 
 export const Nav = styled.nav`
@@ -24,7 +23,7 @@ export const NavbarContainer = styled(Container)`
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  /* ${Container}; */
+  ${Container};
 `;
 
 export const NavLogo = styled(Link)`
@@ -91,7 +90,7 @@ export const Menu = styled.ul<{
     position: absolute;
     top: 80px;
     left: ${({ click }) => (click ? "0" : "-100%")};
-    background-color: transparent;
+    background-color: #f7f7f7;
     transition: all 0.5s ease;
   }
 `;
@@ -119,6 +118,10 @@ export const MenuLink = styled(Link)`
   padding: 1rem 2rem;
   height: 100%;
   transition: all 0.2s ease;
+
+  & svg {
+    margin-left: 5px;
+  }
 
   &:hover {
     color: #b5c401;

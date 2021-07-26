@@ -78,7 +78,7 @@ export const Button = styled.button<{
   bigFont?: boolean;
 }>`
   border-radius: ${({ bigRadius }) => (bigRadius ? "30px" : "20px")};
-  background-color: ${({ primary }) => (primary ? "#E38B06" : "#000")};
+  background-color: ${({ primary }) => (primary ? "#b5c401" : "#000")};
   color: ${({ primary }) => (primary ? "#000" : "#fff")};
   padding: ${({ big }) => (big ? "18px 30px" : "10px 28px")};
   font-size: ${({ bigFont }) => (bigFont ? "20px" : "18px")};
@@ -86,9 +86,10 @@ export const Button = styled.button<{
   cursor: pointer;
   border: none;
   transition: all 0.5s ease;
+  flex-direction: column;
 
   &:hover {
-    background-color: ${({ primary }) => (primary ? "#fff" : "#E38B06")};
+    background-color: ${({ primary }) => (primary ? "#fff" : "#b5c401")};
     transform: translateY(-0.5rem) scale(1.02);
     color: #000;
   }

@@ -8,7 +8,7 @@ export const Nav = styled.nav`
   top: 0;
   z-index: 999;
   height: 70px;
-  background-color: transparent;
+  background-color: #f7f7f7;
   padding-bottom: 0px;
   /* box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5); */
   /* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15); */

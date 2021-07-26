@@ -19,6 +19,7 @@ html {
         font-size: 70%;
     }
 }
+
 body{
     /* font-family: 'Nunito', sans-serif; */
     font-weight: 400;
@@ -26,15 +27,38 @@ body{
     font-size: 1.6rem;
     margin: 0;
     background: #f7f7f7 0% 0% no-repeat padding-box;
-    font-family: Helvetica;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 
 }
 
+hr {
+  color: #ebebeb;
+  background-color: #ebebeb;
+}
+
 main {
+  /* display: inline-block; */
   margin: 3rem auto;
   width: 90%;
-  max-width: 40rem;
+  max-width: 90rem;
+}
+
+
+input {
+  font-size: 18px;
+  padding: 10px;
+  margin: 10px;
+  background: transparent;
+  border: none;
+  border-radius: 15px;
+  :focus {
+    border: none;
+  }
+
+  ::placeholder {
+    color: #9D9D9D;
+  }
 }
 `;
 
@@ -64,11 +88,47 @@ export const Container = styled.div`
 `;
 
 export const CenteredDiv = styled.div`
-  margin: 3rem auto;
+  margin: auto;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 100%;
+`;
+
+export const CenteredPageDiv = styled.div`
+  margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -ms-transform: translate(-45%, -45%);
+  transform: translate(-50%, -50%);
+`;
+
+export const Column = styled.div<{
+  margin?: string;
+}>`
+  float: left;
+  width: 50%;
+  margin: ${({ margin }) => (margin ? margin : "5rem")};
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+`;
+
+export const Row = styled.div`
+  display: flex;
+  /* align-items: stretch; */
+  /* align-items: space-between; */
+  width: 90%;
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 `;
 
 export const Button = styled.button<{
@@ -136,5 +196,42 @@ export const OutlineButton = styled.button<{
     border-radius: ${({ bigRadius }) => (bigRadius ? "20px" : "18px")};
     padding: ${({ big }) => (big ? "9px 30px" : "8px 28px")};
     font-size: ${({ bigFont }) => (bigFont ? "18px" : "16px")};
+  }
+`;
+
+export const FlatButton = styled.button<{
+  isPrimary?: boolean;
+}>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  color: ${({ isPrimary }) => (isPrimary ? "#b5c401" : "#707070")};
+  font-size: 4rem;
+  font-family: Helvetica;
+  cursor: pointer;
+
+  margin: 3rem 0rem;
+
+  /* height: 100%; */
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+  border: none;
+
+  & svg {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  &:hover {
+    filter: ${({ isPrimary }) => (isPrimary ? "brightness(0.9)" : "#b5c401")};
+    color: ${({ isPrimary }) => !isPrimary && "#b5c401"};
+    transform: traslateY(-3rem);
+  }
+  &:active {
+    transform: traslateY(3rem);
+    filter: ${({ isPrimary }) => (isPrimary ? "brightness(0.9)" : "#b5c401")};
   }
 `;

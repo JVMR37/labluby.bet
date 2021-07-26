@@ -9,7 +9,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   user: null,
-  isLoggedIn: true,
+  isLoggedIn: false,
 };
 
 export const authSlice = createSlice({

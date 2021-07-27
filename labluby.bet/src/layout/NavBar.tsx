@@ -37,7 +37,7 @@ const Navbar = () => {
 
         <Menu onClick={handleClick} click={click}>
           <MenuItem>
-            <MenuLink to="/">Home</MenuLink>
+            <MenuLink to="/home">Home</MenuLink>
           </MenuItem>
           <MenuItem>
             <MenuLink to="/account">Account</MenuLink>

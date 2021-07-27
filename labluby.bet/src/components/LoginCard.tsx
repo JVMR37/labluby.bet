@@ -60,19 +60,6 @@ const LoginCard: React.FC = () => {
     resetPass();
   };
 
-  const EmailInput = (
-    <InputField
-      type="text"
-      value={emailValue}
-      onChange={emailChangeHandler}
-      onBlur={emailBlurHandler}
-      id="1"
-      key={"email"}
-      // autoFocus={true}
-      placeholder="Email"
-    ></InputField>
-  );
-
   return (
     <Card>
       <Form onSubmit={submitHandler}>

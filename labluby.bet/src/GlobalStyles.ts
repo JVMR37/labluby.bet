@@ -88,7 +88,6 @@ export const Container = styled.div`
 `;
 
 export const CenteredDiv = styled.div`
-  margin: auto;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -208,7 +207,7 @@ export const FlatButton = styled.button<{
   text-decoration: none;
   font-weight: bold;
   color: ${({ isPrimary }) => (isPrimary ? "#b5c401" : "#707070")};
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-family: Helvetica;
   cursor: pointer;
 

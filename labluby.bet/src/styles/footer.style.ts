@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FooterDiv = styled.footer`
+export const StyledFooter = styled.footer`
   position: fixed;
   padding-top: 1rem;
   padding-bottom: 1rem;

@@ -1,7 +1,7 @@
-import { FooterDiv } from "../styles/footer.style";
+import { StyledFooter } from "../styles/footer.style";
 
 const Footer: React.FC = () => {
-  return <FooterDiv>Copyright 2020 Luby Software</FooterDiv>;
+  return <StyledFooter>Copyright 2020 Luby Software</StyledFooter>;
 };
 
 export default Footer;

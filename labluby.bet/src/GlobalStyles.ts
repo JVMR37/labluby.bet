@@ -46,7 +46,7 @@ main {
 
 
 input {
-  font-size: 18px;
+  font-size: 1.8rem;
   padding: 10px;
   margin: 10px;
   background: transparent;

@@ -1,0 +1,9 @@
+export const emailValidator = (text: string) => {
+  // eslint-disable-next-line no-useless-escape
+  const emailValitionRegex = /^[\w\+\.]+@\w+\.\w{2,253}(?:\.?)[\w]{0,2}$/;
+  return emailValitionRegex.test(text);
+};
+
+export const passValidator = (text: string) => text.trim().length >= 6;
+
+export const isNotEmptyValidator = (text: string) => text.trim() !== "";

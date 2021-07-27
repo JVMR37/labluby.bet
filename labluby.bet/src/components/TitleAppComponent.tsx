@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-import { CSSProperties } from "styled-components";
 import { CenteredDiv } from "../GlobalStyles";
 import {
   TitleSpan,
@@ -8,13 +6,8 @@ import {
 } from "../styles/titleAppComponent.style";
 
 const TitleAppComponent: React.FC = (props) => {
-  // let prop: CSSProperties = {
-  //   display: "inline-block",
-  // };
   return (
-    <div
-    //  style={prop}
-     >
+    <div>
       <CenteredDiv>
         <TitleSpan>The Greatest App</TitleSpan>
       </CenteredDiv>

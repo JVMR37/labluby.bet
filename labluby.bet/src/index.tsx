@@ -5,13 +5,17 @@ import { Provider } from "react-redux";
 import GlobalStyles from "./GlobalStyles";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { appTheme } from "./utils/appTheme";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <GlobalStyles />
-      <App />
-    </Router>
+    <ThemeProvider theme={appTheme}>
+      <Router>
+        <GlobalStyles />
+        <App />
+      </Router>
+    </ThemeProvider>
   </Provider>,
   document.getElementById("root")
 );

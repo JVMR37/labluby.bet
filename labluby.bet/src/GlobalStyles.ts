@@ -51,6 +51,7 @@ input {
   margin: 10px;
   background: transparent;
   border: none;
+  outline: none;
   border-radius: 15px;
   :focus {
     border: none;

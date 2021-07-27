@@ -6,7 +6,7 @@ export const TitleSpan = styled.span`
   align-self: center;
   font: italic normal bold 7rem Helvetica;
   letter-spacing: 0px;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.secondary};
   opacity: 1;
 
   display: inline-block;
@@ -15,7 +15,7 @@ export const TitleSpan = styled.span`
 `;
 
 export const GreenDiv = styled.div`
-  background: #b5c401 0% 0% no-repeat padding-box;
+  background: ${({ theme }) => theme.colors.main} 0% 0% no-repeat padding-box;
   border-radius: 100px;
   opacity: 1;
   display: inline-block;
@@ -34,7 +34,7 @@ export const LotterySpan = styled.span`
   align-self: center;
   font: italic normal bold 7rem Helvetica;
   letter-spacing: 0px;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.secondary};
   opacity: 1;
 
   display: inline-block;

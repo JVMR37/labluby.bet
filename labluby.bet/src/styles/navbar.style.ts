@@ -8,7 +8,7 @@ export const Nav = styled.nav`
   top: 0;
   z-index: 999;
   height: 70px;
-  background-color: #f7f7f7;
+  background-color: ${({ theme }) => theme.colors.background};
   padding-bottom: 0px;
   /* box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5); */
   /* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15); */
@@ -38,7 +38,7 @@ export const NavLogo = styled(Link)`
   text-align: start;
   font: italic normal bold 4rem Helvetica;
   letter-spacing: 0px;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.secondary};
   opacity: 1;
 
   /* border-bottom: 2px solid #b5c401; */
@@ -54,7 +54,7 @@ export const NavLine = styled.div`
   height: 6px;
   width: 8rem;
   border-radius: 3px;
-  background-color: #b5c401;
+  background-color: ${({ theme }) => theme.colors.main};
 
   &:hover {
     transform: scale(1.08);
@@ -90,7 +90,7 @@ export const Menu = styled.ul<{
     position: absolute;
     top: 80px;
     left: ${({ click }) => (click ? "0" : "-100%")};
-    background-color: #f7f7f7;
+    background-color: ${({ theme }) => theme.colors.background};
     transition: all 0.5s ease;
   }
 `;
@@ -111,7 +111,7 @@ export const MenuLink = styled(Link)`
   text-decoration: none;
   font-weight: bold;
   font-size: 2rem;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.secondary};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -124,12 +124,12 @@ export const MenuLink = styled(Link)`
   }
 
   &:hover {
-    color: #b5c401;
+    color: ${({ theme }) => theme.colors.main};
     transform: traslateY(-3rem);
   }
   &:active {
     transform: traslateY(3rem);
-    color: #b5c401;
+    color: ${({ theme }) => theme.colors.main};
   }
 
   @media only screen and (max-width: 1000px) {
@@ -165,7 +165,7 @@ export const MenuLinkBtn = styled(Link)`
     text-decoration: none;
     font-weight: bold;
     font-size: 2rem;
-    color: #707070;
+    color: ${({ theme }) => theme.colors.secondary};
     outline: none;
     background-color: transparent;
     border: none;
@@ -181,12 +181,12 @@ export const MenuLinkBtn = styled(Link)`
     }
 
     &:hover {
-      color: red;
+      color: ${({ theme }) => theme.colors.error};
       transform: traslateY(-3rem);
     }
     &:active {
       transform: traslateY(3rem);
-      color: red;
+      color: ${({ theme }) => theme.colors.error};
     }
 
     @media only screen and (max-width: 1000px) {
@@ -196,12 +196,12 @@ export const MenuLinkBtn = styled(Link)`
       transition: all 0.2s ease;
 
       &:hover {
-        color: red;
+        color: ${({ theme }) => theme.colors.error};
         transform: traslateY(-3rem);
       }
       &:active {
         transform: traslateY(3rem);
-        color: red;
+        color: ${({ theme }) => theme.colors.error};
       }
 
       & svg {

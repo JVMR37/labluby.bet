@@ -6,7 +6,7 @@ export const NotFoundSpan = styled.span`
   align-self: center;
   font: italic normal bold 4rem Helvetica;
   letter-spacing: 0px;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.secondary};
   opacity: 1;
 
   display: inline-block;

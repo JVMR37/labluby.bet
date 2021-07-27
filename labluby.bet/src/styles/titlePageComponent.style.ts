@@ -5,6 +5,6 @@ export const TitlePageSpan = styled.div`
   text-align: center;
   font: italic normal bold 3.5rem Helvetica;
   letter-spacing: 0px;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.secondary};
   opacity: 1;
 `;

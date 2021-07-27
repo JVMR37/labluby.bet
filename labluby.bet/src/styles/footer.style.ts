@@ -5,7 +5,7 @@ export const FooterDiv = styled.footer`
   padding-top: 1rem;
   padding-bottom: 1rem;
   border-top: 3px solid #ebebeb;
-  background-color: #f7f7f7;
+  background-color: ${({ theme }) => theme.colors.background};
   bottom: 0rem;
   left: 0;
   right: 0;

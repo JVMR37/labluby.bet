@@ -19,11 +19,10 @@ export const GreenDiv = styled.div`
   border-radius: 100px;
   opacity: 1;
   display: inline-block;
-  padding: 2px 5rem;
-  /* float: left; */
-
+  padding: 1rem 5rem;
+  margin: 2rem;
   text-align: center;
-  font: italic normal bold 22px/40px Helvetica;
+  font: italic normal bold 22px Helvetica;
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;

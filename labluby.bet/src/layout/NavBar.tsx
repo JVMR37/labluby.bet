@@ -12,8 +12,13 @@ import {
   MenuLinkBtn,
   MenuItemBtn,
 } from "../styles/navbar.style";
+
+import { useAppDispatch } from "../hooks/hooks";
+import { logout } from "../store/authSlice";
+
 const Navbar = () => {
   const [click, setClick] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleClick = () => setClick(!click);
 
@@ -21,6 +26,13 @@ const Navbar = () => {
     event.preventDefault();
     console.log("aloha");
   };
+
+  const logoutButtonHandler = (event: any) => {
+    event.preventDefault();
+
+    dispatch(logout());
+  };
+
   return (
     <Nav>
       <NavbarContainer>
@@ -42,7 +54,7 @@ const Navbar = () => {
 
           <MenuItemBtn>
             <MenuLinkBtn to="/login">
-              <button onClick={closeMenu}>
+              <button onClick={logoutButtonHandler}>
                 <span>Logout</span>
                 <FaArrowRight />
               </button>

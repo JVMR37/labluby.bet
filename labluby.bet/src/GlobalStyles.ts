@@ -131,6 +131,10 @@ export const Row = styled.div`
   }
 `;
 
+export const StyledForm = styled.form`
+  padding-top: 10px;
+`;
+
 export const Button = styled.button<{
   bigRadius?: boolean;
   primary?: boolean;

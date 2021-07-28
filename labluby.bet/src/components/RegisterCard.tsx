@@ -1,19 +1,13 @@
 import Card from "../layout/Card";
-import { FlatButton } from "../GlobalStyles";
+import { FlatButton, StyledForm } from "../GlobalStyles";
 import { FaArrowRight } from "react-icons/fa";
 
 import React from "react";
-import styled from "styled-components";
 
 const RegisterCard: React.FC = () => {
-  const Form = styled.form`
-    padding-top: 10px;
-    /* padding-bottom: 10px; */
-  `;
-
   return (
     <Card>
-      <Form>
+      <StyledForm>
         <input placeholder="Name"></input>
         <hr />
 
@@ -26,7 +20,7 @@ const RegisterCard: React.FC = () => {
         <FlatButton isPrimary>
           Register <FaArrowRight />
         </FlatButton>
-      </Form>
+      </StyledForm>
     </Card>
   );
 };

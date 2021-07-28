@@ -1,21 +1,15 @@
 import Card from "../layout/Card";
 import { InputField } from "../layout/Input";
 
-import { FlatButton } from "../GlobalStyles";
+import { FlatButton, StyledForm } from "../GlobalStyles";
 import { FaArrowRight } from "react-icons/fa";
 
 import React from "react";
-import styled from "styled-components";
 import { ResetPasswordButton } from "../styles/loginCard.style";
 import ErrotInputTextStyled from "../styles/errorInputText.style";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import { emailValidator, passValidator } from "../utils/validators";
-
-// interface IProps extends React.HTMLProps<HTMLInputElement> {}
-const Form = styled.form`
-  padding-top: 10px;
-`;
 
 const LoginCard: React.FC = () => {
   const {
@@ -62,7 +56,7 @@ const LoginCard: React.FC = () => {
 
   return (
     <Card>
-      <Form onSubmit={submitHandler}>
+      <StyledForm onSubmit={submitHandler}>
         <div>
           <InputField
             type="text"
@@ -108,7 +102,7 @@ const LoginCard: React.FC = () => {
         <FlatButton isPrimary disabled={!formIsValid}>
           Log In <FaArrowRight />
         </FlatButton>
-      </Form>
+      </StyledForm>
     </Card>
   );
 };

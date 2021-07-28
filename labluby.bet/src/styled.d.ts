@@ -13,6 +13,7 @@ declare module "styled-components" {
       label: string;
       error: string;
       card: string;
+      focus: string;
     };
   }
 }

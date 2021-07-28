@@ -54,6 +54,8 @@ const RegisterCard: React.FC = () => {
       return;
     }
 
+    history.replace("/login");
+
     console.log("Submitted!");
 
     resetName();
@@ -68,6 +70,7 @@ const RegisterCard: React.FC = () => {
           key="name-input"
           type="text"
           value={nameValue}
+          hasError={nameHasError}
           onChange={nameChangeHandler}
           onBlur={nameBlurHandler}
           placeholder="Name"
@@ -79,12 +82,11 @@ const RegisterCard: React.FC = () => {
           </ErrotInputTextStyled>
         )}
 
-        <hr />
-
         <InputField
           key="email-input"
           type="text"
           value={emailValue}
+          hasError={emailHasError}
           onChange={emailChangeHandler}
           onBlur={emailBlurHandler}
           placeholder="Email"
@@ -96,11 +98,11 @@ const RegisterCard: React.FC = () => {
           </ErrotInputTextStyled>
         )}
 
-        <hr />
         <InputField
           key={"pass"}
           type="password"
           value={passValue}
+          hasError={passHasError}
           onChange={passChangeHandler}
           onBlur={passBlurHandler}
           placeholder="Password"
@@ -111,8 +113,6 @@ const RegisterCard: React.FC = () => {
             Please enter a valid password.
           </ErrotInputTextStyled>
         )}
-
-        <hr />
 
         <FlatButton isPrimary disabled={!formIsValid}>
           Register <FaArrowRight />

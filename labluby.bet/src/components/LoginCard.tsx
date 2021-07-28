@@ -57,6 +57,7 @@ const LoginCard: React.FC = () => {
           key="email"
           type="text"
           value={emailValue}
+          hasError={emailHasError}
           onChange={emailChangeHandler}
           onBlur={emailBlurHandler}
           id="1"
@@ -69,11 +70,11 @@ const LoginCard: React.FC = () => {
           </ErrotInputTextStyled>
         )}
 
-        <hr />
         <InputField
           key={"pass"}
           type="password"
           value={passValue}
+          hasError={passHasError}
           onChange={passChangeHandler}
           onBlur={passBlurHandler}
           placeholder="Password"
@@ -85,11 +86,11 @@ const LoginCard: React.FC = () => {
           </ErrotInputTextStyled>
         )}
 
-        <hr />
-
-        <ResetPasswordButton onClick={handleResetPassButton}>
-          I forget my password
-        </ResetPasswordButton>
+        <div>
+          <ResetPasswordButton onClick={handleResetPassButton}>
+            I forget my password
+          </ResetPasswordButton>
+        </div>
 
         <FlatButton isPrimary disabled={!formIsValid}>
           Log In <FaArrowRight />

@@ -14,10 +14,25 @@ export const ResetPasswordButton = styled.button`
   color: #c1c1c1;
   opacity: 1;
   background-color: transparent;
-  border: none;
   cursor: pointer;
+  outline: none;
+
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  border-bottom: 2px solid transparent;
+
+  transition: all 0.5s ease;
 
   &:hover {
     filter: brightness(0.8);
+    border-bottom: 2px solid ${({ theme }) => theme.colors.focus};
+    transform: scale(1.02);
+  }
+
+  &:focus {
+    filter: brightness(0.8);
+    border-bottom: 2px solid ${({ theme }) => theme.colors.focus};
   }
 `;

@@ -12,5 +12,6 @@ export const appTheme: DefaultTheme = {
     //error: "#ff3333",
     error: "#bf2424",
     card: "#FFFFFF",
+    focus: "#ddf000",
   },
 };

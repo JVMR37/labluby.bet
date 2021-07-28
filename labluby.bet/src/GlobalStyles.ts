@@ -118,21 +118,29 @@ export const StyledForm = styled.form`
   padding-top: 10px;
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<{
+  hasError?: boolean;
+}>`
   font-size: 1.8rem;
-  padding: 10px;
-  margin: 10px;
+  padding: 16px;
+  margin-top: 10px;
   background: transparent;
   outline: none;
-  border: 2px solid transparent;
-  border-radius: 15px;
+
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+
+  border-bottom: 2px solid
+    ${({ hasError, theme }) => (hasError ? theme.colors.error : "#ebebeb")};
+  /* border-radius: 0px; */
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-    /* font-size: 1.8rem; */
-    font-weight: 500;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.main};
     -webkit-text-fill-color: ${({ theme }) => theme.colors.main};
     -webkit-box-shadow: 0 0 0 30px transparent
       /* ${({ theme }) => theme.colors.background} */ inset !important;
@@ -140,7 +148,7 @@ export const StyledInput = styled.input`
   }
 
   &:focus {
-    border: 2px solid ${({ theme }) => theme.colors.main};
+    border-bottom: 2px solid ${({ theme }) => theme.colors.focus} !important;
   }
 
   &::placeholder {
@@ -238,6 +246,8 @@ export const FlatButton = styled.button<{
   background-color: transparent;
   border: none;
 
+  transition: all 0.5s ease;
+
   & svg {
     margin-left: 5px;
     margin-right: 5px;
@@ -246,7 +256,7 @@ export const FlatButton = styled.button<{
   &:disabled,
   &[disabled] {
     filter: brightness(0.6);
-    transition: color 5000s ease-in-out 0s;
+    /* transition: color 5s ease-in-out 0s; */
   }
 
   &:not(&[disabled]):hover {
@@ -254,6 +264,7 @@ export const FlatButton = styled.button<{
       isPrimary ? "brightness(0.9)" : theme.colors.main};
     color: ${({ isPrimary, theme }) => !isPrimary && theme.colors.main};
     transform: traslateY(-3rem);
+    transform: scale(1.02);
   }
   &:active {
     transform: traslateY(3rem);

@@ -9,6 +9,9 @@ import { ResetPasswordButton } from "../styles/loginCard.style";
 import ErrotInputTextStyled from "../styles/errorInputText.style";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
+import { useAppDispatch } from "../hooks/hooks";
+import { login } from "../store/authSlice";
+
 import { emailValidator, passValidator } from "../utils/validators";
 
 const LoginCard: React.FC = () => {
@@ -29,6 +32,8 @@ const LoginCard: React.FC = () => {
     inputBlurHandler: passBlurHandler,
     reset: resetPass,
   } = useInput(passValidator);
+
+  const dispatch = useAppDispatch();
   const history = useHistory();
 
   const handleResetPassButton = () => {
@@ -44,6 +49,7 @@ const LoginCard: React.FC = () => {
       return;
     }
 
+    dispatch(login({ email: emailValue, password: passValue }));
     console.log("Submitted!");
 
     resetEmail();

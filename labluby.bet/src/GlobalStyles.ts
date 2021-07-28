@@ -27,7 +27,7 @@ body{
     font-size: 1.6rem;
     margin: 0;
     background: #f7f7f7 0% 0% no-repeat padding-box;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica;
     color: #333;
 
 }
@@ -44,23 +44,6 @@ main {
   max-width: 90rem;
 }
 
-
-input {
-  font-size: 1.8rem;
-  padding: 10px;
-  margin: 10px;
-  background: transparent;
-  border: none;
-  outline: none;
-  border-radius: 15px;
-  :focus {
-    border: none;
-  }
-
-  ::placeholder {
-    color: #9D9D9D;
-  }
-}
 `;
 
 export default GlobalStyles;
@@ -133,6 +116,36 @@ export const Row = styled.div`
 
 export const StyledForm = styled.form`
   padding-top: 10px;
+`;
+
+export const StyledInput = styled.input`
+  font-size: 1.8rem;
+  padding: 10px;
+  margin: 10px;
+  background: transparent;
+  outline: none;
+  border: 2px solid transparent;
+  border-radius: 15px;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    /* font-size: 1.8rem; */
+    font-weight: 500;
+    -webkit-text-fill-color: ${({ theme }) => theme.colors.main};
+    -webkit-box-shadow: 0 0 0 30px transparent
+      /* ${({ theme }) => theme.colors.background} */ inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  &:focus {
+    border: 2px solid ${({ theme }) => theme.colors.main};
+  }
+
+  &::placeholder {
+    color: #9d9d9d;
+  }
 `;
 
 export const Button = styled.button<{
@@ -211,7 +224,8 @@ export const FlatButton = styled.button<{
   align-items: center;
   text-decoration: none;
   font-weight: bold;
-  color: ${({ isPrimary }) => (isPrimary ? "#b5c401" : "#707070")};
+  color: ${({ isPrimary, theme }) =>
+    isPrimary ? theme.colors.main : theme.colors.secondary};
   font-size: 3.5rem;
   font-family: Helvetica;
   cursor: pointer;
@@ -229,13 +243,21 @@ export const FlatButton = styled.button<{
     margin-right: 5px;
   }
 
-  &:hover {
-    filter: ${({ isPrimary }) => (isPrimary ? "brightness(0.9)" : "#b5c401")};
-    color: ${({ isPrimary }) => !isPrimary && "#b5c401"};
+  &:disabled,
+  &[disabled] {
+    filter: brightness(0.6);
+    transition: color 5000s ease-in-out 0s;
+  }
+
+  &:not(&[disabled]):hover {
+    filter: ${({ isPrimary, theme }) =>
+      isPrimary ? "brightness(0.9)" : theme.colors.main};
+    color: ${({ isPrimary, theme }) => !isPrimary && theme.colors.main};
     transform: traslateY(-3rem);
   }
   &:active {
     transform: traslateY(3rem);
-    filter: ${({ isPrimary }) => (isPrimary ? "brightness(0.9)" : "#b5c401")};
+    filter: ${({ isPrimary, theme }) =>
+      isPrimary ? "brightness(0.9)" : theme.colors.main};
   }
 `;

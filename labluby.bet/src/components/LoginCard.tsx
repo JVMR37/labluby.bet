@@ -35,11 +35,7 @@ const LoginCard: React.FC = () => {
     history.push("/reset-password");
   };
 
-  let formIsValid = false;
-
-  if (passIsValid && emailIsValid) {
-    formIsValid = true;
-  }
+  const formIsValid = passIsValid && emailIsValid;
 
   const submitHandler = (event: any) => {
     event.preventDefault();
@@ -57,35 +53,31 @@ const LoginCard: React.FC = () => {
   return (
     <Card>
       <StyledForm onSubmit={submitHandler}>
-        <div>
-          <InputField
-            type="text"
-            value={emailValue}
-            onChange={emailChangeHandler}
-            onBlur={emailBlurHandler}
-            id="1"
-            key="email"
-            placeholder="Email"
-          ></InputField>
+        <InputField
+          key="email"
+          type="text"
+          value={emailValue}
+          onChange={emailChangeHandler}
+          onBlur={emailBlurHandler}
+          id="1"
+          placeholder="Email"
+        ></InputField>
 
-          {emailHasError && (
-            <ErrotInputTextStyled>
-              Please enter a valid email address.
-            </ErrotInputTextStyled>
-          )}
-        </div>
+        {emailHasError && (
+          <ErrotInputTextStyled>
+            Please enter a valid email address.
+          </ErrotInputTextStyled>
+        )}
 
         <hr />
-        <input
+        <InputField
+          key={"pass"}
           type="password"
           value={passValue}
           onChange={passChangeHandler}
           onBlur={passBlurHandler}
-          id="2"
-          key={"pass"}
-          // autoFocus={true}
           placeholder="Password"
-        ></input>
+        ></InputField>
 
         {passHasError && (
           <ErrotInputTextStyled>

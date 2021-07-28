@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 import { FaBars, FaTimes, FaArrowRight } from "react-icons/fa";
 import {
   Nav,
@@ -13,15 +13,12 @@ import {
   MenuItemBtn,
 } from "../styles/navbar.style";
 const Navbar = () => {
-  //click is the initial state and setclick will be the update state
   const [click, setClick] = useState(false);
 
-  //Create a function to handle the click state of the menu icon.
-  //if the menu icon was the menu bar at the beginning when clicked it will have the close icon
   const handleClick = () => setClick(!click);
 
   const closeMenu = (event: any) => {
-    // event.preventDefault();
+    event.preventDefault();
     console.log("aloha");
   };
   return (
@@ -51,23 +48,6 @@ const Navbar = () => {
               </button>
             </MenuLinkBtn>
           </MenuItemBtn>
-
-          {/* <MenuItemBtn>
-            {true ? (
-              <MenuLinkBtn to="/order-now">
-                <OutlineButton>
-                  <span>Logout</span>
-                  <FaArrowRight />
-                </OutlineButton>
-              </MenuLinkBtn>
-            ) : (
-              <MenuLinkBtn to="/order-now">
-                <OutlineButton primary bigFont>
-                  Order Now
-                </OutlineButton>
-              </MenuLinkBtn>
-            )}
-          </MenuItemBtn> */}
         </Menu>
       </NavbarContainer>
     </Nav>

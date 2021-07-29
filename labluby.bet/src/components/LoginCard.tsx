@@ -1,16 +1,25 @@
 import Card from "../layout/Card";
 import { InputField } from "../layout/Input";
 
-import { FlatButton, StyledForm } from "../GlobalStyles";
+import { CenteredDiv, FlatButton, StyledForm } from "../GlobalStyles";
 import { FaArrowRight } from "react-icons/fa";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 
-import React from "react";
-import { ResetPasswordButton } from "../styles/loginCard.style";
+import React, { useCallback } from "react";
+import {
+  ResetPasswordButton,
+  AnimatedDivContent,
+} from "../styles/loginCard.style";
 import ErrotInputTextStyled from "../styles/errorInputText.style";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
-import { useAppDispatch } from "../hooks/hooks";
-import { login } from "../store/authSlice";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import {
+  login,
+  updateAuthStatusAfterTime,
+  AuthStatus,
+  selectAuthStatusValue,
+} from "../store/authSlice";
 
 import { emailValidator, passValidator } from "../utils/validators";
 
@@ -35,25 +44,53 @@ const LoginCard: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const authStatus = useAppSelector(selectAuthStatusValue);
+
+  const formIsValid = passIsValid && emailIsValid;
+
+  const content = useCallback(() => {
+    switch (authStatus) {
+      case AuthStatus.Loading:
+        return (
+          <span key="Loading Message">
+            Carregando missão da Turma do Bairro...
+          </span>
+        );
+      case AuthStatus.Error:
+        return <span key="IDLE Message">Deu ruim ae bro</span>;
+      case AuthStatus.IDLE:
+      default:
+        return (
+          <FlatButton key="Login Button" isPrimary disabled={!formIsValid}>
+            Log In <FaArrowRight />
+          </FlatButton>
+        );
+    }
+  }, [authStatus, formIsValid])();
 
   const handleResetPassButton = () => {
     history.push("/reset-password");
   };
 
-  const formIsValid = passIsValid && emailIsValid;
-
-  const submitHandler = (event: any) => {
+  const submitHandler = async (event: any) => {
     event.preventDefault();
 
     if (!formIsValid) {
       return;
     }
 
-    dispatch(login({ email: emailValue, password: passValue }));
-    console.log("Submitted!");
+    const result = await dispatch(
+      login({ email: emailValue, password: passValue })
+    );
 
-    resetEmail();
-    resetPass();
+    if (result.meta.requestStatus === "rejected") {
+      dispatch(updateAuthStatusAfterTime(AuthStatus.IDLE));
+    } else if (result.meta.requestStatus === "fulfilled") {
+      resetEmail();
+      resetPass();
+    }
+
+    console.log("Submitted!");
   };
 
   return (
@@ -92,15 +129,22 @@ const LoginCard: React.FC = () => {
           </ErrotInputTextStyled>
         )}
 
-        <div>
-          <ResetPasswordButton onClick={handleResetPassButton}>
-            I forget my password
-          </ResetPasswordButton>
-        </div>
+        <ResetPasswordButton onClick={handleResetPassButton}>
+          I forget my password
+        </ResetPasswordButton>
+        <SwitchTransition mode="out-in">
+          <CSSTransition
+            key={"true"}
+            addEndListener={(node, done) => {
+              node.addEventListener("transitionend", done, false);
+            }}
+            classNames="fade"
+          >
+            <AnimatedDivContent>{content}</AnimatedDivContent>
+          </CSSTransition>
+        </SwitchTransition>
 
-        <FlatButton isPrimary disabled={!formIsValid}>
-          Log In <FaArrowRight />
-        </FlatButton>
+        {/* <AnimatedDivContent>{content}</AnimatedDivContent> */}
       </StyledForm>
     </Card>
   );

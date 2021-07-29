@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import { FlatButton, StyledForm } from "../GlobalStyles";
 import Card from "../layout/Card";
@@ -15,6 +15,14 @@ import {
   passValidator,
   isNotEmptyValidator,
 } from "../utils/validators";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import AuthStatusMessage from "./AuthStatusMessageComponent";
+import {
+  register,
+  updateAuthStatusAfterTime,
+  AuthStatus,
+  selectAuthStatusValue,
+} from "../store/authSlice";
 
 const RegisterCard: React.FC = () => {
   const {
@@ -45,23 +53,64 @@ const RegisterCard: React.FC = () => {
   } = useInput(isNotEmptyValidator);
 
   const history = useHistory();
+  const dispatch = useAppDispatch();
+  const authStatus = useAppSelector(selectAuthStatusValue);
 
   const formIsValid = passIsValid && emailIsValid && nameIsValid;
 
-  const submitHandler = (event: any) => {
+  const content = useCallback(() => {
+    switch (authStatus) {
+      case AuthStatus.Loading:
+        return (
+          <AuthStatusMessage key="Loading Message" status={authStatus}>
+            Loading...
+          </AuthStatusMessage>
+        );
+      case AuthStatus.Error:
+        return (
+          <AuthStatusMessage key="Error Message" status={authStatus}>
+            Failed to register : (
+          </AuthStatusMessage>
+        );
+      case AuthStatus.Success:
+        return (
+          <AuthStatusMessage key="Success Message" status={authStatus}>
+            Successfully registered : )
+          </AuthStatusMessage>
+        );
+      case AuthStatus.IDLE:
+      default:
+        return (
+          <FlatButton isPrimary disabled={!formIsValid}>
+            Register <FaArrowRight />
+          </FlatButton>
+        );
+    }
+  }, [authStatus, formIsValid])();
+
+  const submitHandler = async (event: any) => {
     event.preventDefault();
 
     if (!formIsValid) {
       return;
     }
 
-    history.replace("/login");
+    const result = await dispatch(
+      register({ name: nameValue, email: emailValue, password: passValue })
+    );
+
+    dispatch(updateAuthStatusAfterTime(AuthStatus.IDLE));
+
+    if (result.meta.requestStatus === "fulfilled") {
+      setTimeout(() => {
+        resetName();
+        resetEmail();
+        resetPass();
+        history.push("/login");
+      }, 2000);
+    }
 
     console.log("Submitted!");
-
-    resetName();
-    resetEmail();
-    resetPass();
   };
 
   return (
@@ -114,11 +163,7 @@ const RegisterCard: React.FC = () => {
             Please enter a valid password.
           </ErrotInputTextStyled>
         )}
-        <AnimatedDivStyled>
-          <FlatButton isPrimary disabled={!formIsValid}>
-            Register <FaArrowRight />
-          </FlatButton>
-        </AnimatedDivStyled>
+        <AnimatedDivStyled>{content}</AnimatedDivStyled>
       </StyledForm>
     </Card>
   );

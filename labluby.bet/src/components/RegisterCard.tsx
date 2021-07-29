@@ -7,6 +7,7 @@ import { InputField } from "../layout/Input";
 import { FaArrowRight } from "react-icons/fa";
 
 import ErrotInputTextStyled from "../styles/errorInputText.style";
+import AnimatedDivStyled from "../styles/animatedDiv.style";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import {
@@ -113,10 +114,11 @@ const RegisterCard: React.FC = () => {
             Please enter a valid password.
           </ErrotInputTextStyled>
         )}
-
-        <FlatButton isPrimary disabled={!formIsValid}>
-          Register <FaArrowRight />
-        </FlatButton>
+        <AnimatedDivStyled>
+          <FlatButton isPrimary disabled={!formIsValid}>
+            Register <FaArrowRight />
+          </FlatButton>
+        </AnimatedDivStyled>
       </StyledForm>
     </Card>
   );

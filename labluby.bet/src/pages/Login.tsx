@@ -1,14 +1,16 @@
 import TitleAppComponent from "../components/TitleAppComponent";
 import TitlePageComponent from "../components/TitlePageComponent";
-import { Row, Column, FlatButton, CenteredPageDiv } from "../GlobalStyles";
+import {
+  Row,
+  Column,
+  FlatButton,
+  CenteredPageDiv,
+  DivButton,
+} from "../GlobalStyles";
 import LoginCard from "../components/LoginCard";
 import { FaArrowRight } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-
-const DivButton = styled.div`
-  margin: 3rem 0rem;
-`;
 
 const Login: React.FC = (props) => {
   const history = useHistory();

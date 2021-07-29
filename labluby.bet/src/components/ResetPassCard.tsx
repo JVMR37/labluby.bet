@@ -8,6 +8,7 @@ import useInput from "../hooks/use-input";
 import { emailValidator } from "../utils/validators";
 import { InputField } from "../layout/Input";
 import ErrotInputTextStyled from "../styles/errorInputText.style";
+import AnimatedDivStyled from "../styles/animatedDiv.style";
 
 const ResetPassCard: React.FC = () => {
   const {
@@ -49,11 +50,11 @@ const ResetPassCard: React.FC = () => {
             Please enter a valid email address.
           </ErrotInputTextStyled>
         )}
-        <hr />
-
-        <FlatButton isPrimary>
-          Send link <FaArrowRight />
-        </FlatButton>
+        <AnimatedDivStyled>
+          <FlatButton isPrimary>
+            Send link <FaArrowRight />
+          </FlatButton>
+        </AnimatedDivStyled>
       </StyledForm>
     </Card>
   );

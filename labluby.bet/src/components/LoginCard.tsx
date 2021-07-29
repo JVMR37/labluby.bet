@@ -7,7 +7,7 @@ import { FaArrowRight } from "react-icons/fa";
 import React, { useCallback } from "react";
 import { ResetPasswordButton } from "../styles/loginCard.style";
 import ErrotInputTextStyled from "../styles/errorInputText.style";
-import { AnimatedDiv } from "../styles/animatedDiv.style";
+import AnimatedDivStyled from "../styles/animatedDiv.style";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
@@ -57,8 +57,6 @@ const LoginCard: React.FC = () => {
         return <span key="IDLE Message">Deu ruim ae bro</span>;
       case AuthStatus.IDLE:
       default:
-        // setState(true);
-
         return (
           <FlatButton key="Login Button" isPrimary disabled={!formIsValid}>
             Log In <FaArrowRight />
@@ -87,6 +85,7 @@ const LoginCard: React.FC = () => {
     } else if (result.meta.requestStatus === "fulfilled") {
       resetEmail();
       resetPass();
+      history.push("/home");
     }
 
     console.log("Submitted!");
@@ -132,7 +131,9 @@ const LoginCard: React.FC = () => {
           I forget my password
         </ResetPasswordButton>
 
-        <AnimatedDiv key={authStatus.toString()}>{content}</AnimatedDiv>
+        <AnimatedDivStyled key={authStatus.toString()}>
+          {content}
+        </AnimatedDivStyled>
       </StyledForm>
     </Card>
   );

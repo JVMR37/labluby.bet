@@ -69,7 +69,7 @@ export const register = createAsyncThunk(
     );
 
     if (!response) {
-      return thunkApi.rejectWithValue("Não foi possível fazer o Login !");
+      return thunkApi.rejectWithValue("Não foi possível fazer o Cadastro !");
     }
 
     return { ...response.data };
@@ -80,6 +80,10 @@ export const sendLinkToResetPass = createAsyncThunk(
   "auth/sendLinkToResetPass",
   async (email: string, thunkApi) => {
     const response = await resetPasswordInAPI(email);
+
+    if (!response) {
+      return thunkApi.rejectWithValue("Não foi possível enviar o link !");
+    }
 
     return { ...response.data };
   }
@@ -136,6 +140,18 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(register.fulfilled, (state, action) => {
+      state.status = AuthStatus.Success;
+    });
+
+    builder.addCase(sendLinkToResetPass.pending, (state) => {
+      state.status = AuthStatus.Loading;
+    });
+
+    builder.addCase(sendLinkToResetPass.rejected, (state) => {
+      state.status = AuthStatus.Error;
+    });
+
+    builder.addCase(sendLinkToResetPass.fulfilled, (state) => {
       state.status = AuthStatus.Success;
     });
 

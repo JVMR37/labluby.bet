@@ -1,16 +1,13 @@
 import Card from "../layout/Card";
 import { InputField } from "../layout/Input";
 
-import { CenteredDiv, FlatButton, StyledForm } from "../GlobalStyles";
+import { FlatButton, StyledForm } from "../GlobalStyles";
 import { FaArrowRight } from "react-icons/fa";
-import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 import React, { useCallback } from "react";
-import {
-  ResetPasswordButton,
-  AnimatedDivContent,
-} from "../styles/loginCard.style";
+import { ResetPasswordButton } from "../styles/loginCard.style";
 import ErrotInputTextStyled from "../styles/errorInputText.style";
+import { AnimatedDiv } from "../styles/animatedDiv.style";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
@@ -60,6 +57,8 @@ const LoginCard: React.FC = () => {
         return <span key="IDLE Message">Deu ruim ae bro</span>;
       case AuthStatus.IDLE:
       default:
+        // setState(true);
+
         return (
           <FlatButton key="Login Button" isPrimary disabled={!formIsValid}>
             Log In <FaArrowRight />
@@ -132,19 +131,8 @@ const LoginCard: React.FC = () => {
         <ResetPasswordButton onClick={handleResetPassButton}>
           I forget my password
         </ResetPasswordButton>
-        <SwitchTransition mode="out-in">
-          <CSSTransition
-            key={"true"}
-            addEndListener={(node, done) => {
-              node.addEventListener("transitionend", done, false);
-            }}
-            classNames="fade"
-          >
-            <AnimatedDivContent>{content}</AnimatedDivContent>
-          </CSSTransition>
-        </SwitchTransition>
 
-        {/* <AnimatedDivContent>{content}</AnimatedDivContent> */}
+        <AnimatedDiv key={authStatus.toString()}>{content}</AnimatedDiv>
       </StyledForm>
     </Card>
   );

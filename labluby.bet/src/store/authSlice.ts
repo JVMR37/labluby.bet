@@ -62,20 +62,24 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (props: RegisterProps) => {
+  async (props: RegisterProps, thunkApi) => {
     const response = await registerUserInAPI(
       props.name,
       props.email,
       props.password
     );
-    // The value we return becomes the `fulfilled` action payload
+
+    if (!response) {
+      return thunkApi.rejectWithValue("Não foi possível fazer o Login !");
+    }
+
     return { ...response.data };
   }
 );
 
 export const sendLinkToResetPass = createAsyncThunk(
   "auth/sendLinkToResetPass",
-  async (email: string) => {
+  async (email: string, thunkApi) => {
     const response = await resetPasswordInAPI(email);
 
     return { ...response.data };
@@ -87,7 +91,7 @@ export const updateAuthStatusAfterTime = createAsyncThunk<
   AuthStatus
 >("auth/updateStatus", async (newStatus: AuthStatus = AuthStatus.IDLE) => {
   return new Promise<AuthStatus>((resolve) => {
-    setTimeout(() => resolve(newStatus), 3000);
+    setTimeout(() => resolve(newStatus), 2000);
   }).then((value) => value);
 });
 
@@ -124,8 +128,19 @@ export const authSlice = createSlice({
       }
     });
 
+    builder.addCase(register.pending, (state, action) => {
+      state.status = AuthStatus.Loading;
+    });
+
+    builder.addCase(register.rejected, (state, action) => {
+      state.status = AuthStatus.Error;
+    });
+
+    builder.addCase(register.fulfilled, (state, action) => {
+      state.status = AuthStatus.Success;
+    });
+
     builder.addCase(updateAuthStatusAfterTime.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.status = action.payload;
     });
   },

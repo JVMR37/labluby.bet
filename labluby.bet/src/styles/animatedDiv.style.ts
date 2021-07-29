@@ -20,7 +20,7 @@ const highlightAnimation = css`
   animation: ${highlight} 0.8s ease-in-out;
 `;
 
-export const AnimatedDiv = styled.div`
+const AnimatedDivStyled = styled.div`
   ${highlightAnimation}
 
   margin: 3rem 0rem;
@@ -31,3 +31,5 @@ export const AnimatedDiv = styled.div`
   width: 100%;
   transition: all 1.5s ease;
 `;
+
+export default AnimatedDivStyled;

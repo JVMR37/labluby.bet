@@ -44,6 +44,24 @@ main {
   max-width: 90rem;
 }
 
+.fade-enter{
+   opacity: 0;
+}
+.fade-exit{
+   opacity: 1;
+}
+.fade-enter-active{
+   opacity: 1;
+}
+.fade-exit-active{
+   opacity: 0;
+}
+.fade-enter-active,
+.fade-exit-active{
+   transition: opacity 500ms;
+}
+
+
 `;
 
 export default GlobalStyles;
@@ -238,7 +256,7 @@ export const FlatButton = styled.button<{
   font-family: Helvetica;
   cursor: pointer;
 
-  margin: 3rem 0rem;
+  /* margin: 03rem 0rem; */
 
   /* height: 100%; */
   width: 100%;

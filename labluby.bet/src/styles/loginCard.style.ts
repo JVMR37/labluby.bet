@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const ResetPasswordButton = styled.button`
   text-align: left;
@@ -35,4 +35,30 @@ export const ResetPasswordButton = styled.button`
     filter: brightness(0.8);
     border-bottom: 2px solid ${({ theme }) => theme.colors.focus};
   }
+`;
+
+const highlight = keyframes`
+  25% {
+    transform: scale(1.3);
+  }
+
+  100% {
+    transform: scale(1.0);
+  }
+`;
+
+const highlightAnimation = css`
+  animation: ${highlight} 1s ease;
+`;
+
+export const AnimatedDivContent = styled.div`
+  ${highlightAnimation}
+
+  margin: 3rem 0rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transition: all 1.5s ease;
 `;

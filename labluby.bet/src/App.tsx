@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import ResetPass from "./pages/ResetPass";
 import Home from "./pages/Home";
 import NewBet from "./pages/NewBet";
+import Account from "./pages/Account";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useAppSelector } from "./hooks/hooks";
 import { selectIsLoggedInValue } from "./store/authSlice";
@@ -22,6 +23,11 @@ function App() {
 
         <Route path="/home">
           {isLoggedIn && <Home />}
+          {!isLoggedIn && <Redirect to="/login"></Redirect>}
+        </Route>
+
+        <Route path="/account">
+          {isLoggedIn && <Account />}
           {!isLoggedIn && <Redirect to="/login"></Redirect>}
         </Route>
 

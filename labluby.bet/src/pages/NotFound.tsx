@@ -1,4 +1,4 @@
-import { CenteredDiv, FlatButton, Column } from "../GlobalStyles";
+import { CenteredDiv, FlatButton, Column, DivButton } from "../GlobalStyles";
 import { FaArrowLeft } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { NotFoundSpan } from "../styles/notFound.style";
@@ -20,10 +20,12 @@ const NotFound = () => {
           Oops...
           <br /> Page not found.
         </NotFoundSpan>
-        <FlatButton isPrimary onClick={handleBackButton}>
-          <FaArrowLeft />
-          Return to {isLoggedIn ? "Home" : "Login"}
-        </FlatButton>
+        <DivButton>
+          <FlatButton isPrimary onClick={handleBackButton}>
+            <FaArrowLeft />
+            Return to {isLoggedIn ? "Home" : "Login"}
+          </FlatButton>
+        </DivButton>
       </Column>
     </CenteredDiv>
   );

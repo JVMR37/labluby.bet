@@ -11,6 +11,7 @@ import AnimatedDivStyled from "../styles/animatedDiv.style";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import AuthStatusMessage from "./AuthStatusMessageComponent";
 import {
   login,
   updateAuthStatusAfterTime,
@@ -49,12 +50,16 @@ const LoginCard: React.FC = () => {
     switch (authStatus) {
       case AuthStatus.Loading:
         return (
-          <span key="Loading Message">
-            Carregando missão da Turma do Bairro...
-          </span>
+          <AuthStatusMessage key="Loading Message" status={authStatus}>
+            Loading...
+          </AuthStatusMessage>
         );
       case AuthStatus.Error:
-        return <span key="IDLE Message">Deu ruim ae bro</span>;
+        return (
+          <AuthStatusMessage key="Error Message" status={authStatus}>
+            Error when logging in : (
+          </AuthStatusMessage>
+        );
       case AuthStatus.IDLE:
       default:
         return (

@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from ".";
-import User from "../models/User";
 import {
   loginInAPI,
   registerUserInAPI,

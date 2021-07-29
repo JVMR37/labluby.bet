@@ -10,6 +10,7 @@ import {
 export enum AuthStatus {
   Loading,
   Logged,
+  Success,
   Error,
   IDLE,
 }

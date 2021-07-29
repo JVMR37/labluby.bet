@@ -89,6 +89,10 @@ export const Container = styled.div`
   }
 `;
 
+export const DivButton = styled.div`
+  margin: 3rem 0rem;
+`;
+
 export const CenteredDiv = styled.div`
   text-align: center;
   display: flex;

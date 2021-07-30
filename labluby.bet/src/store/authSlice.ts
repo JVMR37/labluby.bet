@@ -20,7 +20,6 @@ export interface AuthState {
   userEmail: string | null;
 
   status: AuthStatus;
-  isLoggedIn: boolean;
   isLoading: boolean;
 }
 
@@ -30,8 +29,7 @@ const initialState: AuthState = {
   userName: null,
   userEmail: null,
 
-  status: AuthStatus.IDLE,
-  isLoggedIn: false,
+  status: AuthStatus.Logged,
   isLoading: false,
 };
 
@@ -127,7 +125,6 @@ export const authSlice = createSlice({
         state.userEmail = user.email;
 
         state.status = AuthStatus.Logged;
-        state.isLoggedIn = true;
       }
     });
 

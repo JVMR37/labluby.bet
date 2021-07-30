@@ -113,9 +113,10 @@ export const CenteredPageDiv = styled.div`
 
 export const Column = styled.div<{
   margin?: string;
+  width?: string;
 }>`
   float: left;
-  width: 50%;
+  width: ${({ width }) => (width ? width : "50%")}; // 50%;
   margin: ${({ margin }) => (margin ? margin : "5rem")};
 
   @media screen and (max-width: 600px) {
@@ -292,5 +293,56 @@ export const FlatButton = styled.button<{
     transform: traslateY(3rem);
     filter: ${({ isPrimary, theme }) =>
       isPrimary ? "brightness(0.9)" : theme.colors.main};
+  }
+`;
+
+export const IconButton = styled.button<{
+  isDeleteButton?: boolean;
+}>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  color: ${({ isDeleteButton, theme }) =>
+    isDeleteButton ? theme.colors.secondary : theme.colors.main};
+  font-size: 2.5rem;
+  font-family: Helvetica;
+  cursor: pointer;
+  display: block;
+
+  /* margin: 03rem 0rem; */
+
+  /* height: 100%; */
+  /* width: 100%; */
+  outline: none;
+  background-color: transparent;
+  border: none;
+
+  transition: all 0.5s ease;
+
+  & svg {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  &:disabled,
+  &[disabled] {
+    filter: brightness(0.6);
+    /* transition: color 5s ease-in-out 0s; */
+  }
+
+  &:not(&[disabled]):hover {
+    filter: ${({ isDeleteButton, theme }) =>
+      !isDeleteButton ? "brightness(0.9)" : theme.colors.main};
+    color: ${({ isDeleteButton, theme }) =>
+      isDeleteButton && theme.colors.error};
+    transform: traslateY(-3rem);
+    transform: scale(1.2);
+  }
+  &:active {
+    transform: traslateY(3rem);
+    filter: ${({ isDeleteButton, theme }) =>
+      isDeleteButton ? "brightness(0.9)" : theme.colors.main};
   }
 `;

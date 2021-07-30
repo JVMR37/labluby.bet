@@ -116,6 +116,7 @@ export const Column = styled.div<{
   width?: string;
 }>`
   float: left;
+  flex-direction: column;
   width: ${({ width }) => (width ? width : "50%")}; // 50%;
   margin: ${({ margin }) => (margin ? margin : "5rem")};
 
@@ -126,8 +127,7 @@ export const Column = styled.div<{
 
 export const Row = styled.div`
   display: flex;
-  /* align-items: stretch; */
-  /* align-items: space-between; */
+  flex-direction: row;
   width: 90%;
 
   &:after {
@@ -221,21 +221,25 @@ export const OutlineButton = styled.button<{
   big?: boolean;
   bigFont?: boolean;
 }>`
-  border-radius: ${({ bigRadius }) => (bigRadius ? "40px" : "30px")};
+  border-radius: 50rem;
+  /* ${({ bigRadius }) => (bigRadius ? "40px" : "30px")}; */
   border: 2px solid #333;
   color: #333;
   outline: none;
   padding: ${({ big }) => (big ? "15px 60px" : "13px 55px")};
   font-size: ${({ bigFont }) => (bigFont ? "22px" : "18px")};
-  transition: all 0.5s ease;
-  background-color: #fefefe;
+  transition: all 0.2s ease;
+  background-color: ${({ theme }) => theme.colors.background};
+  cursor: pointer;
 
   &:hover {
     background-color: #333;
     color: #fff;
+    font-weight: bold;
     border: none;
     transform: translateY(-0.5rem) scale(1.02);
   }
+
   &:active {
     transform: translateY(0.5rem);
   }

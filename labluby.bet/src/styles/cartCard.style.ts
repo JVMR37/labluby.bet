@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Card from "../layout/Card";
 
 export const CartStyledDivContent = styled.div`
-  /* float: left; */
   width: 30rem;
   padding: 0rem;
 
@@ -13,7 +12,7 @@ export const CartStyledDivContent = styled.div`
 
 export const CartTitleStyledSpan = styled.span`
   text-align: start;
-  font: italic normal bold 24px/85px Helvetica;
+  font: italic normal bold 2.3rem/85px Helvetica;
   letter-spacing: 0px;
   padding-left: 2rem;
   color: ${({ theme }) => theme.colors.secondary};
@@ -23,7 +22,7 @@ export const CartTitleStyledSpan = styled.span`
 
 export const TotalPriceStyledSpan = styled.span`
   text-align: center;
-  font: normal normal 300 24px/85px Helvetica;
+  font: normal normal 300 2.3rem/85px Helvetica;
   letter-spacing: 0px;
   color: ${({ theme }) => theme.colors.secondary};
   text-transform: uppercase;
@@ -38,6 +37,5 @@ export const SaveCartStyledDiv = styled.div`
   text-align: center;
   font: italic normal bold 35px/70px Helvetica;
   letter-spacing: 0px;
-  /* color: #27c383; */
   opacity: 1;
 `;

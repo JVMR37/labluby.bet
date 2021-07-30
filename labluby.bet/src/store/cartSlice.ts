@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import CartItem from "../models/CartItem";
+import SavedGame from "../models/SavedGame";
 
 export interface CartState {
-  items: Array<CartItem>;
+  items: Array<SavedGame>;
   totalPrice: number;
 }
 
@@ -15,7 +15,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<CartItem>) => {
+    addItem: (state, action: PayloadAction<SavedGame>) => {
       state.items.push(action.payload);
       state.totalPrice += action.payload.price;
     },

@@ -29,7 +29,7 @@ const CartItemComponent: React.FC<CartItemProps> = (props) => {
         <NameGameStyledSpan fontColor={props.gameColor}>
           {props.gameName}
         </NameGameStyledSpan>
-        <PriceStyledSpan> R$ {props.gamePrice}</PriceStyledSpan>
+        <PriceStyledSpan> R$ {props.gamePrice.toFixed(2)}</PriceStyledSpan>
       </GameStyledDiv>
     </CartItemStyledDiv>
   );

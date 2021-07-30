@@ -60,7 +60,7 @@ const CartCard: React.FC = (props) => {
         </div>
 
         <SaveCartStyledDiv>
-          <FlatButton>
+          <FlatButton isPrimary>
             Save <FaArrowRight />
           </FlatButton>
         </SaveCartStyledDiv>

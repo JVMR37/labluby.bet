@@ -20,7 +20,6 @@ export interface AuthState {
   userEmail: string | null;
 
   status: AuthStatus;
-  isLoading: boolean;
 }
 
 const initialState: AuthState = {
@@ -29,8 +28,7 @@ const initialState: AuthState = {
   userName: null,
   userEmail: null,
 
-  status: AuthStatus.Logged,
-  isLoading: false,
+  status: AuthStatus.IDLE,
 };
 
 export interface LoginProps {
@@ -106,7 +104,6 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state, action) => {
-      state.isLoading = true;
       state.status = AuthStatus.Loading;
     });
 
@@ -115,7 +112,6 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(login.fulfilled, (state, action) => {
-      state.isLoading = false;
       const user = action.payload;
 
       if (user) {

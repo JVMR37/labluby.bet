@@ -10,7 +10,6 @@ import {
 import LoginCard from "../components/LoginCard";
 import { FaArrowRight } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
 
 const Login: React.FC = (props) => {
   const history = useHistory();

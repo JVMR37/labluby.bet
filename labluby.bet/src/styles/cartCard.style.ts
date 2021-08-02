@@ -39,3 +39,14 @@ export const SaveCartStyledDiv = styled.div`
   letter-spacing: 0px;
   opacity: 1;
 `;
+
+export const NoItensSpan = styled.span`
+  flex-direction: column;
+  text-align: center;
+  margin: 2rem 3rem;
+
+  font: normal normal 300 14px Helvetica;
+  letter-spacing: 0px;
+  color: #707070;
+  text-transform: uppercase;
+`;

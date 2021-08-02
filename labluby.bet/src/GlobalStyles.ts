@@ -181,25 +181,35 @@ export const StyledInput = styled.input<{
 
 export const Button = styled.button<{
   bigRadius?: boolean;
-  primary?: boolean;
+  isPrimary?: boolean;
   big?: boolean;
   bigFont?: boolean;
 }>`
-  border-radius: ${({ bigRadius }) => (bigRadius ? "30px" : "20px")};
-  background-color: ${({ primary }) => (primary ? "#b5c401" : "#000")};
-  color: ${({ primary }) => (primary ? "#000" : "#fff")};
-  padding: ${({ big }) => (big ? "18px 30px" : "10px 28px")};
-  font-size: ${({ bigFont }) => (bigFont ? "20px" : "18px")};
+  /* border-radius: ${({ bigRadius }) => (bigRadius ? "30px" : "20px")}; */
+  border-radius: 50rem;
+  background-color: ${({ isPrimary, theme }) =>
+    isPrimary ? theme.colors.main : theme.colors.secondary};
+  color: ${({ isPrimary, theme }) =>
+    isPrimary ? theme.colors.background : theme.colors.main};
+  padding: ${({ big }) => (big ? "15px 60px" : "13px 55px")};
+  font-size: ${({ bigFont }) => (bigFont ? "22px" : "18px")};
   outline: none;
   cursor: pointer;
-  border: none;
+  border: 2px solid
+    ${({ theme, isPrimary }) =>
+      isPrimary ? theme.colors.main : theme.colors.secondary};
   transition: all 0.5s ease;
-  flex-direction: column;
+
+  & svg {
+    margin-left: 5px;
+    margin-right: 10px;
+  }
 
   &:hover {
-    background-color: ${({ primary }) => (primary ? "#fff" : "#b5c401")};
+    filter: ${({ isPrimary }) => (isPrimary ? "brightness(0.9)" : "#b5c401")};
+    background-color: ${({ isPrimary }) => !isPrimary && "#b5c401"};
     transform: translateY(-0.5rem) scale(1.02);
-    color: #000;
+    font-weight: bold;
   }
   &:active {
     transform: translateY(0.5rem);
@@ -217,14 +227,17 @@ export const Button = styled.button<{
 
 export const OutlineButton = styled.button<{
   bigRadius?: boolean;
-  primary?: boolean;
+  isPrimary?: boolean;
   big?: boolean;
   bigFont?: boolean;
 }>`
-  border-radius: 50rem;
   /* ${({ bigRadius }) => (bigRadius ? "40px" : "30px")}; */
-  border: 2px solid #333;
-  color: #333;
+  border: 2px solid
+    ${({ theme, isPrimary }) =>
+      isPrimary ? theme.colors.main : theme.colors.secondary};
+  border-radius: 50rem;
+  color: ${({ theme, isPrimary }) =>
+    isPrimary ? theme.colors.main : theme.colors.secondary};
   outline: none;
   padding: ${({ big }) => (big ? "15px 60px" : "13px 55px")};
   font-size: ${({ bigFont }) => (bigFont ? "22px" : "18px")};
@@ -233,10 +246,11 @@ export const OutlineButton = styled.button<{
   cursor: pointer;
 
   &:hover {
-    background-color: #333;
+    background-color: ${({ theme, isPrimary }) =>
+      isPrimary ? theme.colors.main : theme.colors.secondary};
     color: #fff;
     font-weight: bold;
-    border: none;
+    /* border: none; */
     transform: translateY(-0.5rem) scale(1.02);
   }
 

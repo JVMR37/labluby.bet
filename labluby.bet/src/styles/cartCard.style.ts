@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import Card from "../layout/Card";
 
 export const CartStyledDivContent = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 30rem;
   padding: 0rem;
 
@@ -33,6 +34,7 @@ export const SaveCartStyledDiv = styled.div`
   padding: 2rem;
   background: #f4f4f4 0% 0% no-repeat padding-box;
   border: 1px solid #e2e2e2;
+  border-radius: 0px 0px 15px 15px;
   opacity: 1;
   text-align: center;
   font: italic normal bold 35px/70px Helvetica;

@@ -41,7 +41,7 @@ main {
   /* display: inline-block; */
   margin: 3rem auto;
   width: 90%;
-  max-width: 90rem;
+  max-width: 100rem;
 }
 
 .fade-enter{

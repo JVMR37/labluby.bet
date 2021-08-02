@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from ".";
 import Game from "../models/Game";
 
 export enum GameStatus {
@@ -64,6 +65,10 @@ const gameSlice = createSlice({
   },
 });
 
-export const gameActions = gameSlice.actions;
+export const { selectGame } = gameSlice.actions;
+export const selectAvailableGames = (state: RootState) =>
+  state.game.availableGames;
+
+export const getSelectedGame = (state: RootState) => state.game.selectedGame;
 
 export default gameSlice.reducer;

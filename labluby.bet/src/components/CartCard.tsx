@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import Card from "../layout/Card";
 import { Column, Row, FlatButton } from "../GlobalStyles";
 import CartItemComponent from "./CartItemComponent";
@@ -8,55 +9,46 @@ import {
   CartTitleStyledSpan,
   TotalPriceStyledSpan,
   SaveCartStyledDiv,
+  NoItensSpan,
 } from "../styles/cartCard.style";
 
+import { useAppSelector } from "../hooks/hooks";
+import { selectCartItens, selectCartTotalPrice } from "../store/cartSlice";
+
 const CartCard: React.FC = (props) => {
+  const cartItens = useAppSelector(selectCartItens);
+  const cartTotalPrice = useAppSelector(selectCartTotalPrice);
+
+  const cartContent = useCallback(() => {
+    if (cartItens.length > 0) {
+      return cartItens.map((cartItem) => {
+        return (
+          <CartItemComponent
+            key={cartItem.id}
+            gameColor={cartItem.typeGame.color}
+            gameName={cartItem.typeGame.type}
+            gamePrice={cartItem.typeGame.price}
+            selectedNumbers={cartItem.selectedNumbers}
+          ></CartItemComponent>
+        );
+      });
+    } else {
+      return (
+        <NoItensSpan>There are no games added to the cart : (</NoItensSpan>
+      );
+    }
+  }, [cartItens])();
+
   return (
     <Card>
       <CartStyledDivContent>
         <CartTitleStyledSpan>Cart</CartTitleStyledSpan>
-        <CartItemComponent
-          key={"2"}
-          gameColor="red"
-          gameName="Test"
-          gamePrice={100}
-          selectedNumbers={[
-            "1",
-            "2",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-            "3",
-          ]}
-        ></CartItemComponent>
+
+        {cartContent}
+
         <div>
           <CartTitleStyledSpan>Cart </CartTitleStyledSpan>
-          <TotalPriceStyledSpan>TOTAL: R$15.00</TotalPriceStyledSpan>
+          <TotalPriceStyledSpan>TOTAL: R${cartTotalPrice}</TotalPriceStyledSpan>
         </div>
 
         <SaveCartStyledDiv>

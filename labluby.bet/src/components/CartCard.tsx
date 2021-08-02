@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import Card from "../layout/Card";
-import { Column, Row, FlatButton } from "../GlobalStyles";
+import { FlatButton } from "../GlobalStyles";
 import CartItemComponent from "./CartItemComponent";
 import { FaArrowRight } from "react-icons/fa";
 

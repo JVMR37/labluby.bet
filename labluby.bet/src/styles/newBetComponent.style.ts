@@ -109,8 +109,9 @@ export const GameActionStyledButton = styled(OutlineButton)`
   justify-content: center;
   align-items: center;
   border-radius: 50rem;
+  font-weight: bold;
   padding: 1rem 2rem;
-  margin: 1rem 1rem;
+  margin: 1rem 0.5rem;
 
   @media only screen and (max-width: 1000px) {
     flex: inherit;

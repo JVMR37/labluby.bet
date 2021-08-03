@@ -11,7 +11,7 @@ import {
 
 export interface CartItemProps {
   gameColor: string;
-  selectedNumbers: Array<string>;
+  selectedNumbers: string;
   gameName: string;
   gamePrice: number;
 }

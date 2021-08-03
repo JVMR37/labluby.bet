@@ -28,7 +28,7 @@ const CartCard: React.FC = (props) => {
             gameColor={cartItem.typeGame.color}
             gameName={cartItem.typeGame.type}
             gamePrice={cartItem.typeGame.price}
-            selectedNumbers={cartItem.selectedNumbers}
+            selectedNumbers={cartItem.selectedNumbers.join(", ") + "."}
           ></CartItemComponent>
         );
       });
@@ -48,7 +48,9 @@ const CartCard: React.FC = (props) => {
 
         <div>
           <CartTitleStyledSpan>Cart </CartTitleStyledSpan>
-          <TotalPriceStyledSpan>TOTAL: R${cartTotalPrice}</TotalPriceStyledSpan>
+          <TotalPriceStyledSpan>
+            TOTAL: R${cartTotalPrice.toFixed(2)}
+          </TotalPriceStyledSpan>
         </div>
 
         <SaveCartStyledDiv>

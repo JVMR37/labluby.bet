@@ -16,7 +16,7 @@ const highlight = keyframes`
 }
 `;
 
-const highlightAnimation = css`
+export const highlightAnimation = css`
   animation: ${highlight} 0.8s ease-in-out;
 `;
 

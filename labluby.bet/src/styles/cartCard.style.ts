@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import { highlightAnimation } from "./animatedDiv.style";
 
 export const CartStyledDivContent = styled.div`
+  ${highlightAnimation}
   display: flex;
   flex-direction: column;
   width: 30rem;
   padding: 0rem;
+  transition: all 0.5s ease;
+  
 
   @media screen and (max-width: 600px) {
     width: 100%;

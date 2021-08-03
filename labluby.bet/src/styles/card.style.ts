@@ -1,6 +1,7 @@
 import styled from "styled-components";
-
+import { highlightAnimation } from "./animatedDiv.style";
 export const StyledCard = styled.div`
+  ${highlightAnimation}
   background: ${({ theme }) => theme.colors.card} 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 25px #00000014;
   border: 1px solid #dddddd;

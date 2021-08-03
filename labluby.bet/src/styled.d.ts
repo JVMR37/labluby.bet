@@ -11,6 +11,7 @@ declare module "styled-components" {
       background: string;
       secondary: string;
       label: string;
+      gameNumbers: string;
       error: string;
       card: string;
       focus: string;

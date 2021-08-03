@@ -9,7 +9,7 @@ export const appTheme: DefaultTheme = {
     background: "#F7F7F7",
     secondary: "#707070",
     label: "##9D9D9D",
-    //error: "#ff3333",
+    gameNumbers: "#adc0c4",
     error: "#bf2424",
     card: "#FFFFFF",
     focus: "#ddf000",

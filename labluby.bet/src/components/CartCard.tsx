@@ -12,12 +12,27 @@ import {
   NoItensSpan,
 } from "../styles/cartCard.style";
 
-import { useAppSelector } from "../hooks/hooks";
-import { selectCartItens, selectCartTotalPrice } from "../store/cartSlice";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import {
+  selectCartItens,
+  selectCartTotalPrice,
+  clearCart,
+} from "../store/cartSlice";
+import { saveGames } from "../store/gamesSlice";
 
 const CartCard: React.FC = (props) => {
+  const dispatch = useAppDispatch();
   const cartItens = useAppSelector(selectCartItens);
   const cartTotalPrice = useAppSelector(selectCartTotalPrice);
+
+  const saveButtonHandler = useCallback(
+    (event: any) => {
+      event.preventDefault();
+      dispatch(saveGames(cartItens));
+      dispatch(clearCart());
+    },
+    [cartItens, dispatch]
+  );
 
   const cartContent = useCallback(() => {
     if (cartItens.length > 0) {
@@ -25,6 +40,7 @@ const CartCard: React.FC = (props) => {
         return (
           <CartItemComponent
             key={cartItem.id}
+            cartItemId={cartItem.id}
             gameColor={cartItem.typeGame.color}
             gameName={cartItem.typeGame.type}
             gamePrice={cartItem.typeGame.price}
@@ -54,7 +70,7 @@ const CartCard: React.FC = (props) => {
         </div>
 
         <SaveCartStyledDiv>
-          <FlatButton isPrimary>
+          <FlatButton isPrimary onClick={saveButtonHandler}>
             Save <FaArrowRight />
           </FlatButton>
         </SaveCartStyledDiv>

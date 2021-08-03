@@ -12,11 +12,13 @@ export enum GameStatus {
 export interface GameState {
   availableGames: Array<Game>;
   selectedGame?: Game;
+  selectedNumbers: Array<number>;
   status: GameStatus;
 }
 
 const initialState: GameState = {
   availableGames: [],
+  selectedNumbers: [],
   status: GameStatus.IDLE,
 };
 
@@ -42,6 +44,43 @@ const gameSlice = createSlice({
         return value.type === action.payload;
       });
     },
+
+    selectNumber: (state, action: PayloadAction<number>) => {
+      if (action.payload) {
+        state.selectedNumbers.push(action.payload);
+      }
+    },
+
+    removeNumber: (state, action: PayloadAction<number>) => {
+      const numberIndex = state.selectedNumbers.findIndex(
+        (number) => number === action.payload
+      );
+      if (numberIndex !== -1) {
+        state.selectedNumbers.splice(numberIndex, 1);
+      }
+    },
+
+    clearSelectedNumbers: (state) => {
+      state.selectedNumbers = [];
+    },
+
+    randomlySelectNumbers: (state) => {
+      //TODO: Validar onde essa função será chamada, para desmarcar o números selecionados
+      console.log("=========== randomlySelectNumbers ===========");
+
+      while (state.selectedNumbers.length < state.selectedGame!.maxNumber) {
+        const possibleNumber = Math.ceil(
+          Math.random() * (state.selectedGame!.range - 1)
+        );
+        if (
+          !state.selectedNumbers.some(
+            (selectedNumber) => possibleNumber === selectedNumber
+          )
+        ) {
+          state.selectedNumbers.push(possibleNumber);
+        }
+      }
+    },
   },
 
   extraReducers: (builder) => {
@@ -65,9 +104,17 @@ const gameSlice = createSlice({
   },
 });
 
-export const { selectGame } = gameSlice.actions;
+export const {
+  selectGame,
+  selectNumber,
+  clearSelectedNumbers,
+  removeNumber,
+  randomlySelectNumbers,
+} = gameSlice.actions;
 export const selectAvailableGames = (state: RootState) =>
   state.game.availableGames;
+export const getSelectedNumbers = (state: RootState) =>
+  state.game.selectedNumbers;
 
 export const getSelectedGame = (state: RootState) => state.game.selectedGame;
 

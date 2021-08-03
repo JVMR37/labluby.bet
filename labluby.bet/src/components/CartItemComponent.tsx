@@ -1,4 +1,4 @@
-import { Row, IconButton } from "../GlobalStyles";
+import { IconButton } from "../GlobalStyles";
 import { FaTrashAlt } from "react-icons/fa";
 import {
   GameStyledDiv,
@@ -8,8 +8,12 @@ import {
   DeleteButtonStyledDiv,
   CartItemStyledDiv,
 } from "../styles/cartItemComponet.style";
+import { useAppDispatch } from "../hooks/hooks";
+import { removeItem } from "../store/cartSlice";
+import { useCallback } from "react";
 
 export interface CartItemProps {
+  cartItemId: number;
   gameColor: string;
   selectedNumbers: string;
   gameName: string;
@@ -17,10 +21,20 @@ export interface CartItemProps {
 }
 
 const CartItemComponent: React.FC<CartItemProps> = (props) => {
+  const dispatch = useAppDispatch();
+
+  const removeButtonHandler = useCallback(
+    (event: any) => {
+      event.preventDefault();
+      dispatch(removeItem(props.cartItemId));
+    },
+    [dispatch, props.cartItemId]
+  );
+
   return (
     <CartItemStyledDiv>
       <DeleteButtonStyledDiv>
-        <IconButton isDeleteButton={true}>
+        <IconButton isDeleteButton={true} onClick={removeButtonHandler}>
           <FaTrashAlt />
         </IconButton>
       </DeleteButtonStyledDiv>

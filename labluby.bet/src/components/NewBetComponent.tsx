@@ -44,15 +44,29 @@ const NewBetComponent: React.FC = (props) => {
     [dispatch]
   );
 
+  const completeGameButtonHandler = useCallback(
+    (event: any) => {
+      console.log("========== Complete Button Clicked ==========");
+      dispatch(clearSelectedNumbers());
+      dispatch(randomlySelectNumbers());
+    },
+    [dispatch]
+  );
+
   const addToCartButtonHandler = useCallback(
     (event: any) => {
       console.log("========== Add To Cart Button Clicked ==========");
+      if (selectedNumbers.length < selectedGame!.maxNumber) {
+        alert("Ainda há números disponíveis para serem escolhidos !");
+        return;
+      }
 
       dispatch(
         addItem(
           new SavedGame(selectedNumbers, selectedGame!, selectedGame!.price)
         )
       );
+      dispatch(clearSelectedNumbers());
     },
     [dispatch, selectedGame, selectedNumbers]
   );
@@ -98,7 +112,7 @@ const NewBetComponent: React.FC = (props) => {
         <GameActionStyledButton
           key={"CompleteGameButton"}
           isPrimary
-          onClick={() => dispatch(randomlySelectNumbers())}
+          onClick={completeGameButtonHandler}
         >
           Complete Game
         </GameActionStyledButton>

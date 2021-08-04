@@ -86,7 +86,7 @@ const gameSlice = createSlice({
       while (state.selectedNumbers.length < state.selectedGame!.maxNumber) {
         console.log("=========== randomlySelectNumbers ===========");
         const possibleNumber = Math.ceil(
-          Math.random() * (state.selectedGame!.range - 1)
+          Math.random() * state.selectedGame!.range
         );
         console.log(possibleNumber);
         if (

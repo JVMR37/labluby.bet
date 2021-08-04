@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useState, useEffect } from "react";
+import { Fragment, useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   HomeRow,
@@ -12,20 +12,15 @@ import {
 
 import RecentGameComponent from "../components/RecentGameComponent";
 
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { loadGames, selectAvailableGames } from "../store/gamesSlice";
+import { useAppSelector } from "../hooks/hooks";
+import { selectAvailableGames } from "../store/gamesSlice";
 import { FaArrowRight } from "react-icons/fa";
 import Game from "../models/Game";
 
 const Home: React.FC = () => {
   const history = useHistory();
   const games = useAppSelector(selectAvailableGames) as Array<Game>;
-  const dispatch = useAppDispatch();
   const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    dispatch(loadGames());
-  }, [dispatch]);
 
   const newBetButtonHandler = useCallback(
     async (event: any) => {

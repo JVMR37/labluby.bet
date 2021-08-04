@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaArrowRight } from "react-icons/fa";
 import {
   Nav,
@@ -15,12 +15,19 @@ import {
 
 import { useAppDispatch } from "../hooks/hooks";
 import { logout } from "../store/authSlice";
+import { loadGames } from "../store/gamesSlice";
+
+const useMountEffect = (fun: any) => useEffect(fun, []);
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleClick = () => setClick(!click);
+
+  useMountEffect(() => {
+    dispatch(loadGames());
+  });
 
   const closeMenu = (event: any) => {
     event.preventDefault();

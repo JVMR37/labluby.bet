@@ -8,6 +8,11 @@ export const HomeRow = styled.div`
   align-items: center;
   align-content: flex-start;
   width: 100%;
+
+  @media only screen and (max-width: 1000px) {
+    flex-flow: column wrap;
+    align-items: flex-start;
+  }
 `;
 
 export const RecentGameStyledSpan = styled.span`
@@ -71,8 +76,6 @@ export const FilterGameStyledButton = styled(OutlineButton)<{
   background-color: ${({ gameColor, isSelected, theme }) =>
     isSelected ? gameColor : theme.colors.background};
   font-weight: ${({ isSelected }) => (isSelected ? "bold" : "normal")};
-
-  pointer-events: ${({ isSelected }) => (isSelected ? "none" : "all")};
 
   &:hover {
     background-color: ${({ gameColor }) => gameColor};

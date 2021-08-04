@@ -8,7 +8,6 @@ export const CartStyledDivContent = styled.div`
   width: 30rem;
   padding: 0rem;
   transition: all 0.5s ease;
-  
 
   @media screen and (max-width: 600px) {
     width: 100%;
@@ -53,6 +52,6 @@ export const NoItensSpan = styled.span`
 
   font: normal normal 300 14px Helvetica;
   letter-spacing: 0px;
-  color: #707070;
+  color: ${({ theme }) => theme.colors.secondary};
   text-transform: uppercase;
 `;

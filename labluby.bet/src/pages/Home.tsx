@@ -1,3 +1,4 @@
+import { Fragment, useCallback, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   HomeRow,
@@ -14,46 +15,53 @@ import RecentGameComponent from "../components/RecentGameComponent";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { loadGames, selectAvailableGames } from "../store/gamesSlice";
 import { FaArrowRight } from "react-icons/fa";
-import { Fragment, useCallback, useState } from "react";
+import Game from "../models/Game";
 
 const Home: React.FC = () => {
   const history = useHistory();
-  const games = useAppSelector(selectAvailableGames);
+  const games = useAppSelector(selectAvailableGames) as Array<Game>;
   const dispatch = useAppDispatch();
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    dispatch(loadGames());
+  }, [dispatch]);
 
   const newBetButtonHandler = useCallback(
     async (event: any) => {
       event.preventDefault();
-
-      const result = await dispatch(loadGames());
-
-      if (result.meta.requestStatus === "fulfilled") {
-        history.push("/new-bet");
-      }
+      history.push("/new-bet");
     },
-    [dispatch, history]
+    [history]
   );
 
-  const filterButtonHandler = useCallback(async (event: any) => {
-    event.preventDefault();
+  const filterButtonHandler = useCallback(
+    async (event: any) => {
+      event.preventDefault();
 
-    const game = event.target.textContent;
+      const game = event.target.textContent;
 
-    setFilter(game);
-  }, []);
+      if (filter === game) {
+        setFilter("");
+      } else {
+        setFilter(game);
+      }
+    },
+    [filter]
+  );
 
   const filterButtonsElements = useCallback(
     () =>
       games.map((game: any) => (
         <FilterGameStyledButton
+          isSelected={game.type === filter}
           gameColor={game.color}
           onClick={filterButtonHandler}
         >
           {game.type}
         </FilterGameStyledButton>
       )),
-    [filterButtonHandler, games]
+    [filter, filterButtonHandler, games]
   )();
 
   return (
@@ -70,7 +78,7 @@ const Home: React.FC = () => {
           </NewBetStyledButton>
         </NewBetStyledDiv>
       </HomeRow>
-      <RecentGameComponent filter={filter} />
+      <RecentGameComponent key={filter} filter={filter} />
     </Fragment>
   );
 };

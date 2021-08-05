@@ -41,7 +41,6 @@ export const NavLogo = styled(Link)`
   color: ${({ theme }) => theme.colors.secondary};
   opacity: 1;
 
-  /* border-bottom: 2px solid #b5c401; */
   &:hover {
     transform: scale(1.08);
   }

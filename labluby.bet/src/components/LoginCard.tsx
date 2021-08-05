@@ -5,7 +5,10 @@ import { FlatButton, StyledForm } from "../GlobalStyles";
 import { FaArrowRight } from "react-icons/fa";
 
 import React, { useCallback } from "react";
-import { ResetPasswordButton } from "../styles/loginCard.style";
+import {
+  ResetPasswordButton,
+  LoginCardStyledDiv,
+} from "../styles/loginCard.style";
 import ErrotInputTextStyled from "../styles/errorInputText.style";
 import AnimatedDivStyled from "../styles/animatedDiv.style";
 import { useHistory } from "react-router-dom";
@@ -97,7 +100,7 @@ const LoginCard: React.FC = () => {
   };
 
   return (
-    <Card>
+    <LoginCardStyledDiv>
       <StyledForm onSubmit={submitHandler}>
         <InputField
           key="email"
@@ -140,7 +143,7 @@ const LoginCard: React.FC = () => {
           {content}
         </AnimatedDivStyled>
       </StyledForm>
-    </Card>
+    </LoginCardStyledDiv>
   );
 };
 

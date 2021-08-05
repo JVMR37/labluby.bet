@@ -32,6 +32,7 @@ export const GameStyledDiv = styled.div<{
 
 export const NumbersStyledSpan = styled.span`
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   word-wrap: break-word;
   white-space: wrap;

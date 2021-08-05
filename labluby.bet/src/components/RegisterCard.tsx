@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 
 import { FlatButton, StyledForm } from "../GlobalStyles";
-import Card from "../layout/Card";
 import { InputField } from "../layout/Input";
 
 import { FaArrowRight } from "react-icons/fa";
@@ -23,6 +22,7 @@ import {
   AuthStatus,
   selectAuthStatusValue,
 } from "../store/authSlice";
+import { RegisterCardStyledDiv } from "../styles/registerCard.style";
 
 const RegisterCard: React.FC = () => {
   const {
@@ -114,7 +114,7 @@ const RegisterCard: React.FC = () => {
   };
 
   return (
-    <Card>
+    <RegisterCardStyledDiv>
       <StyledForm onSubmit={submitHandler}>
         <InputField
           key="name-input"
@@ -165,7 +165,7 @@ const RegisterCard: React.FC = () => {
         )}
         <AnimatedDivStyled>{content}</AnimatedDivStyled>
       </StyledForm>
-    </Card>
+    </RegisterCardStyledDiv>
   );
 };
 

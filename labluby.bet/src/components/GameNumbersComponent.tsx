@@ -20,8 +20,6 @@ const GameNumbersContainer: React.FC<{
 
   const gameButtonHandler = useCallback(
     (event: any) => {
-      console.log("========== Number Button Clicked ==========");
-      console.log(typeof event);
       const clickedNumber = Number(event.target.textContent);
       if (selectedNumbers.some((number) => number === clickedNumber)) {
         dispatch(removeNumber(clickedNumber));

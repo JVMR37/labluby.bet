@@ -64,8 +64,13 @@ const gameSlice = createSlice({
     },
 
     selectNumber: (state, action: PayloadAction<number>) => {
-      if (action.payload) {
+      if (
+        action.payload &&
+        state.selectedNumbers.length < state.selectedGame!.maxNumber
+      ) {
         state.selectedNumbers.push(action.payload);
+      } else {
+        
       }
     },
 

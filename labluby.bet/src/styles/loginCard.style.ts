@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import { StyledCard } from "../styles/card.style";
+
+export const LoginCardStyledDiv = styled(StyledCard)`
+  max-width: 27rem;
+`;
 
 export const ResetPasswordButton = styled.button`
   text-align: left;

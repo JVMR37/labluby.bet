@@ -152,6 +152,7 @@ export const StyledInput = styled.input<{
   background: transparent;
   outline: none;
 
+  width: 100%;
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;

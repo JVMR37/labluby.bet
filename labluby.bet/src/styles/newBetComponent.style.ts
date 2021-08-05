@@ -91,7 +91,7 @@ export const DescriptionGameStyledSpan = styled.span`
 export const GameActionsStyledRow = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   align-content: flex-start;
   padding: 1px;
@@ -110,8 +110,9 @@ export const GameActionStyledButton = styled(OutlineButton)`
   align-items: center;
   border-radius: 50rem;
   font-weight: bold;
-  min-width: 13rem;
-  padding: 1rem 0.1rem;
+  min-width: 14rem;
+  max-width: 16rem;
+  padding: 1rem 0.3rem;
   margin: 1rem 0.5rem;
 
   @media only screen and (max-width: 1000px) {
@@ -122,7 +123,7 @@ export const GameActionStyledButton = styled(OutlineButton)`
 export const CartButtonStyledDiv = styled.div`
   display: flex;
   flex: 2;
-  padding: 5px;
+  /* padding: 5px; */
   justify-self: flex-end;
   justify-content: flex-end;
   align-items: flex-start;
@@ -139,7 +140,7 @@ export const AddToCartStyledButton = styled(Button)`
   align-items: center;
   font-weight: bold;
 
-  min-width: 13rem;
-  padding: 1rem 3rem;
+  min-width: 16rem;
+  padding: 1rem 0.3rem;
   margin: 1rem 1rem;
 `;

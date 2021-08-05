@@ -15,7 +15,7 @@ const TitleAppComponent: React.FC = (props) => {
         <GreenDiv>for</GreenDiv>
       </CenteredDiv>
       <CenteredDiv>
-        <LotterySpan>LOTERRY</LotterySpan>
+        <LotterySpan>LOTTERY</LotterySpan>
       </CenteredDiv>
     </div>
   );

@@ -26,7 +26,7 @@ export const RecentGameStyledSpan = styled.span`
 
 export const FilterStyledSpan = styled.span`
   display: flex;
-  font: italic normal normal 17px/70px Helvetica;
+  font: italic normal normal 2rem Helvetica;
   letter-spacing: 0px;
   color: #868686;
 `;
@@ -34,12 +34,34 @@ export const FilterStyledSpan = styled.span`
 export const FilterStyledDiv = styled.div`
   display: flex;
   flex: 4;
-  justify-self: flex-start;
+  flex-flow: row wrap;
   margin: 2rem;
 
   justify-content: space-around;
-  align-content: space-around;
+  align-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 1000px) {
+    margin: 2rem 0rem;
+
+    justify-content: flex-start;
+  }
+`;
+
+export const GameFilterRowStyledDiv = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+
+  
+  justify-content: space-around;
+  /* align-content: space-around; */
+  align-items: center;
+  
+  @media only screen and (max-width: 1000px) {
+    margin: 2rem 0rem 0rem 0rem;
+    width: 100%;
+    justify-content: flex-start;
+  }
 `;
 
 export const NewBetStyledDiv = styled.div`
@@ -67,7 +89,9 @@ export const FilterGameStyledButton = styled(OutlineButton)<{
   justify-content: center;
 
   padding: 1rem;
-  margin: 1rem;
+  margin: 0.5rem;
+  min-width: 13rem;
+  max-width: 13rem;
 
   border: 2px solid ${({ gameColor }) => gameColor};
   border-radius: 50rem;

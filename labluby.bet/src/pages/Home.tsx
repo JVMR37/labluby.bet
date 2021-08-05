@@ -8,6 +8,7 @@ import {
   NewBetStyledDiv,
   FilterGameStyledButton,
   NewBetStyledButton,
+  GameFilterRowStyledDiv,
 } from "../styles/home.style";
 
 import RecentGameComponent from "../components/RecentGameComponent";
@@ -65,7 +66,9 @@ const Home: React.FC = () => {
         <RecentGameStyledSpan>RECENT GAME</RecentGameStyledSpan>
         <FilterStyledDiv>
           <FilterStyledSpan>Filters</FilterStyledSpan>
-          {filterButtonsElements}
+          <GameFilterRowStyledDiv>
+            {filterButtonsElements}
+          </GameFilterRowStyledDiv>
         </FilterStyledDiv>
         <NewBetStyledDiv>
           <NewBetStyledButton isPrimary onClick={newBetButtonHandler}>

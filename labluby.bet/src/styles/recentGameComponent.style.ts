@@ -7,6 +7,7 @@ export const RecentGameStyledColumn = styled.div`
   flex-flow: column wrap;
   justify-content: space-around;
   align-items: flex-start;
+  padding-bottom: 3rem;
 `;
 
 export const GameStyledDiv = styled.div<{

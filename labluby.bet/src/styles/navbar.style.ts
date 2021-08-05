@@ -166,6 +166,7 @@ export const MenuLinkBtn = styled(Link)`
     font-size: 2rem;
     color: ${({ theme }) => theme.colors.secondary};
     outline: none;
+    cursor: pointer;
     background-color: transparent;
     border: none;
     display: flex;

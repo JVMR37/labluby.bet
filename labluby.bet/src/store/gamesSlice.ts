@@ -70,7 +70,6 @@ const gameSlice = createSlice({
       ) {
         state.selectedNumbers.push(action.payload);
       } else {
-        
       }
     },
 
@@ -89,11 +88,10 @@ const gameSlice = createSlice({
 
     randomlySelectNumbers: (state) => {
       while (state.selectedNumbers.length < state.selectedGame!.maxNumber) {
-        console.log("=========== randomlySelectNumbers ===========");
         const possibleNumber = Math.ceil(
           Math.random() * state.selectedGame!.range
         );
-        console.log(possibleNumber);
+
         if (
           !state.selectedNumbers.some(
             (selectedNumber) => possibleNumber === selectedNumber
@@ -105,7 +103,11 @@ const gameSlice = createSlice({
     },
 
     saveGames: (state, action: PayloadAction<Array<SavedGame>>) => {
-      Object.assign(state.savedGames, action.payload);
+      state.savedGames = [...action.payload, ...state.savedGames];
+
+      state.savedGames.sort(
+        (gameA, gameB) => gameB.createdAt.getTime() - gameA.createdAt.getTime()
+      );
     },
   },
 

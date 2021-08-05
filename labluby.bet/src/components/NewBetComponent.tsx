@@ -14,6 +14,9 @@ import {
   CartButtonStyledDiv,
 } from "../styles/newBetComponent.style";
 import GameNumbersContainer from "./GameNumbersComponent";
+import { useMySwal } from "../hooks/use-swal";
+
+import { appTheme } from "../utils/appTheme";
 
 import { useAppSelector, useAppDispatch } from "../hooks/hooks";
 import {
@@ -25,6 +28,8 @@ import {
   randomlySelectNumbers,
 } from "../store/gamesSlice";
 
+import { ModalCloseStyledButton } from "../styles/modal.style";
+
 import { addItem } from "../store/cartSlice";
 import SavedGame from "../models/SavedGame";
 
@@ -33,6 +38,7 @@ const NewBetComponent: React.FC = (props) => {
   const availableGames = useAppSelector(selectAvailableGames);
   const selectedGame = useAppSelector(getSelectedGame);
   const selectedNumbers = useAppSelector(getSelectedNumbers);
+  const mySwal = useMySwal();
 
   const gameButtonHandler = useCallback(
     (event: any) => {
@@ -56,8 +62,28 @@ const NewBetComponent: React.FC = (props) => {
   const addToCartButtonHandler = useCallback(
     (event: any) => {
       console.log("========== Add To Cart Button Clicked ==========");
-      if (selectedNumbers.length < selectedGame!.maxNumber) {
-        alert("Ainda há números disponíveis para serem escolhidos !");
+      const availableNumbersCount =
+        selectedGame!.maxNumber - selectedNumbers.length;
+
+      console.log(availableNumbersCount);
+
+      if (availableNumbersCount > 0) {
+        mySwal.fire({
+          title: "There are still numbers available to choose from!",
+          text: `Add ${availableNumbersCount} more numbers before adding the game to your cart.`,
+          icon: "warning",
+          background: appTheme.colors.background,
+          footer: (
+            <ModalCloseStyledButton
+              color={appTheme.colors.main}
+              backgroundColor={appTheme.colors.background}
+              onClick={mySwal.clickConfirm}
+            >
+              Back
+            </ModalCloseStyledButton>
+          ),
+          showConfirmButton: false,
+        });
         return;
       }
 
@@ -68,7 +94,7 @@ const NewBetComponent: React.FC = (props) => {
       );
       dispatch(clearSelectedNumbers());
     },
-    [dispatch, selectedGame, selectedNumbers]
+    [dispatch, mySwal, selectedGame, selectedNumbers]
   );
 
   const gameButtons = useCallback(() => {

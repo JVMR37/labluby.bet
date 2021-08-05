@@ -25,12 +25,19 @@ import {
   selectMinCartValue,
 } from "../store/cartSlice";
 import { saveGames } from "../store/gamesSlice";
+import { ModalCloseStyledButton } from "../styles/modal.style";
+import { useMySwal } from "../hooks/use-swal";
+import { appTheme } from "../utils/appTheme";
+
+import { useHistory } from "react-router-dom";
 
 const CartCard: React.FC = (props) => {
   const dispatch = useAppDispatch();
   const cartItens = useAppSelector(selectCartItens);
   const cartTotalPrice = useAppSelector(selectCartTotalPrice);
   const minCartTotalPrice = useAppSelector(selectMinCartValue);
+  const mySwal = useMySwal();
+  const history = useHistory();
 
   const showWarning = useMemo(
     () => minCartTotalPrice !== 0 && cartTotalPrice < minCartTotalPrice,
@@ -42,8 +49,26 @@ const CartCard: React.FC = (props) => {
       event.preventDefault();
       dispatch(saveGames(cartItens));
       dispatch(clearCart());
+
+      mySwal
+        .fire({
+          title: "Your games have been successfully saved!",
+          icon: "success",
+          background: appTheme.colors.background,
+          footer: (
+            <ModalCloseStyledButton
+              color={appTheme.colors.main}
+              backgroundColor={appTheme.colors.background}
+              onClick={mySwal.clickConfirm}
+            >
+              Back
+            </ModalCloseStyledButton>
+          ),
+          showConfirmButton: false,
+        })
+        .then(() => history.replace("/home"));
     },
-    [cartItens, dispatch]
+    [cartItens, dispatch, history, mySwal]
   );
 
   const cartContent = useCallback(() => {

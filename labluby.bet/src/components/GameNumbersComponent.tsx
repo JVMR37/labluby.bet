@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from "../hooks/hooks";
 import {
   selectNumber,
   getSelectedNumbers,
+  getSelectedGame,
   removeNumber,
 } from "../store/gamesSlice";
 import {
@@ -11,18 +12,42 @@ import {
   GameNumberButton,
 } from "../styles/gameNumbers.style";
 
+import { useMySwal } from "../hooks/use-swal";
+import { ModalCloseStyledButton } from "../styles/modal.style";
+import { appTheme } from "../utils/appTheme";
+
 const GameNumbersContainer: React.FC<{
   numbersQuantity: number;
   gameColor: string;
 }> = (props) => {
   const selectedNumbers = useAppSelector(getSelectedNumbers);
+  const selectedSelected = useAppSelector(getSelectedGame);
+
   const dispatch = useAppDispatch();
+  const mySwal = useMySwal();
 
   const gameButtonHandler = useCallback(
     (event: any) => {
       const clickedNumber = Number(event.target.textContent);
       if (selectedNumbers.some((number) => number === clickedNumber)) {
         dispatch(removeNumber(clickedNumber));
+      } else if (selectedNumbers.length === selectedSelected!.maxNumber) {
+        mySwal.fire({
+          title:
+            "You have already selected the maximum number allowed for this game!",
+          icon: "warning",
+          background: appTheme.colors.background,
+          footer: (
+            <ModalCloseStyledButton
+              color={appTheme.colors.main}
+              backgroundColor={appTheme.colors.background}
+              onClick={mySwal.clickConfirm}
+            >
+              Back
+            </ModalCloseStyledButton>
+          ),
+          showConfirmButton: false,
+        });
       } else {
         dispatch(selectNumber(clickedNumber));
       }

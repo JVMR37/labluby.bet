@@ -136,7 +136,7 @@ const LoginCard: React.FC = () => {
         )}
 
         <ResetPasswordButton onClick={handleResetPassButton}>
-          I forget my password
+          I forgot my password
         </ResetPasswordButton>
 
         <AnimatedDivStyled key={authStatus.toString()}>

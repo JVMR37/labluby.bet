@@ -5,7 +5,7 @@ export const CartItemStyledDiv = styled.div`
   flex-flow: row wrap;
   align-items: baseline;
   word-wrap: break-word;
-  margin: 0.2rem;
+  margin: 1rem 0.2rem;
 
   &:after {
     content: "";

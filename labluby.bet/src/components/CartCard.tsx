@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import Card from "../layout/Card";
 import { FlatButton } from "../GlobalStyles";
 import CartItemComponent from "./CartItemComponent";
@@ -10,6 +10,11 @@ import {
   TotalPriceStyledSpan,
   SaveCartStyledDiv,
   NoItensSpan,
+  MinCartPricesWarningSpan,
+  CartTitleStyledDiv,
+  TotalPriceStyledDiv,
+  CartItensStyledDiv,
+  TotalPriceValueStyledSpan,
 } from "../styles/cartCard.style";
 
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
@@ -17,6 +22,7 @@ import {
   selectCartItens,
   selectCartTotalPrice,
   clearCart,
+  selectMinCartValue,
 } from "../store/cartSlice";
 import { saveGames } from "../store/gamesSlice";
 
@@ -24,6 +30,12 @@ const CartCard: React.FC = (props) => {
   const dispatch = useAppDispatch();
   const cartItens = useAppSelector(selectCartItens);
   const cartTotalPrice = useAppSelector(selectCartTotalPrice);
+  const minCartTotalPrice = useAppSelector(selectMinCartValue);
+
+  const showWarning = useMemo(
+    () => minCartTotalPrice !== 0 && cartTotalPrice < minCartTotalPrice,
+    [cartTotalPrice, minCartTotalPrice]
+  );
 
   const saveButtonHandler = useCallback(
     (event: any) => {
@@ -58,19 +70,34 @@ const CartCard: React.FC = (props) => {
   return (
     <Card>
       <CartStyledDivContent>
-        <CartTitleStyledSpan>Cart</CartTitleStyledSpan>
+        <CartTitleStyledDiv>
+          <CartTitleStyledSpan>Cart</CartTitleStyledSpan>
+        </CartTitleStyledDiv>
 
-        {cartContent}
+        <CartItensStyledDiv>{cartContent}</CartItensStyledDiv>
 
-        <div>
+        <TotalPriceStyledDiv>
           <CartTitleStyledSpan>Cart </CartTitleStyledSpan>
           <TotalPriceStyledSpan>
-            TOTAL: R${cartTotalPrice.toFixed(2)}
+            TOTAL: R$
+            <TotalPriceValueStyledSpan hasError={showWarning}>
+              {" " + cartTotalPrice.toFixed(2)}
+              {showWarning && "*"}
+            </TotalPriceValueStyledSpan>
           </TotalPriceStyledSpan>
-        </div>
+        </TotalPriceStyledDiv>
+        {showWarning && (
+          <MinCartPricesWarningSpan>
+            *Cart must be at least R${minCartTotalPrice.toFixed(2)} to save
+          </MinCartPricesWarningSpan>
+        )}
 
         <SaveCartStyledDiv>
-          <FlatButton isPrimary onClick={saveButtonHandler}>
+          <FlatButton
+            isPrimary
+            onClick={saveButtonHandler}
+            disabled={showWarning}
+          >
             Save <FaArrowRight />
           </FlatButton>
         </SaveCartStyledDiv>

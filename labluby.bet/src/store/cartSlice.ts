@@ -34,6 +34,10 @@ const cartSlice = createSlice({
         state.totalPrice -= state.items[cartItemIndex].price;
         state.items.splice(cartItemIndex, 1);
       }
+
+      if (state.items.length === 0) {
+        state.minCartValue = 0;
+      }
     },
     clearCart: (state) => {
       state.items = [];

@@ -110,7 +110,8 @@ export const GameActionStyledButton = styled(OutlineButton)`
   align-items: center;
   border-radius: 50rem;
   font-weight: bold;
-  padding: 1rem 2rem;
+  min-width: 13rem;
+  padding: 1rem 0.1rem;
   margin: 1rem 0.5rem;
 
   @media only screen and (max-width: 1000px) {
@@ -138,7 +139,7 @@ export const AddToCartStyledButton = styled(Button)`
   align-items: center;
   font-weight: bold;
 
-  /* width: 13rem; */
+  min-width: 13rem;
   padding: 1rem 3rem;
   margin: 1rem 1rem;
 `;

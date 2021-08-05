@@ -7,9 +7,6 @@ export const GameNumbersStyledContainer = styled.div`
   align-items: baseline;
   margin: 3rem auto;
 
-  @media only screen and (max-width: 1000px) {
-    justify-content: space-around;
-  }
 `;
 
 export const GameNumberButton = styled.button<{
@@ -32,6 +29,7 @@ export const GameNumberButton = styled.button<{
   align-items: center;
   justify-content: center;
   border: none;
+  cursor: pointer;
 
   &:hover {
     filter: brightness(0.9);

@@ -90,7 +90,7 @@ const NewBetComponent: React.FC = (props) => {
     <NewBetContentStyledColumn>
       <NewBetStyledTitle>
         New Bet
-        <span>{" for game Lotofácil"}</span>
+        <span>{" for " + selectedGame!.type}</span>
       </NewBetStyledTitle>
 
       <ChooseGameStyledSpan>Choose a game</ChooseGameStyledSpan>

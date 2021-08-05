@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { highlightAnimation } from "./styles/animatedDiv.style";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -103,6 +104,7 @@ export const CenteredDiv = styled.div`
 `;
 
 export const CenteredPageDiv = styled.div`
+  ${highlightAnimation}
   margin: 0;
   position: absolute;
   top: 45%;

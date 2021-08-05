@@ -43,7 +43,7 @@ export const loadGames = createAsyncThunk(
           game.price,
           game["max-number"],
           game.color,
-          game.minCartValue
+          game["min-cart-value"]
         )
     );
 

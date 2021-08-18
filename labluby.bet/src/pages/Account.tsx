@@ -1,4 +1,4 @@
-import { CenteredPageDiv, FlatButton } from "../GlobalStyles";
+import { FlatButton } from "../GlobalStyles";
 
 import AccountCard from "../components/AccountCard";
 import TitlePageComponent from "../components/TitlePageComponent";

@@ -52,7 +52,7 @@ const GameNumbersContainer: React.FC<{
         dispatch(selectNumber(clickedNumber));
       }
     },
-    [dispatch, selectedNumbers]
+    [dispatch, mySwal, selectedNumbers, selectedSelected]
   );
 
   const gameNumbers = useCallback(() => {

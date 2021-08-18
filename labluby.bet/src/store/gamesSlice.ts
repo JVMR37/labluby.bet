@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from ".";
 import Game from "../models/Game";
 import SavedGame from "../models/SavedGame";
+import ApiDatasource from "../datasource/apiDatasource";
 
 export enum GameStatus {
   Loading,
@@ -28,26 +29,13 @@ const initialState: GameState = {
 export const loadGames = createAsyncThunk(
   "auth/loadGames",
   async (_, thunkApi) => {
-    const response = require("../assets/games.json");
+    const response = await ApiDatasource.Instance.loadGames();
 
-    if (!response) {
+    if (response instanceof Error) {
       return thunkApi.rejectWithValue("Não foi possível carregar os jogos !");
     }
 
-    const games = response.types.map(
-      (game: any) =>
-        new Game(
-          game.type,
-          game.description,
-          game.range,
-          game.price,
-          game["max-number"],
-          game.color,
-          game["min-cart-value"]
-        )
-    );
-
-    return games;
+    return response.data;
   }
 );
 
@@ -59,8 +47,6 @@ const gameSlice = createSlice({
       state.selectedGame = state.availableGames.find((value) => {
         return value.type === action.payload;
       });
-
-      console.log(state.selectedGame);
     },
 
     selectNumber: (state, action: PayloadAction<number>) => {

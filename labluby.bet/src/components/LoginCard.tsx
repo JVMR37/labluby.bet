@@ -1,4 +1,3 @@
-import Card from "../layout/Card";
 import { InputField } from "../layout/Input";
 
 import { FlatButton, StyledForm } from "../GlobalStyles";

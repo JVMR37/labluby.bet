@@ -15,7 +15,6 @@ export enum AuthStatus {
 }
 export interface AuthState {
   userId: string | null;
-  userToken: string | null;
   userName: string | null;
   userEmail: string | null;
 
@@ -24,7 +23,6 @@ export interface AuthState {
 
 const initialState: AuthState = {
   userId: null,
-  userToken: null,
   userName: null,
   userEmail: null,
 
@@ -47,7 +45,7 @@ export const login = createAsyncThunk(
   async (props: LoginProps, thunkApi) => {
     const response = await loginInAPI(props.email, props.password);
 
-    if (!response) {
+    if (response instanceof Error) {
       return thunkApi.rejectWithValue("Não foi possível fazer o Login !");
     }
 
@@ -116,7 +114,6 @@ export const authSlice = createSlice({
 
       if (user) {
         state.userId = user.id;
-        state.userToken = user.id;
         state.userName = user.name;
         state.userEmail = user.email;
 

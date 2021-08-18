@@ -10,4 +10,8 @@ export default class User {
     this.email = email;
     this.password = password;
   }
+
+  public static fromJSON(json: { id: string; name: string; email: string; password: string; }): User {
+    return new User(json.id, json.name, json.email, json.password);
+  }
 }

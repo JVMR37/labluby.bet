@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import { highlightAnimation } from "./animatedDiv.style";
 
 export const GameNumbersStyledContainer = styled.div`
+  ${highlightAnimation}
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: baseline;
   margin: 3rem auto;
-
 `;
 
 export const GameNumberButton = styled.button<{

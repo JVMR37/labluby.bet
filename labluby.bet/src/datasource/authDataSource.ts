@@ -2,22 +2,27 @@ import User from "../models/User";
 import ApiDatasource from "./apiDatasource";
 
 export const loginInAPI = async (email: string, password: string) => {
-  return new Promise<{ data: User }>(async (resolve) => {
+  return new Promise<{ data: User } | Error>(async (resolve) => {
     var apiUtils = ApiDatasource.Instance;
-    const response = await apiUtils.Axios.post("/sessions", {
+    apiUtils.Axios.post("/sessions", {
       email: email,
       password: password,
-    }).catch((error) => {
-      if (error.response) {
-        console.log(error.response);
-      }
-    });
-    console.log(response);
-    resolve({
-      data: new User(Math.random().toString(), "Teste", email, password),
-    });
-  }).catch((error) => {
-    console.log(error);
+    })
+      .then((response) => {
+        console.log(response);
+
+        apiUtils.setToken(response.data.token);
+
+        resolve({
+          data: User.fromJSON(response!.data.user),
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          resolve(Error(error.response.error));
+        }
+      });
   });
 };
 

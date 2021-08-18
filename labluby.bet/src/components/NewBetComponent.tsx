@@ -53,10 +53,17 @@ const NewBetComponent: React.FC = (props) => {
   const completeGameButtonHandler = useCallback(
     (event: any) => {
       console.log("========== Complete Button Clicked ==========");
-      dispatch(clearSelectedNumbers());
-      dispatch(randomlySelectNumbers());
+      const hasNumberAvailable =
+        selectedGame!.maxNumber - selectedNumbers.length;
+
+      if (hasNumberAvailable) {
+        dispatch(randomlySelectNumbers());
+      } else {
+        dispatch(clearSelectedNumbers());
+        dispatch(randomlySelectNumbers());
+      }
     },
-    [dispatch]
+    [dispatch, selectedGame, selectedNumbers.length]
   );
 
   const addToCartButtonHandler = useCallback(

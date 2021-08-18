@@ -56,12 +56,11 @@ const NewBetComponent: React.FC = (props) => {
       const hasNumberAvailable =
         selectedGame!.maxNumber - selectedNumbers.length;
 
-      if (hasNumberAvailable) {
-        dispatch(randomlySelectNumbers());
-      } else {
+      if (!hasNumberAvailable) {
         dispatch(clearSelectedNumbers());
-        dispatch(randomlySelectNumbers());
       }
+
+      dispatch(randomlySelectNumbers());
     },
     [dispatch, selectedGame, selectedNumbers.length]
   );

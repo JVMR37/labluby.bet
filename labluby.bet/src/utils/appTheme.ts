@@ -8,7 +8,7 @@ export const appTheme: DefaultTheme = {
     main: "#B5C401",
     background: "#F7F7F7",
     secondary: "#707070",
-    label: "##9D9D9D",
+    label: "#9D9D9D",
     gameNumbers: "#adc0c4",
     error: "#bf2424",
     card: "#FFFFFF",

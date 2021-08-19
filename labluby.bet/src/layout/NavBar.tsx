@@ -17,7 +17,8 @@ import { useAppDispatch } from "../hooks/hooks";
 import { logout } from "../store/authSlice";
 import { loadGames } from "../store/gamesSlice";
 
-const useMountEffect = (fun: any) => useEffect(fun, [fun]);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+const useMountEffect = (fun: any) => useEffect(fun, []);
 
 const Navbar = () => {
   const [click, setClick] = useState(false);

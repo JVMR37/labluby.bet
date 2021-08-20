@@ -102,6 +102,8 @@ export const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       Object.assign(state, initialState);
+      ApiDatasource.Instance.clearToken();
+      localStorage.removeItem("@tgl-app/auth");
     },
 
     loadAuthState: (state) => {

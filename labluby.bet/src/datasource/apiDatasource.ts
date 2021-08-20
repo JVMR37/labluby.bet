@@ -27,7 +27,7 @@ export default class ApiDatasource {
   }
 
   public clearToken() {
-    // TODO: Implementar, chamado no Logout 
+    axios.defaults.headers.common["Authorization"] = null;
   }
 
   public async loadGames(): Promise<{ data: Game[] } | Error> {

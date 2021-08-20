@@ -1,4 +1,5 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import logger from "redux-logger";
 import counterReducer from "../features/counter/counterSlice";
 import authReducer from "./authSlice";
 import cartReducer from "./cartSlice";
@@ -11,6 +12,8 @@ export const store = configureStore({
     cart: cartReducer,
     game: gameReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).prepend(logger),
 });
 
 export type AppDispatch = typeof store.dispatch;

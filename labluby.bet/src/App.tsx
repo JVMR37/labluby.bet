@@ -6,6 +6,7 @@ import ResetPass from "./pages/ResetPass";
 import Home from "./pages/Home";
 import NewBet from "./pages/NewBet";
 import Account from "./pages/Account";
+import UpdatePass from "./pages/UpdatePass";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "./hooks/hooks";
 import { useMountEffect } from "./hooks/use-mount-effect";
@@ -52,6 +53,10 @@ function App() {
         </Route>
         <Route path="/reset-password">
           <ResetPass />
+        </Route>
+
+        <Route path="/update-password">
+          <UpdatePass />
         </Route>
 
         <Route path="*">

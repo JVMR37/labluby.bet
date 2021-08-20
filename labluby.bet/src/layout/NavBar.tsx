@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaBars, FaTimes, FaArrowRight } from "react-icons/fa";
 import {
   Nav,
@@ -14,11 +14,9 @@ import {
 } from "../styles/navbar.style";
 
 import { useAppDispatch } from "../hooks/hooks";
+import { useMountEffect } from "../hooks/use-mount-effect";
 import { logout } from "../store/authSlice";
 import { loadGames } from "../store/gamesSlice";
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-const useMountEffect = (fun: any) => useEffect(fun, []);
 
 const Navbar = () => {
   const [click, setClick] = useState(false);

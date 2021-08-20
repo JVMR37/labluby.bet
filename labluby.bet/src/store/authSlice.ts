@@ -4,7 +4,7 @@ import {
   loginInAPI,
   registerUserInAPI,
   resetPasswordInAPI,
-} from "../datasource/authDataSource";
+} from "../datasource/authDatasource";
 
 import ApiDatasource from "../datasource/apiDatasource";
 

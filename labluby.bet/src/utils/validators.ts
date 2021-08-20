@@ -6,4 +6,7 @@ export const emailValidator = (text: string) => {
 
 export const passValidator = (text: string) => text.trim().length >= 6;
 
+export const confirmPassValidator = (text: string, otherText: string) =>
+  text === otherText;
+
 export const isNotEmptyValidator = (text: string) => text.trim() !== "";

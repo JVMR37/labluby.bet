@@ -3,7 +3,8 @@ import { RootState } from ".";
 import {
   loginInAPI,
   registerUserInAPI,
-  resetPasswordInAPI,
+  requestPasswordChange,
+  sendNewPassword,
 } from "../datasource/authDatasource";
 
 import ApiDatasource from "../datasource/apiDatasource";
@@ -44,6 +45,12 @@ export interface RegisterProps {
   password: string;
 }
 
+export interface UpdatePasswordProps {
+  token: string;
+  password: string;
+  password_confirmation: string;
+}
+
 export const login = createAsyncThunk(
   "auth/login",
   async (props: LoginProps, thunkApi) => {
@@ -66,7 +73,7 @@ export const register = createAsyncThunk(
       props.password
     );
 
-    if (!response) {
+    if (response instanceof Error) {
       return thunkApi.rejectWithValue("Não foi possível fazer o Cadastro !");
     }
 
@@ -77,9 +84,26 @@ export const register = createAsyncThunk(
 export const sendLinkToResetPass = createAsyncThunk(
   "auth/sendLinkToResetPass",
   async (email: string, thunkApi) => {
-    const response = await resetPasswordInAPI(email);
+    const response = await requestPasswordChange(email);
 
-    if (!response) {
+    if (response instanceof Error) {
+      return thunkApi.rejectWithValue("Não foi possível enviar o link !");
+    }
+
+    return { ...response.data };
+  }
+);
+
+export const updatePassword = createAsyncThunk(
+  "auth/sendLinkToResetPass",
+  async (props: UpdatePasswordProps, thunkApi) => {
+    const response = await sendNewPassword(
+      props.token,
+      props.password,
+      props.password_confirmation
+    );
+
+    if (response instanceof Error) {
       return thunkApi.rejectWithValue("Não foi possível enviar o link !");
     }
 

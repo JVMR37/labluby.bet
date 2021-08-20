@@ -14,7 +14,7 @@ export const loginInAPI = async (email: string, password: string) => {
         apiUtils.setToken(response.data.token);
 
         resolve({
-          data: User.fromJSON(response!.data.user),
+          data: User.fromJSON(response!.data),
         });
       })
       .catch((error) => {

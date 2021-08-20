@@ -6,6 +6,8 @@ import {
   resetPasswordInAPI,
 } from "../datasource/authDataSource";
 
+import ApiDatasource from "../datasource/apiDatasource";
+
 export enum AuthStatus {
   Loading,
   Logged,
@@ -17,6 +19,7 @@ export interface AuthState {
   userId: string | null;
   userName: string | null;
   userEmail: string | null;
+  userToken: string | null;
 
   status: AuthStatus;
 }
@@ -25,6 +28,7 @@ const initialState: AuthState = {
   userId: null,
   userName: null,
   userEmail: null,
+  userToken: null,
 
   status: AuthStatus.IDLE,
 };
@@ -99,6 +103,17 @@ export const authSlice = createSlice({
     logout: (state) => {
       Object.assign(state, initialState);
     },
+
+    loadAuthState: (state) => {
+      const authData = localStorage.getItem("@tgl-app/auth");
+
+      if (authData) {
+        const authDataObject = JSON.parse(authData);
+        Object.assign(state, authDataObject);
+
+        ApiDatasource.Instance.setToken(authDataObject.userToken);
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state, action) => {
@@ -116,8 +131,11 @@ export const authSlice = createSlice({
         state.userId = user.id;
         state.userName = user.name;
         state.userEmail = user.email;
+        state.userToken = user.token!;
 
         state.status = AuthStatus.Logged;
+
+        localStorage.setItem("@tgl-app/auth", JSON.stringify(state));
       }
     });
 
@@ -164,6 +182,6 @@ export const selectUserData = (state: RootState) => {
   };
 };
 
-export const { logout } = authSlice.actions;
+export const { logout, loadAuthState } = authSlice.actions;
 
 export default authSlice.reducer;

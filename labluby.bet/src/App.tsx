@@ -7,10 +7,17 @@ import Home from "./pages/Home";
 import NewBet from "./pages/NewBet";
 import Account from "./pages/Account";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { useAppSelector } from "./hooks/hooks";
-import { selectIsLoggedInValue } from "./store/authSlice";
+import { useAppSelector, useAppDispatch } from "./hooks/hooks";
+import { useMountEffect } from "./hooks/use-mount-effect";
+import { selectIsLoggedInValue, loadAuthState } from "./store/authSlice";
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useMountEffect(() => {
+    dispatch(loadAuthState());
+  });
+
   const isLoggedIn = useAppSelector(selectIsLoggedInValue);
 
   return (
@@ -37,6 +44,7 @@ function App() {
         </Route>
 
         <Route path="/login">
+          {isLoggedIn && <Redirect to="/home"></Redirect>}
           <Login />
         </Route>
         <Route path="/register" exact>

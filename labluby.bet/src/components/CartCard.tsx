@@ -24,7 +24,7 @@ import {
   clearCart,
   selectMinCartValue,
 } from "../store/cartSlice";
-import { saveGames } from "../store/gamesSlice";
+import { saveBets } from "../store/gamesSlice";
 import { ModalCloseStyledButton } from "../styles/modal.style";
 import { useMySwal } from "../hooks/use-swal";
 import { appTheme } from "../utils/appTheme";
@@ -45,15 +45,34 @@ const CartCard: React.FC = (props) => {
   );
 
   const saveButtonHandler = useCallback(
-    (event: any) => {
+    async (event: any) => {
       event.preventDefault();
-      dispatch(saveGames(cartItens));
-      dispatch(clearCart());
+      const result = await dispatch(saveBets(cartItens));
 
-      mySwal
-        .fire({
-          title: "Your games have been successfully saved!",
-          icon: "success",
+      if (result.meta.requestStatus === "fulfilled") {
+        dispatch(clearCart());
+
+        mySwal
+          .fire({
+            title: "Your games have been successfully saved!",
+            icon: "success",
+            background: appTheme.colors.background,
+            footer: (
+              <ModalCloseStyledButton
+                color={appTheme.colors.main}
+                backgroundColor={appTheme.colors.background}
+                onClick={mySwal.clickConfirm}
+              >
+                Back
+              </ModalCloseStyledButton>
+            ),
+            showConfirmButton: false,
+          })
+          .then(() => history.replace("/home"));
+      } else {
+        mySwal.fire({
+          title: "Failed to save your bets : (",
+          icon: "error",
           background: appTheme.colors.background,
           footer: (
             <ModalCloseStyledButton
@@ -65,8 +84,8 @@ const CartCard: React.FC = (props) => {
             </ModalCloseStyledButton>
           ),
           showConfirmButton: false,
-        })
-        .then(() => history.replace("/home"));
+        });
+      }
     },
     [cartItens, dispatch, history, mySwal]
   );
@@ -78,10 +97,10 @@ const CartCard: React.FC = (props) => {
           <CartItemComponent
             key={cartItem.id}
             cartItemId={cartItem.id}
-            gameColor={cartItem.typeGame.color}
-            gameName={cartItem.typeGame.type}
-            gamePrice={cartItem.typeGame.price}
-            selectedNumbers={cartItem.selectedNumbers.join(", ") + "."}
+            gameColor={cartItem.betType.color}
+            gameName={cartItem.betType.type}
+            gamePrice={cartItem.betType.price}
+            selectedNumbers={cartItem.numbers.join(", ") + "."}
           ></CartItemComponent>
         );
       });

@@ -22,8 +22,8 @@ const cartSlice = createSlice({
       state.items.push(action.payload);
       state.totalPrice += action.payload.price;
 
-      if (action.payload.typeGame.minCartValue > state.minCartValue!) {
-        state.minCartValue = action.payload.typeGame.minCartValue;
+      if (action.payload.betType.minCartValue > state.minCartValue!) {
+        state.minCartValue = action.payload.betType.minCartValue;
       }
     },
     removeItem: (state, action: PayloadAction<number>) => {

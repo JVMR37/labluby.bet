@@ -2,16 +2,16 @@ import Game from "./Game";
 
 export default class SavedGame {
   id: number;
-  selectedNumbers: Array<number>;
-  typeGame: Game;
+  numbers: Array<number>;
+  betType: Game;
   createdAt: Date;
   price: number;
 
   constructor(selectedNumbers: Array<number>, typeGame: Game, price: number) {
     this.id = Date.now();
     this.createdAt = new Date();
-    this.selectedNumbers = selectedNumbers;
-    this.typeGame = typeGame;
+    this.numbers = selectedNumbers;
+    this.betType = typeGame;
     this.price = price;
   }
 

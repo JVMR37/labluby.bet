@@ -13,15 +13,16 @@ import {
 
 import RecentGameComponent from "../components/RecentGameComponent";
 
-import { useAppSelector } from "../hooks/hooks";
-import { selectAvailableGames } from "../store/gamesSlice";
+import { useAppSelector, useAppDispatch } from "../hooks/hooks";
+import { loadSavedBets, selectAvailableGames } from "../store/gamesSlice";
 import { FaArrowRight } from "react-icons/fa";
 import Game from "../models/Game";
 
 const Home: React.FC = () => {
   const history = useHistory();
+  const dispatch = useAppDispatch();
   const games = useAppSelector(selectAvailableGames) as Array<Game>;
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState(0);
 
   const newBetButtonHandler = useCallback(
     async (event: any) => {
@@ -35,24 +36,31 @@ const Home: React.FC = () => {
     async (event: any) => {
       event.preventDefault();
 
-      const game = event.target.textContent;
+      const typeId = event.target.getAttribute("data-id") as number;
 
-      if (filter === game) {
-        setFilter("");
+      if (filter === typeId) {
+        dispatch(loadSavedBets({ page: 1 }));
+
+        setFilter(0);
       } else {
-        setFilter(game);
+        dispatch(loadSavedBets({ page: 1, filter: typeId.toString() }));
+
+        setFilter(typeId);
       }
     },
-    [filter]
+    [dispatch, filter]
   );
 
   const filterButtonsElements = useCallback(
     () =>
-      games.map((game: any) => (
+      games.map((game: Game) => (
         <FilterGameStyledButton
-          isSelected={game.type === filter}
+          key={game.id}
+          // eslint-disable-next-line eqeqeq
+          isSelected={game.id == filter}
           gameColor={game.color}
           onClick={filterButtonHandler}
+          data-id={game.id}
         >
           {game.type}
         </FilterGameStyledButton>
@@ -76,7 +84,7 @@ const Home: React.FC = () => {
           </NewBetStyledButton>
         </NewBetStyledDiv>
       </HomeRow>
-      <RecentGameComponent key={filter} filter={filter} />
+      <RecentGameComponent key={filter} />
     </Fragment>
   );
 };

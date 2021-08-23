@@ -1,5 +1,4 @@
 import { AxiosInstance } from "axios";
-import Game from "../models/Game";
 
 const axios = require("axios").default;
 
@@ -28,21 +27,5 @@ export default class ApiDatasource {
 
   public clearToken() {
     axios.defaults.headers.common["Authorization"] = null;
-  }
-
-  public async loadGames(): Promise<{ data: Game[] } | Error> {
-    return new Promise<{ data: Game[] }>((resolve, reject) => {
-      this.Axios.get<Game[]>("/types")
-        .then((response) => {
-          console.log(response.data);
-          resolve({ data: response.data });
-        })
-        .catch((error) => {
-          console.log(error);
-          reject(error);
-        });
-    }).catch((error) => {
-      return Error(error.message);
-    });
   }
 }

@@ -3,6 +3,11 @@ import { RootState } from ".";
 import Game from "../models/Game";
 import SavedGame from "../models/SavedGame";
 import ApiDatasource from "../datasource/apiDatasource";
+import {
+  fetchGames,
+  fetchSavedBets,
+  saveBetsInDB,
+} from "../datasource/gameDatasource";
 
 export enum GameStatus {
   Loading,
@@ -26,10 +31,42 @@ const initialState: GameState = {
   status: GameStatus.IDLE,
 };
 
+interface FetchBetsProps {
+  page: number;
+  filter?: string;
+}
+
 export const loadGames = createAsyncThunk(
   "auth/loadGames",
   async (_, thunkApi) => {
-    const response = await ApiDatasource.Instance.loadGames();
+    const response = await fetchGames();
+
+    if (response instanceof Error) {
+      return thunkApi.rejectWithValue("Não foi possível carregar os jogos !");
+    }
+
+    return response.data;
+  }
+);
+
+export const loadSavedBets = createAsyncThunk(
+  "auth/loadSavedBets",
+  async (props: FetchBetsProps, thunkApi) => {
+    const response = await fetchSavedBets(props.page, props.filter);
+    console.log(response);
+
+    if (response instanceof Error) {
+      return thunkApi.rejectWithValue("Não foi possível carregar os jogos !");
+    }
+
+    return response.data;
+  }
+);
+
+export const saveBets = createAsyncThunk(
+  "auth/saveGames",
+  async (bets: Array<SavedGame>, thunkApi) => {
+    const response = await saveBetsInDB(bets);
 
     if (response instanceof Error) {
       return thunkApi.rejectWithValue("Não foi possível carregar os jogos !");
@@ -87,20 +124,10 @@ const gameSlice = createSlice({
         }
       }
     },
-
-    saveGames: (state, action: PayloadAction<Array<SavedGame>>) => {
-      state.savedGames = [...action.payload, ...state.savedGames];
-
-      state.savedGames.sort(
-        (gameA, gameB) => gameB.createdAt.getTime() - gameA.createdAt.getTime()
-      );
-    },
   },
 
   extraReducers: (builder) => {
     builder.addCase(loadGames.pending, (state) => {
-      console.log("=========== Loading Games ===========");
-
       state.status = GameStatus.Loading;
     });
 
@@ -109,10 +136,21 @@ const gameSlice = createSlice({
     });
 
     builder.addCase(loadGames.fulfilled, (state, action) => {
-      console.log("=========== Games Loaded ===========");
-
       state.availableGames = action.payload;
       state.selectedGame = state.availableGames[0];
+      state.status = GameStatus.Loaded;
+    });
+
+    builder.addCase(loadSavedBets.pending, (state) => {
+      state.status = GameStatus.Loading;
+    });
+
+    builder.addCase(loadSavedBets.rejected, (state) => {
+      state.status = GameStatus.Error;
+    });
+
+    builder.addCase(loadSavedBets.fulfilled, (state, action) => {
+      state.savedGames = action.payload;
       state.status = GameStatus.Loaded;
     });
   },
@@ -124,7 +162,6 @@ export const {
   clearSelectedNumbers,
   removeNumber,
   randomlySelectNumbers,
-  saveGames,
 } = gameSlice.actions;
 export const selectAvailableGames = (state: RootState) =>
   state.game.availableGames;

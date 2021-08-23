@@ -1,4 +1,5 @@
 export default class Game {
+  id: number;
   type: string;
   description: string;
   range: number;
@@ -8,6 +9,7 @@ export default class Game {
   minCartValue: number;
 
   constructor(
+    id: number,
     type: string,
     description: string,
     range: number,
@@ -16,6 +18,7 @@ export default class Game {
     color: string,
     minCartValue: number
   ) {
+    this.id = id;
     this.type = type;
     this.description = description;
     this.range = range;

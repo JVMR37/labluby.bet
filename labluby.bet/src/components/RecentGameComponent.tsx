@@ -14,18 +14,11 @@ import { getSavedGames } from "../store/gamesSlice";
 import { useAppSelector } from "../hooks/hooks";
 import SavedGame from "../models/SavedGame";
 
-const RecentGameComponent: React.FC<{
-  filter: string;
-}> = (props) => {
+const RecentGameComponent: React.FC = (props) => {
   const savedGames = useAppSelector(getSavedGames) as Array<SavedGame>;
 
   const savedGamesElements = useCallback(() => {
-    const filteredGames =
-      props.filter !== ""
-        ? savedGames.filter((games) => games.typeGame.type === props.filter)
-        : savedGames;
-
-    if (filteredGames.length === 0) {
+    if (savedGames.length === 0) {
       return (
         <NoGamesStyledDiv>
           <NoGamesStyledSpan>
@@ -38,22 +31,20 @@ const RecentGameComponent: React.FC<{
       );
     }
 
-    return filteredGames.map((game) => (
-      <GameStyledDiv borderColor={game.typeGame.color}>
-        <NumbersStyledSpan>
-          {game.selectedNumbers.join(", ") + "."}
-        </NumbersStyledSpan>
+    return savedGames.map((game) => (
+      <GameStyledDiv key={game.id} borderColor={game.betType.color}>
+        <NumbersStyledSpan>{game.numbers.join(", ") + "."}</NumbersStyledSpan>
         <GameDatePriceRow>
           <DatePriceStyledSpan>
             {game.getCreatedAt()} - R${game.price.toFixed(2)}
           </DatePriceStyledSpan>
         </GameDatePriceRow>
-        <NameGameStyledSpan fontColor={game.typeGame.color}>
-          {game.typeGame.type}
+        <NameGameStyledSpan fontColor={game.betType.color}>
+          {game.betType.type}
         </NameGameStyledSpan>
       </GameStyledDiv>
     ));
-  }, [props.filter, savedGames])();
+  }, [savedGames])();
 
   return <RecentGameStyledColumn>{savedGamesElements}</RecentGameStyledColumn>;
 };

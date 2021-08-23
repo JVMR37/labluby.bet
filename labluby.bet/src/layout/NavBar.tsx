@@ -16,7 +16,7 @@ import {
 import { useAppDispatch } from "../hooks/hooks";
 import { useMountEffect } from "../hooks/use-mount-effect";
 import { logout } from "../store/authSlice";
-import { loadGames } from "../store/gamesSlice";
+import { loadGames, loadSavedBets } from "../store/gamesSlice";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -26,6 +26,7 @@ const Navbar = () => {
 
   useMountEffect(() => {
     dispatch(loadGames());
+    dispatch(loadSavedBets({ page: 1 }));
   });
 
   // const closeMenu = (event: any) => {

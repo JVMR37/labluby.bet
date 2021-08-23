@@ -20,7 +20,7 @@ export const AccountCardStyledDiv = styled(StyledCard)`
   align-items: flex-start;
   margin-bottom: 2rem;
   padding: 2rem 0rem;
-  min-width: 30rem;
+  max-width: 27rem;
 `;
 
 export const InfoTitleStyledSpan = styled.span`

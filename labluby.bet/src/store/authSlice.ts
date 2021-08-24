@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from ".";
 import {
   loginInAPI,
-  registerUserInAPI,
+  registerUserInDB,
+  updateUserDataInDB,
   requestPasswordChange,
   sendNewPassword,
 } from "../datasource/authDatasource";
@@ -16,6 +17,13 @@ export enum AuthStatus {
   Error,
   IDLE,
 }
+
+export enum UpdateStatus {
+  Loading,
+  Success,
+  Error,
+  IDLE,
+}
 export interface AuthState {
   userId: string | null;
   userName: string | null;
@@ -23,6 +31,7 @@ export interface AuthState {
   userToken: string | null;
 
   status: AuthStatus;
+  updateStatus: UpdateStatus;
 }
 
 const initialState: AuthState = {
@@ -32,6 +41,7 @@ const initialState: AuthState = {
   userToken: null,
 
   status: AuthStatus.IDLE,
+  updateStatus: UpdateStatus.IDLE,
 };
 
 export interface LoginProps {
@@ -43,6 +53,12 @@ export interface RegisterProps {
   name: string;
   email: string;
   password: string;
+}
+
+export interface UpdateUserProps {
+  userId: string;
+  name: string;
+  email: string;
 }
 
 export interface UpdatePasswordProps {
@@ -67,10 +83,27 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
   "auth/register",
   async (props: RegisterProps, thunkApi) => {
-    const response = await registerUserInAPI(
+    const response = await registerUserInDB(
       props.name,
       props.email,
       props.password
+    );
+
+    if (response instanceof Error) {
+      return thunkApi.rejectWithValue("Não foi possível fazer o Cadastro !");
+    }
+
+    return { ...response.data };
+  }
+);
+
+export const updateUserData = createAsyncThunk(
+  "auth/updateUserData",
+  async (props: UpdateUserProps, thunkApi) => {
+    const response = await updateUserDataInDB(
+      props.userId,
+      props.name,
+      props.email
     );
 
     if (response instanceof Error) {
@@ -114,11 +147,23 @@ export const updatePassword = createAsyncThunk(
 export const updateAuthStatusAfterTime = createAsyncThunk<
   AuthStatus,
   AuthStatus
->("auth/updateStatus", async (newStatus: AuthStatus = AuthStatus.IDLE) => {
+>("auth/updateAuthStatus", async (newStatus: AuthStatus = AuthStatus.IDLE) => {
   return new Promise<AuthStatus>((resolve) => {
     setTimeout(() => resolve(newStatus), 2000);
   }).then((value) => value);
 });
+
+export const updateUpdateStatusAfterTime = createAsyncThunk<
+  UpdateStatus,
+  UpdateStatus
+>(
+  "auth/changeUpdateStatus",
+  async (newStatus: UpdateStatus = UpdateStatus.IDLE) => {
+    return new Promise<UpdateStatus>((resolve) => {
+      setTimeout(() => resolve(newStatus), 2000);
+    }).then((value) => value);
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -128,6 +173,7 @@ export const authSlice = createSlice({
       Object.assign(state, initialState);
       ApiDatasource.Instance.clearToken();
       localStorage.removeItem("@tgl-app/auth");
+      state.status = AuthStatus.IDLE;
     },
 
     loadAuthState: (state) => {
@@ -138,6 +184,8 @@ export const authSlice = createSlice({
         Object.assign(state, authDataObject);
 
         ApiDatasource.Instance.setToken(authDataObject.userToken);
+        state.status = AuthStatus.Logged;
+        state.updateStatus = UpdateStatus.IDLE;
       }
     },
   },
@@ -165,15 +213,36 @@ export const authSlice = createSlice({
       }
     });
 
-    builder.addCase(register.pending, (state, action) => {
+    builder.addCase(updateUserData.pending, (state, action) => {
+      state.updateStatus = UpdateStatus.Loading;
+    });
+
+    builder.addCase(updateUserData.rejected, (state, action) => {
+      state.updateStatus = UpdateStatus.Error;
+    });
+
+    builder.addCase(updateUserData.fulfilled, (state, action) => {
+      const user = action.payload;
+
+      if (user) {
+        state.userName = user.name;
+        state.userEmail = user.email;
+
+        state.updateStatus = UpdateStatus.Success;
+
+        localStorage.setItem("@tgl-app/auth", JSON.stringify(state));
+      }
+    });
+
+    builder.addCase(register.pending, (state) => {
       state.status = AuthStatus.Loading;
     });
 
-    builder.addCase(register.rejected, (state, action) => {
+    builder.addCase(register.rejected, (state) => {
       state.status = AuthStatus.Error;
     });
 
-    builder.addCase(register.fulfilled, (state, action) => {
+    builder.addCase(register.fulfilled, (state) => {
       state.status = AuthStatus.Success;
     });
 
@@ -192,6 +261,10 @@ export const authSlice = createSlice({
     builder.addCase(updateAuthStatusAfterTime.fulfilled, (state, action) => {
       state.status = action.payload;
     });
+
+    builder.addCase(updateUpdateStatusAfterTime.fulfilled, (state, action) => {
+      state.updateStatus = action.payload;
+    });
   },
 });
 
@@ -199,6 +272,8 @@ export const selectIsLoggedInValue = (state: RootState) =>
   state.auth.status === AuthStatus.Logged;
 
 export const selectAuthStatusValue = (state: RootState) => state.auth.status;
+export const selectUpdateStatusValue = (state: RootState) =>
+  state.auth.updateStatus;
 
 export const selectUserData = (state: RootState) => {
   return {

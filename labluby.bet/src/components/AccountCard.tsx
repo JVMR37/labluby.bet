@@ -1,21 +1,27 @@
 import React, { useCallback } from "react";
 import { FlatButton, StyledForm } from "../GlobalStyles";
 
-import { selectUserData } from "../store/authSlice";
+import { selectUserData, UpdateStatus } from "../store/authSlice";
 import { FaArrowRight } from "react-icons/fa";
 
 import { InputField } from "../layout/Input";
-import AuthStatusMessage from "./AuthStatusMessageComponent";
+import UpdateStatusMessage from "./UpdateStatusMessageComponent";
 import useInput from "../hooks/use-input";
 import { emailValidator, isNotEmptyValidator } from "../utils/validators";
-import { AuthStatus, selectAuthStatusValue } from "../store/authSlice";
+import {
+  selectUpdateStatusValue,
+  updateUserData,
+  updateUpdateStatusAfterTime,
+} from "../store/authSlice";
 import { AccountCardStyledDiv } from "../styles/account.style";
 import ErrotInputTextStyled from "../styles/errorInputText.style";
 import AnimatedDivStyled from "../styles/animatedDiv.style";
 import { useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { useMountEffect } from "../hooks/use-mount-effect";
 
 const AccountCard: React.FC = (props) => {
+  const history = useHistory();
   const userData = useAppSelector(selectUserData);
   const dispatch = useAppDispatch();
 
@@ -26,6 +32,7 @@ const AccountCard: React.FC = (props) => {
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmail,
+    setValue: setEmailValue,
   } = useInput(emailValidator);
 
   const {
@@ -35,59 +42,66 @@ const AccountCard: React.FC = (props) => {
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
     reset: resetName,
+    setValue: setNameValue,
   } = useInput(isNotEmptyValidator);
 
-  const authStatus = useAppSelector(selectAuthStatusValue);
+  useMountEffect(() => {
+    setEmailValue(userData.email!);
+    setNameValue(userData.name!);
+  });
+
+  const updateStatus = useAppSelector(selectUpdateStatusValue);
 
   const formIsValid = emailIsValid && nameIsValid;
 
   const submitHandler = async (event: any) => {
     event.preventDefault();
-    //TODO: Implementar lógica
 
     if (!formIsValid) {
       return;
     }
 
-    // const result = await dispatch(
-    //   register({ name: nameValue, email: emailValue, password: passValue })
-    // );
+    const result = await dispatch(
+      updateUserData({
+        userId: userData.id!,
+        email: emailValue,
+        name: nameValue,
+      })
+    );
 
-    // dispatch(updateAuthStatusAfterTime(AuthStatus.IDLE));
-
-    // if (result.meta.requestStatus === "fulfilled") {
-    //   setTimeout(() => {
-    //     resetName();
-    //     resetEmail();
-    //     resetPass();
-    //     history.push("/login");
-    //   }, 2000);
-    // }
+    if (result.meta.requestStatus === "fulfilled") {
+      dispatch(updateUpdateStatusAfterTime(UpdateStatus.IDLE));
+      setTimeout(() => {
+        resetName();
+        resetEmail();
+        history.replace("/home");
+      }, 2000);
+    }
 
     console.log("Submitted!");
   };
 
   const content = useCallback(() => {
-    switch (authStatus) {
-      case AuthStatus.Loading:
+    switch (updateStatus) {
+      case UpdateStatus.Loading:
         return (
-          <AuthStatusMessage key="Loading Message" status={authStatus}>
+          <UpdateStatusMessage key="Loading Message" status={updateStatus}>
             Loading...
-          </AuthStatusMessage>
+          </UpdateStatusMessage>
         );
-      case AuthStatus.Error:
+      case UpdateStatus.Error:
         return (
-          <AuthStatusMessage key="Error Message" status={authStatus}>
+          <UpdateStatusMessage key="Error Message" status={updateStatus}>
             Failed to register : (
-          </AuthStatusMessage>
+          </UpdateStatusMessage>
         );
-      case AuthStatus.Success:
+      case UpdateStatus.Success:
         return (
-          <AuthStatusMessage key="Success Message" status={authStatus}>
+          <UpdateStatusMessage key="Success Message" status={updateStatus}>
             Successfully registered : )
-          </AuthStatusMessage>
+          </UpdateStatusMessage>
         );
-      case AuthStatus.IDLE:
+      case UpdateStatus.IDLE:
       default:
         return (
           <FlatButton isPrimary disabled={!formIsValid}>
@@ -95,7 +109,7 @@ const AccountCard: React.FC = (props) => {
           </FlatButton>
         );
     }
-  }, [authStatus, formIsValid])();
+  }, [updateStatus, formIsValid])();
 
   return (
     <AccountCardStyledDiv>

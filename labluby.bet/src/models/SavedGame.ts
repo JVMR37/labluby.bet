@@ -48,7 +48,7 @@ export default class SavedGame {
       const dd = String(this.createdAt.getUTCDate()).padStart(2, "0");
       const mm = String(this.createdAt.getUTCMonth() + 1).padStart(2, "0"); //January is 0!
       const yyyy = this.createdAt.getUTCFullYear();
-      return mm + "/" + dd + "/" + yyyy;
+      return dd + "/" + mm + "/" + yyyy;
     } else {
       return "No Date To Show.";
     }

@@ -24,7 +24,7 @@ import {
   clearCart,
   selectMinCartValue,
 } from "../store/cartSlice";
-import { saveBets } from "../store/gamesSlice";
+import { saveBets, loadSavedBets } from "../store/gamesSlice";
 import { ModalCloseStyledButton } from "../styles/modal.style";
 import { useMySwal } from "../hooks/use-swal";
 import { appTheme } from "../utils/appTheme";
@@ -51,6 +51,7 @@ const CartCard: React.FC = (props) => {
 
       if (result.meta.requestStatus === "fulfilled") {
         dispatch(clearCart());
+        dispatch(loadSavedBets({ page: 1 }));
 
         mySwal
           .fire({

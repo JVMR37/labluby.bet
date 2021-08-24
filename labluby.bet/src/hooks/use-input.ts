@@ -30,6 +30,7 @@ const useInput = (validateValue: Function, passConfirmValue?: string) => {
     valueChangeHandler,
     inputBlurHandler,
     reset,
+    setValue: setEnteredValue,
   };
 };
 

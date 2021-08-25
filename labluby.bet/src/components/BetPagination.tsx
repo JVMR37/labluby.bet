@@ -35,10 +35,8 @@ const BetPagination: React.FC = (props) => {
 
   const getPaginationGroup = () => {
     if (pagination) {
-      const pageLimit =
-        Math.abs(pagination!.currentPage - pagination.lastPage) < 5
-          ? pagination.lastPage
-          : 5;
+      const pageLimit = 5;
+      
       let start =
         Math.floor((pagination!.currentPage - 1) / pageLimit) * pageLimit;
 
@@ -65,15 +63,19 @@ const BetPagination: React.FC = (props) => {
           <FaArrowLeft /> Prev
         </PaginationActionButton>
 
-        {getPaginationGroup().map((item, index) => (
-          <PaginationItemButton
-            key={index}
-            onClick={changePage}
-            className={`${pagination!.currentPage === item ? "active" : null}`}
-          >
-            <span>{item}</span>
-          </PaginationItemButton>
-        ))}
+        {getPaginationGroup().map((item, index) =>
+          item <= pagination!.lastPage ? (
+            <PaginationItemButton
+              key={index}
+              onClick={changePage}
+              className={`${
+                pagination!.currentPage === item ? "active" : null
+              }`}
+            >
+              <span>{item}</span>
+            </PaginationItemButton>
+          ) : null
+        )}
         <PaginationActionButton
           key={"next button"}
           onClick={goToNextPage}

@@ -7,6 +7,7 @@ import {
   fetchSavedBets,
   saveBetsInDB,
 } from "../datasource/gameDatasource";
+import PaginationMetadata from "../models/PaginationMetadata";
 
 export enum GameStatus {
   Loading,
@@ -21,6 +22,8 @@ export interface GameState {
   selectedNumbers: Array<number>;
   status: GameStatus;
   savedGames: Array<SavedGame>;
+  gamePagination?: PaginationMetadata;
+  filterGame: string;
 }
 
 const initialState: GameState = {
@@ -28,6 +31,7 @@ const initialState: GameState = {
   selectedNumbers: [],
   savedGames: [],
   status: GameStatus.IDLE,
+  filterGame: "",
 };
 
 interface FetchBetsProps {
@@ -58,7 +62,7 @@ export const loadSavedBets = createAsyncThunk(
       return thunkApi.rejectWithValue("Não foi possível carregar os jogos !");
     }
 
-    return response.data;
+    return response;
   }
 );
 
@@ -123,6 +127,10 @@ const gameSlice = createSlice({
         }
       }
     },
+
+    selectFilter: (state, action: PayloadAction<string>) => {
+      state.filterGame = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -149,7 +157,9 @@ const gameSlice = createSlice({
     });
 
     builder.addCase(loadSavedBets.fulfilled, (state, action) => {
-      state.savedGames = action.payload;
+      state.savedGames = action.payload.data;
+      state.gamePagination = action.payload.meta;
+
       state.status = GameStatus.Loaded;
     });
   },
@@ -161,11 +171,17 @@ export const {
   clearSelectedNumbers,
   removeNumber,
   randomlySelectNumbers,
+  selectFilter,
 } = gameSlice.actions;
 export const selectAvailableGames = (state: RootState) =>
   state.game.availableGames;
 export const getSelectedNumbers = (state: RootState) =>
   state.game.selectedNumbers;
+
+export const getGamePagination = (state: RootState) =>
+  state.game.gamePagination;
+
+export const getGameFilter = (state: RootState) => state.game.filterGame;
 
 export const getSavedGames = (state: RootState) => state.game.savedGames;
 

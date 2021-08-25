@@ -13,6 +13,7 @@ import {
 import { getSavedGames } from "../store/gamesSlice";
 import { useAppSelector } from "../hooks/hooks";
 import SavedGame from "../models/SavedGame";
+import BetPagination from "./BetPagination";
 
 const RecentGameComponent: React.FC = (props) => {
   const savedGames = useAppSelector(getSavedGames) as Array<SavedGame>;
@@ -46,7 +47,11 @@ const RecentGameComponent: React.FC = (props) => {
     ));
   }, [savedGames])();
 
-  return <RecentGameStyledColumn>{savedGamesElements}</RecentGameStyledColumn>;
+  return (
+    <RecentGameStyledColumn>
+      <BetPagination>{savedGamesElements}</BetPagination>
+    </RecentGameStyledColumn>
+  );
 };
 
 export default RecentGameComponent;

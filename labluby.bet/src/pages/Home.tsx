@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useState } from "react";
+import { Fragment, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import {
   HomeRow,
@@ -14,7 +14,12 @@ import {
 import RecentGameComponent from "../components/RecentGameComponent";
 
 import { useAppSelector, useAppDispatch } from "../hooks/hooks";
-import { loadSavedBets, selectAvailableGames } from "../store/gamesSlice";
+import {
+  loadSavedBets,
+  selectAvailableGames,
+  selectFilter,
+  getGameFilter,
+} from "../store/gamesSlice";
 import { FaArrowRight } from "react-icons/fa";
 import Game from "../models/Game";
 
@@ -22,7 +27,7 @@ const Home: React.FC = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const games = useAppSelector(selectAvailableGames) as Array<Game>;
-  const [filter, setFilter] = useState(0);
+  const filter = useAppSelector(getGameFilter);
 
   const newBetButtonHandler = useCallback(
     async (event: any) => {
@@ -36,16 +41,15 @@ const Home: React.FC = () => {
     async (event: any) => {
       event.preventDefault();
 
-      const typeId = event.target.getAttribute("data-id") as number;
+      const typeId = event.target.getAttribute("data-id") as string;
 
       if (filter === typeId) {
+        dispatch(selectFilter(""));
         dispatch(loadSavedBets({ page: 1 }));
-
-        setFilter(0);
       } else {
         dispatch(loadSavedBets({ page: 1, filter: typeId.toString() }));
 
-        setFilter(typeId);
+        dispatch(selectFilter(typeId));
       }
     },
     [dispatch, filter]
@@ -57,10 +61,10 @@ const Home: React.FC = () => {
         <FilterGameStyledButton
           key={game.id}
           // eslint-disable-next-line eqeqeq
-          isSelected={game.id == filter}
+          isSelected={game.id.toString() === filter}
           gameColor={game.color}
           onClick={filterButtonHandler}
-          data-id={game.id}
+          data-id={game.id.toString()}
         >
           {game.type}
         </FilterGameStyledButton>

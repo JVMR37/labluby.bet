@@ -31,7 +31,10 @@ export const fetchSavedBets = async (page: number = 1, filter?: string) => {
           const responseData = response.data.data.map((betsJson: any) =>
             SavedGame.fromJson(betsJson)
           );
-          resolve({ data: responseData, meta: response.data.meta });
+          resolve({
+            data: responseData,
+            meta: PaginationMetadata.fromJson(response.data.meta),
+          });
         })
         .catch((error) => {
           if (error.messages) {
